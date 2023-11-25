@@ -1,0 +1,50 @@
+﻿/*https://css-tricks.com/easy-dark-mode-and-multiple-color-themes-in-react/*/
+
+:root {
+    --background: white;
+    --text-primary: black;
+    --text-secondary: royalblue;
+    --accent: purple;
+}
+[data-theme='dark'] {
+    --background: black;
+    --text-primary: white;
+    --text-secondary: grey;
+    --accent: darkred;
+}
+[data-theme='blue'] {
+    --background: blue;
+    --text-primary: white;
+    --text-secondary: grey;
+    --accent: darkred;
+}
+
+
+.App {
+    text-align: center;
+    background-color: var(--background);
+    color: var(--text-primary);
+}
+.App-logo {
+     height: 40vmin;
+     pointer-events: none;
+ }
+.App-header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+}
+
+
+.Logo-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.Logo-text {
+    display: flex;
+    flex-direction: column;
+}
