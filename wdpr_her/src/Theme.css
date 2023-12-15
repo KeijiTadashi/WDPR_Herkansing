@@ -1,22 +1,22 @@
 ﻿/*https://css-tricks.com/easy-dark-mode-and-multiple-color-themes-in-react/*/
 
 :root {
-    --background: white;
-    --text-primary: black;
-    --text-secondary: royalblue;
-    --accent: purple;
+    --background: #FFFFFF;
+    --text-primary: #111329;
+    --text-secondary: #1CA883;
+    --accent: #FF7D00;
 }
 [data-theme='dark'] {
-    --background: black;
-    --text-primary: white;
-    --text-secondary: grey;
-    --accent: darkred;
+    --background: #111329;
+    --text-primary: #D9EBF7;
+    --text-secondary: #21CEA1;
+    --accent: #FFB800;
 }
 [data-theme='blue'] {
-    --background: blue;
-    --text-primary: white;
-    --text-secondary: grey;
-    --accent: darkred;
+    --background: #2B50EC;
+    --text-primary: #FFFFFF;
+    --text-secondary: #21CEA1;
+    --accent: #FFB800;
 }
 
 
@@ -26,8 +26,8 @@
     color: var(--text-primary);
 }
 .App-logo {
-     height: 40vmin;
-     pointer-events: none;
+    height: 20vmin;
+    pointer-events: none;
  }
 .App-header {
     min-height: 100vh;
@@ -47,4 +47,12 @@
 .Logo-text {
     display: flex;
     flex-direction: column;
+}
+
+.text-sec {
+    color: var(--text-secondary);
+}
+
+.text-accent {
+    color: var(--accent);
 }
