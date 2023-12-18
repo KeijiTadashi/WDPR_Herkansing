@@ -16,3 +16,10 @@ https://calm-rock-078c14b03.4.azurestaticapps.net/
 <li>Ghani Peverelli (21026769)</li>
 <li>Jaden Autar (21110042)</li>
 </ul>
+
+<h2>Instructies</h2>
+<p>Voor het lokaal runnen van de website:
+<code>
+cd wdpr_her
+npm run start
+</code>

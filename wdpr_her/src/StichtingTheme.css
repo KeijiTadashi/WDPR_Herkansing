@@ -99,6 +99,7 @@ button:hover {
     flex-direction: column;
     width: 100%;
     padding-top: 16px;
+    z-index: 200;
 }
 
 .Header-top {
@@ -108,7 +109,6 @@ button:hover {
     flex: 0 0 auto;
     column-gap: var(--header-column-gap);
     padding: 0px var(--header-padding-side);
-    /*width: 100%;*/
 }
 
 .Logo-header {
@@ -125,16 +125,6 @@ button:hover {
     justify-content: flex-end;
     position: relative;
 }
-
-/*.Row-button-header {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    !*align-items: end;*!*/
-/*    !*width: 100%;*!*/
-/*    !*text-align: right;*!*/
-/*    justify-content: right;*/
-/*}*/
-
 
 .Button-header {
     background: var(--accent-3);
@@ -213,45 +203,6 @@ button:hover {
 
 .Body {
     font-size: 1em;
+    z-index: 100;
 }
 
-/*.Header {*/
-/*    position: sticky;*/
-/*    top: 0;*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    align-items: start;*/
-/*    justify-content: left;*/
-/*    font-size: 1.5em;*/
-/*    background: var(--accent-1);*/
-/*    width: 100vw;*/
-/*}*/
-/*.Logo-header {*/
-/*    height: 20vmin;*/
-/*    pointer-events: none;*/
-/*}*/
-/*.Header-column {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*}*/
-/*.Header-row { !* needs a more descriptive name *!*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*}*/
-/*.Button-header-row {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    align-items: end;*/
-/*    justify-content: right;*/
-/*    justify-items: right;*/
-/*}*/
-/*.Button-header {*/
-/*    background: var(--accent-3);*/
-/*    font-size: 1em;*/
-/*    min-width: 20vw;    */
-/*}*/
-
-/*.Menu-item {*/
-/*    min-width: 10vw;*/
-/*    color: var(--header-text-1);*/
-/*}*/

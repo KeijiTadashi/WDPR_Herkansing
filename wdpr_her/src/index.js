@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './Pages/App';
-import Font from './Pages/Font';
+import Home from './Pages/Home';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -12,8 +12,8 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
-        path: "font",
-        element: <Font />,
+        path: "Home",
+        element: <Home />,
     }
 ]);
 
