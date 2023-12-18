@@ -6,11 +6,9 @@ function Font() {
     // Abstact this out
     // Check browser default theme preference
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const [theme , setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
-    //let curThemeLogo = theme === 'light' ? logo : logo_donker_trans;
-    // let curThemeLogo = logo;
     
-    const [fontSize, setFontSize] = useLocalStorage('font-size', 'normal');
+    const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
+    const [fontSize] = useLocalStorage('font-size', 'normal');
 
     return (
         <>
