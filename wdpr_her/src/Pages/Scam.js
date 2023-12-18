@@ -32,7 +32,8 @@ function Scam() {
       <header className="App-header">
         Welkom bij Stichting Accessibility
 
-        <Link to={"/"}><h1>GO TO FONT PAGE, HAS THE HEADER AND CORRECT CSS FILE</h1><button>CLICK</button></Link>
+        <Link to={"/"}><h1>GRATIS iPHONE 20</h1><button>CLICK</button></Link>
+        <h1>DIT IS TOTAAL GEEN SCAM</h1>
         <div className="Logo-row">
           <p className="Logo-text"><img src={logo} className="App-logo" alt="logo" /> default logo</p>
           <p className="Logo-text"><img src={logo_blauw} className="App-logo" alt="logo" /> logo on blue</p>
