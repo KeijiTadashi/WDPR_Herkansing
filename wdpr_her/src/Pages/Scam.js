@@ -32,7 +32,7 @@ function Scam() {
       <header className="App-header">
         Welkom bij Stichting Accessibility
 
-        <Link to={"/Home"}><h1>GO TO FONT PAGE, HAS THE HEADER AND CORRECT CSS FILE</h1><button>CLICK</button></Link>
+        <Link to={"/"}><h1>GO TO FONT PAGE, HAS THE HEADER AND CORRECT CSS FILE</h1><button>CLICK</button></Link>
         <div className="Logo-row">
           <p className="Logo-text"><img src={logo} className="App-logo" alt="logo" /> default logo</p>
           <p className="Logo-text"><img src={logo_blauw} className="App-logo" alt="logo" /> logo on blue</p>
