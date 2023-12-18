@@ -1,7 +1,5 @@
-import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
 import '../StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
-import {Link} from "react-router-dom";
 import Header from '../standaardformats/Header';
 
 function Font() {
@@ -14,33 +12,6 @@ function Font() {
     
     const [fontSize, setFontSize] = useLocalStorage('font-size', 'normal');
 
-    const switchTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-        // curThemeLogo = theme === 'light' ? logo : logo_donker_trans;
-    }
-    
-    const increaseFont = () => {
-        let newFontSize = fontSize;
-        switch (fontSize) {
-            case 'normal' : newFontSize = 'big'; break;
-            case 'big' : newFontSize = 'bigger'; break;
-            case 'bigger' : newFontSize = 'biggest'; break;
-            default : break;
-        }
-        setFontSize(newFontSize);
-    }
-
-    const decreaseFont = () => {
-        let newFontSize = fontSize;
-        switch (fontSize) {
-            case 'big' : newFontSize = 'normal'; break;
-            case 'bigger' : newFontSize = 'big'; break;
-            case 'biggest' : newFontSize = 'bigger'; break;
-            default : break;
-        }
-        setFontSize(newFontSize);
-    }
     return (
         <>
             <Header/>
