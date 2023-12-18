@@ -1,17 +1,16 @@
-import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
-// import logo_donker_trans from '../Logo Icon/Op donker/Transparant/icon_accessibility_on-dark_transp.png';
+
+﻿import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
 import '../StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import {Link} from "react-router-dom";
 
 function Font() {
-
     // Abstact this out
     // Check browser default theme preference
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const [theme , setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     //let curThemeLogo = theme === 'light' ? logo : logo_donker_trans;
-    let curThemeLogo = logo;
+    // let curThemeLogo = logo;
     
     const [fontSize, setFontSize] = useLocalStorage('font-size', 'normal');
 
@@ -63,7 +62,7 @@ function Font() {
 
             <div className={"Header"}>
                 <div className={"Header-top"}>
-                    <img src={curThemeLogo} className={"Logo-header"} alt={"logo stichting accessibility. Klik om naar de homepage te gaan"} />
+                    <img src={logo} className={"Logo-header"} alt={"logo stichting accessibility. Klik om naar de homepage te gaan"} />
                     <h1>Title</h1>
                     <div className={"Info-header"}>
                         <button className={"Button-header-small"} onClick={increaseFont}>+</button>
