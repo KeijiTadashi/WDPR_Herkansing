@@ -20,6 +20,6 @@ https://calm-rock-078c14b03.4.azurestaticapps.net/
 <h2>Instructies</h2>
 <p>Voor het lokaal runnen van de website:
 <code>
-    cd wdpr_her
-    npm run start
+cd wdpr_her
+npm run start
 </code>
