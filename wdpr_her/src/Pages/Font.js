@@ -1,4 +1,4 @@
-﻿import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
+import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
 // import logo_donker_trans from '../Logo Icon/Op donker/Transparant/icon_accessibility_on-dark_transp.png';
 import '../StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
