@@ -47,11 +47,6 @@ function Font() {
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
                 
                 <div className={"Body"}>
-                    <button onClick={switchTheme}>
-                        switch to {theme === 'light' ? 'dark' : 'light'}
-                    </button>
-                    <button onClick={increaseFont}>increase font</button>
-                    <button onClick={decreaseFont}>decrease font</button>
                     <h1>H1 text here</h1>
                     <h2>H2 lorem ipsum</h2>
                     <h3>H3 example</h3>
