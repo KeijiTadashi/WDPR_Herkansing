@@ -2,7 +2,7 @@ import '../StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
 
-function Font() {
+function Home() {
     // Abstact this out
     // Check browser default theme preference
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -37,4 +37,4 @@ function Font() {
     )
 }
 
-export default Font;
+export default Home;
