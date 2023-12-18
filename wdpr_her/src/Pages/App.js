@@ -1,6 +1,7 @@
 import '../StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
+import {apiPath} from "../Helper/Api";
 
 function App() {
     // Abstact this out
@@ -10,11 +11,23 @@ function App() {
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
 
+    // const AddTest = () => {
+    //     axios
+    //         .post(apiPath + "/Test", {
+    //            
+    //         })
+    //         .then((response) => {
+    //             console.log(response);
+    //             this.setState({ tickets: response.data, loaded: true });
+    //         });
+    // }
+    //
+    
     return (
         <>
             <Header/>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                
+                {/*<button onClick={}*/}
                 <div className={"Body"}>
                     <h1>H1 text here</h1>
                     <h2>H2 lorem ipsum</h2>
