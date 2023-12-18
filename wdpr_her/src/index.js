@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './Pages/App';
-import Home from './Pages/Home';
+import Scam from './Pages/Scam';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <App />,
+        path: "/Scam",
+        element: <Scam />,
     },
     {
-        path: "Home",
-        element: <Home />,
+        path: "/",
+        element: <App />,
     }
 ]);
 
