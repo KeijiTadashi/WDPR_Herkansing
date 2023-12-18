@@ -59,6 +59,7 @@ const Header = () => {
             <ul>
                 <li><Link to={"/"}><button className={"Button-navigation"}>Home</button></Link></li>
                 <li><button className={"Button-navigation"}>Mijn profiel</button></li>
+                <li><Link to={"/Scam"}><button className={"Button-navigation"}>Gratis iPhone 20</button></Link></li>
             </ul>
         </div>
     </div>
