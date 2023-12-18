@@ -6,7 +6,7 @@ import logo_donker_trans from '../Logo Icon/Op donker/Transparant/icon_accessibi
 // import './App.css';
 import '../Theme.css';
 import useLocalStorage from 'use-local-storage';
-import {useAuth0} from "@auth0/auth0-react";
+// import {useAuth0} from "@auth0/auth0-react";
 import {Link} from "react-router-dom";
 
 function App() {
@@ -21,11 +21,11 @@ function App() {
     curThemeLogo = theme === 'light' ? logo : theme === 'blue' ? logo_blauw_trans : logo_donker_trans;
   }
 
-  const LoginButton = () => {
-    const { loginWithRedirect } = useAuth0();
-
-    return <button onClick={() => loginWithRedirect()}>Log In</button>;
-  };
+  // const LoginButton = () => {
+  //   const { loginWithRedirect } = useAuth0();
+  //
+  //   return <button onClick={() => loginWithRedirect()}>Log In</button>;
+  // };
   
   return (
     <div className="App" data-theme={theme}>
@@ -35,10 +35,10 @@ function App() {
         <Link to={"/font"}><h1>GO TO FONT PAGE, HAS THE HEADER AND CORRECT CSS FILE</h1><button>CLICK</button></Link>
         <div className="Logo-row">
           <p className="Logo-text"><img src={logo} className="App-logo" alt="logo" /> default logo</p>
-          <p className="Logo-text"><img src={logo_blauw} className="App-logo"/> logo on blue</p>
-          <p className="Logo-text"><img src={logo_blauw_trans} className="App-logo"/> logo on blue transparent</p>
-          <p className="Logo-text"><img src={logo_donker} className="App-logo"/> logo on dark </p>
-          <p className="Logo-text"><img src={logo_donker_trans} className="App-logo"/> logo on dark transparent</p>
+          <p className="Logo-text"><img src={logo_blauw} className="App-logo" alt="logo" /> logo on blue</p>
+          <p className="Logo-text"><img src={logo_blauw_trans} className="App-logo" alt="logo" /> logo on blue transparent</p>
+          <p className="Logo-text"><img src={logo_donker} className="App-logo" alt="logo" /> logo on dark </p>
+          <p className="Logo-text"><img src={logo_donker_trans} className="App-logo" alt="logo" /> logo on dark transparent</p>
         </div>
         <div className={"Logo-row"} >
           <img src={curThemeLogo} className={"App-logo"} alt={"logo stichting accessibility"} /> <button onClick={switchTheme}>
