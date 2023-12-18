@@ -2,6 +2,8 @@ import '../StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
 import {apiPath} from "../Helper/Api";
+import axios from "axios";
+import {useState} from "react";
 
 function App() {
     // Abstact this out
@@ -10,24 +12,52 @@ function App() {
     
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
+    
+    const [testData, setTestData] = useState("");
+    const [showTest, setShowTest] = useState(false);
+    
+    const AddTest = () => {
+        const testInfo = 
+        {
+            "name": "test",
+            "ditiseentestbool": true
+        }
+        axios
+            .post(apiPath + "Test", testInfo)
+            .then((response) => {
+                console.log(response);
+            });
+    }
+    
+    const ShowTest = () => {
+        if (!showTest) {
+            axios.get(apiPath + "Test/" + 2)
+                .then((response) => {
+                    console.log(response);
+                    setTestData(response.data.name);
+                    setShowTest(true);
+                })
+        }
+        else
+        {
+            setShowTest(false);
+        }
+        
+    }
+    
+    const TestList = () =>
+    {
+        return (<p>{testData}</p>)
+    }
 
-    // const AddTest = () => {
-    //     axios
-    //         .post(apiPath + "/Test", {
-    //            
-    //         })
-    //         .then((response) => {
-    //             console.log(response);
-    //             this.setState({ tickets: response.data, loaded: true });
-    //         });
-    // }
-    //
     
     return (
         <>
             <Header/>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                {/*<button onClick={}*/}
+                <button onClick={AddTest}>Add Test to DB</button>
+                <button onClick={ShowTest}>{showTest ? "Hide Test" : "Show Test"}</button>
+                {showTest ? <TestList /> : null}
                 <div className={"Body"}>
                     <h1>H1 text here</h1>
                     <h2>H2 lorem ipsum</h2>
