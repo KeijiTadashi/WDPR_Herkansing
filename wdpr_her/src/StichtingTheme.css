@@ -99,6 +99,7 @@ button:hover {
     flex-direction: column;
     width: 100%;
     padding-top: 16px;
+    z-index: 600;
 }
 
 .Header-top {
@@ -108,7 +109,6 @@ button:hover {
     flex: 0 0 auto;
     column-gap: var(--header-column-gap);
     padding: 0px var(--header-padding-side);
-    /*width: 100%;*/
 }
 
 .Logo-header {
@@ -125,16 +125,6 @@ button:hover {
     justify-content: flex-end;
     position: relative;
 }
-
-/*.Row-button-header {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    !*align-items: end;*!*/
-/*    !*width: 100%;*!*/
-/*    !*text-align: right;*!*/
-/*    justify-content: right;*/
-/*}*/
-
 
 .Button-header {
     background: var(--accent-3);
@@ -214,9 +204,5 @@ button:hover {
 .Body {
     font-size: 1em;
     z-index: 500;
-}
-
-.Header {
-    z-index: 600;
 }
 
