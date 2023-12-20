@@ -2,7 +2,7 @@
 
 public class Test
 {
-    public int? Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
-    public bool IsTest { get; set; }
+    public bool? IsTest { get; set; }
 }

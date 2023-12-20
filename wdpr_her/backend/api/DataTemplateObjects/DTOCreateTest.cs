@@ -2,11 +2,11 @@
 
 namespace api.DataTemplate;
 
-public class TestPost
+public class DTOCreateTest
 {
     [Required(ErrorMessage = "Username is required")]
     public string Name { get; init; }
 
     [Required(ErrorMessage = "is required")]
-    public bool Ditiseentestbool { get; init; } 
+    public bool DitIsEenTestBool { get; init; } 
 }
