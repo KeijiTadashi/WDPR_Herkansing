@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api;
 
@@ -11,9 +12,11 @@ using api;
 namespace api.Migrations
 {
     [DbContext(typeof(StichtingContext))]
-    partial class StichtingContextModelSnapshot : ModelSnapshot
+    [Migration("20231221204118_ErvaringsdeskundigeInit")]
+    partial class ErvaringsdeskundigeInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,66 +158,6 @@ namespace api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("api.Aandoening", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Naam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Aandoebingen");
-                });
-
-            modelBuilder.Entity("api.Benadering", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Naam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Benaderingen");
-                });
-
-            modelBuilder.Entity("api.Beperking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Naam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Beperkingen");
-                });
-
             modelBuilder.Entity("api.Gebruiker", b =>
                 {
                     b.Property<string>("Id")
@@ -229,10 +172,6 @@ namespace api.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -286,87 +225,6 @@ namespace api.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Gebruiker");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("api.Hulpmiddel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Naam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hulpmiddelen");
-                });
-
-            modelBuilder.Entity("api.Onderzoek", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Beloning")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Beschrijving")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Locatie")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OnderzoeksData")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OnderzoeksType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Titel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UitvoerderId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UitvoerderId");
-
-                    b.ToTable("Onderzoeken");
-                });
-
-            modelBuilder.Entity("api.OnderzoeksType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OnderzoeksTypes");
                 });
 
             modelBuilder.Entity("api.Test", b =>
@@ -387,119 +245,6 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tests");
-                });
-
-            modelBuilder.Entity("api.Verzorger", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Achternaam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefoon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Voornaam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Verzorgers");
-                });
-
-            modelBuilder.Entity("api.Bedrijf", b =>
-                {
-                    b.HasBaseType("api.Gebruiker");
-
-                    b.Property<int>("Kvk")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Locatie")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Naam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Website")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("Bedrijf");
-                });
-
-            modelBuilder.Entity("api.Beheerder", b =>
-                {
-                    b.HasBaseType("api.Gebruiker");
-
-                    b.Property<string>("Achternaam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Voornaam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("AspNetUsers", t =>
-                        {
-                            t.Property("Achternaam")
-                                .HasColumnName("Beheerder_Achternaam");
-
-                            t.Property("Voornaam")
-                                .HasColumnName("Beheerder_Voornaam");
-                        });
-
-                    b.HasDiscriminator().HasValue("Beheerder");
-                });
-
-            modelBuilder.Entity("api.Ervaringsdeskundige", b =>
-                {
-                    b.HasBaseType("api.Gebruiker");
-
-                    b.Property<int?>("Aandoending")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Achternaam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Beperking")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Hulpmiddel")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("MagBenaderdWorden")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Postcode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("VerzorgerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VooerkeurOnderzoek")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VoorkeurBenadering")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Voornaam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("VerzorgerId");
-
-                    b.HasDiscriminator().HasValue("Ervaringsdeskundige");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -551,26 +296,6 @@ namespace api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("api.Onderzoek", b =>
-                {
-                    b.HasOne("api.Gebruiker", "Uitvoerder")
-                        .WithMany()
-                        .HasForeignKey("UitvoerderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Uitvoerder");
-                });
-
-            modelBuilder.Entity("api.Ervaringsdeskundige", b =>
-                {
-                    b.HasOne("api.Verzorger", "Verzorger")
-                        .WithMany()
-                        .HasForeignKey("VerzorgerId");
-
-                    b.Navigation("Verzorger");
                 });
 #pragma warning restore 612, 618
         }
