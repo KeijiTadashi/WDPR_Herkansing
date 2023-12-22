@@ -1,31 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css';
 import App from './Pages/App';
 import Scam from './Pages/Scam';
 import reportWebVitals from './reportWebVitals';
+import {ApiExample} from "./Pages/ApiExample";
 
 const router = createBrowserRouter([
     {
         path: "/Scam",
-        element: <Scam />,
+        element: <Scam/>,
     },
     {
         path: "/",
-        element: <App />,
+        element: <App/>,
+    },
+    {
+        path: "/Test",
+        element: <ApiExample/>,
     }
 ]);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>
+    // <React.StrictMode>
+    //   <App />
+    // </React.StrictMode>
 
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <RouterProvider router={router}/>
     </React.StrictMode>
 );
 

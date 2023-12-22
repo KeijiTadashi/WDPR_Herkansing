@@ -6,12 +6,14 @@
     --text-secondary: #1CA883;
     --accent: #FF7D00;
 }
+
 [data-theme='dark'] {
     --background: #111329;
     --text-primary: #D9EBF7;
     --text-secondary: #21CEA1;
     --accent: #FFB800;
 }
+
 [data-theme='blue'] {
     --background: #2B50EC;
     --text-primary: #FFFFFF;
@@ -25,10 +27,12 @@
     background-color: var(--background);
     color: var(--text-primary);
 }
+
 .App-logo {
     height: 20vmin;
     pointer-events: none;
- }
+}
+
 .App-header {
     min-height: 100vh;
     display: flex;

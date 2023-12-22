@@ -55,14 +55,17 @@ and wrap so stuff automatically moves down if it gets to small */
 p {
     font-size: 1em;
 }
+
 h1 {
     font-size: 4em;
     margin: 0;
 }
+
 h2 {
     font-size: 2.5em;
     margin: 0;
 }
+
 h3 {
     font-size: 1.75em;
     margin: 0;
@@ -84,6 +87,7 @@ button {
     position: relative;
     width: 10em;
 }
+
 button:hover {
     background: var(--accent-1);
     color: var(--background);
@@ -132,9 +136,11 @@ button:hover {
     font-size: 1.25em;
     height: 1.5em;
 }
+
 .Button-header:hover {
     background: var(--accent-4);
 }
+
 .Button-header:active {
     color: var(--header-text-2);
     background: var(--header-text-1);
@@ -147,9 +153,11 @@ button:hover {
     width: 1.5em;
     height: 1.5em;
 }
+
 .Button-header-small:hover {
-     background: var(--accent-4);
- }
+    background: var(--accent-4);
+}
+
 .Button-header-small:active {
     color: var(--header-text-2);
     background: var(--header-text-1);
@@ -170,7 +178,7 @@ button:hover {
 .Navigation-spacer {
     align-self: stretch;
     position: relative;
-    width: var(--logo-size); 
+    width: var(--logo-size);
     padding-right: var(--header-column-gap);
     /*+ --header-column-gap + --header-padding_side);*/
     /*width: var(--logo-size) + var(--header-column-gap) + var(--header-padding-side);*/
@@ -192,10 +200,12 @@ button:hover {
     width: 14em;
     /*width: 7.5vw;*/
 }
+
 .Button-navigation:hover {
     background: var(--accent-4);
     color: var(--default);
 }
+
 .Button-navigation:active {
     background: var(--background);
     color: var(--default);
@@ -206,12 +216,14 @@ button:hover {
     z-index: 100;
 }
 
-ul{
+.Header ul {
     padding: 0;
     margin: 0;
 }
-ul li{
+
+.Header ul li {
     text-align: left;
     display: inline-block;
     list-style: none;
 }
+
