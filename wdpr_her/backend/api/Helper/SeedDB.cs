@@ -52,13 +52,32 @@ public class SeedDB
 
     private void SetData()
     {
-
+        Random rnd = new Random();
+        int telefoonnummer = 123456789;
+        string ww = "Wachtwoord1!";
+        int emailNum = 47;
         _deskundige = new List<DTORegistreerErvaringsdeskundige>
         {
             new DTORegistreerErvaringsdeskundige
-                { Voornaam = "Steven", Acternaam = "Wilson", Gebruikersnaam = "Voyage34" },
+            {
+                Voornaam = "Steven", 
+                Acternaam = "Wilson", 
+                Gebruikersnaam = "Voyage34", 
+                Wachtwoord = ww,
+                Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
+                Email = $"mail_ed{emailNum}@mail.com", 
+                Postcode = $"{rnd.NextInt64(1000, 9999)} AB"
+            },
+            new DTORegistreerErvaringsdeskundige
+            {
+                Voornaam = "Jack", 
+                Acternaam = "White", 
+                Gebruikersnaam = "", 
+                Wachtwoord = ww,
+                Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
+                Email = $"mail_ed{emailNum}@mail.com", 
+                Postcode = $"{rnd.NextInt64(1000, 9999)} AB"
+            },
         };
     }
-}
-
 }
