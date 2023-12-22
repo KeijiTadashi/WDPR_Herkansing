@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics;
+using System.Drawing;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -27,25 +28,7 @@ public class AuthService : ControllerBase
         _userManager = userManager;
         _roleManager = roleManager;
         _configuration = configuration;
-        //Create roles if they don't exist, can be removed after running once and maybe put into some kind of start the service or just remove
-        if (!_roleManager.RoleExistsAsync(Roles.Beheerder).Result)
-        {
-            IdentityRole role = new IdentityRole();
-            role.Name = Roles.Beheerder;
-            roleManager.CreateAsync(role).Wait();
-        }
-        if (!roleManager.RoleExistsAsync(Roles.Ervaringsdeskundige).Result)
-        {
-            IdentityRole role = new IdentityRole();
-            role.Name = Roles.Ervaringsdeskundige;
-            roleManager.CreateAsync(role).Wait();
-        }
-        if (!roleManager.RoleExistsAsync(Roles.Bedrijf).Result)
-        {
-            IdentityRole role = new IdentityRole();
-            role.Name = Roles.Bedrijf;
-            roleManager.CreateAsync(role).Wait();
-        }
+        
     }
 
     [HttpPost("RegistreerErvaringsdeskundige")]
@@ -101,16 +84,25 @@ public class AuthService : ControllerBase
             authClaims.Add(new Claim(ClaimTypes.Role, userRole));
         }
 
-        (string token, DateTime validTo) token = GenerateToken(authClaims, _configuration["Jwt:ErvaringsdeskundigeExpirationInHours"]);
+        (string token, DateTime validTo) token = ( "", DateTime.Now );
+        if (userRoles.Contains(Roles.Beheerder))
+            token = GenerateToken(authClaims, _configuration["Jwt:BeheerderExpirationInHours"]);
+        else if (userRoles.Contains((Roles.Bedrijf)))
+            token = GenerateToken(authClaims, _configuration["Jwt:BedrijfExpirationInHours"]);
+        else if (userRoles.Contains(Roles.Ervaringsdeskundige))
+            token = GenerateToken(authClaims, _configuration["Jwt:ErvaringsdeskundigeExpirationInHours"]);
+
+        if (token.token != "")
+            return Ok(new
+            {
+                api_key = token.token,
+                expiration = token.validTo,
+                user = gebruiker.UserName,
+                Role = userRoles,
+                status = "Gebruiker login successful"
+            });
         
-        return Ok(new
-        {
-            api_key = token.token,
-            expiration = token.validTo,
-            user = gebruiker.UserName,
-            Role = userRoles,
-            status = "Gebruiker login successful"
-        });
+        return BadRequest("Couldn't generate jwt token.");
     }
 
     private (string, DateTime) GenerateToken(IEnumerable<Claim> claims, string expirationInHours)
