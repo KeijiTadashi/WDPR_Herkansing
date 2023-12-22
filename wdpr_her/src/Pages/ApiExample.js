@@ -85,7 +85,7 @@ export function ApiExample() {
                     </li>
                 ))}
             </ul>
-        ) : (<>Single test data ID = {testData.data.id} => Naam: {testData.data.name} <br/>IsTest: {testData.data.isTest.toString()}</>);
+        ) : (<>Single test data ID = {testData.data.id} =&62; Naam: {testData.data.name} <br/>IsTest: {testData.data.isTest.toString()}</>);
     }
     /* 
     In button ShowTest, change the text to show or hide test based on the current state
