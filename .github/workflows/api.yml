@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - apiwdprher
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'apiwdprher'
           slot-name: 'production'
-          publish-profile: ${{ secrets.MYSECRET }} #change to something add
+          publish-profile: ${{ secrets.API }} #might be wrong and needs a new web app with GitHub with access to this orginaztion, I can only select my own
           package: .
