@@ -6,6 +6,7 @@ import App from './Pages/App';
 import Scam from './Pages/Scam';
 import reportWebVitals from './reportWebVitals';
 import {ApiExample} from "./Pages/ApiExample";
+import Homepage from './Pages/Homepage';
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     {
         path: "/Test",
         element: <ApiExample/>,
+    },
+    {
+        path: "/Home",
+        element: <Homepage/>
     }
 ]);
 

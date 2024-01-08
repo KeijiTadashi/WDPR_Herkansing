@@ -72,9 +72,16 @@ const Header = () => {
                 <div className={"Navigation"}>
                     <div className={"Navigation-spacer"}/>
                     <ul>
-                        <li><Link to={"/"}>
-                            <button className={"Button-navigation"}>Home</button>
-                        </Link></li>
+                        <li>
+                            <Link to={"/"}>
+                                <button className={"Button-navigation"}>Page_1</button>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={"/Home"}>
+                                <button className={"Button-navigation"}>Home</button>
+                            </Link>
+                        </li>
                         <li>
                             <button className={"Button-navigation"}>Mijn profiel</button>
                         </li>
