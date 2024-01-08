@@ -7,6 +7,7 @@ import Scam from './Pages/Scam';
 import reportWebVitals from './reportWebVitals';
 import {ApiExample} from "./Pages/ApiExample";
 import {Login} from "./Pages/Login";
+import Homepage from './Pages/Homepage';
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: "/Login",
         element: <Login/>,
+    },
+    {
+        path: "/Home",
+        element: <Homepage/>
     }
 ]);
 
