@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'apiwdprher'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
+          publish-profile: ${{ secrets.MYSECRET }} #change to something add
           package: .
