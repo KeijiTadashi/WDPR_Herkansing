@@ -1,8 +1,10 @@
-﻿namespace api;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace api;
 
 public class Benadering
 {
-    public int Id { get; init; }
-    public string Naam { get; set; }
+    [Key]
     public int BitFlag { get; set; }
+    public string Soort { get; set; }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
 namespace api;
+
 // https://www.yogihosting.com/aspnet-core-identity-setup/
 public class Gebruiker : IdentityUser //In het ERR Login
 {
@@ -15,5 +16,5 @@ public class Gebruiker : IdentityUser //In het ERR Login
      * NormalizedUserName :string?
      * En nog wat meer die niet in de ERR staan en we mogelijk/waarschijnlijk niet nodig hebben
      */
-    public string AccountType { get; init; }
+    public string AccountType { get; set; }
 }

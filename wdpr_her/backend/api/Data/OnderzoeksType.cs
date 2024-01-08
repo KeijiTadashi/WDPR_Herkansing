@@ -1,8 +1,10 @@
-﻿namespace api;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace api;
 
 public class OnderzoeksType
 {
-    public int Id { get; init; }
-    public string Type { get; set; }
+    [Key]
     public int BitFlag { get; set; }
+    public string Type { get; set; }
 }
