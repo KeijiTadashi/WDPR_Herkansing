@@ -1,8 +1,5 @@
 ﻿namespace api;
 
-public class Beheerder : Gebruiker
+public class Beheerder : Persoon
 {
-    
-    public string Voornaam { get; set; }
-    public string Achternaam { get; set; }
 }

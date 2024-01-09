@@ -15,4 +15,5 @@ public class DTORegistreer
     [Required(ErrorMessage = "Email is verplicht.")]
     public string Email { get; set; }
     
+    public string Telefoonnummer { get; set; }
 }

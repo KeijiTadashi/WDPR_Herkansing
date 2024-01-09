@@ -13,8 +13,9 @@ function App() {
 
     return (
         <>
-            <Header/>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
+                <Header/>
+                {/*<div className="Main" data-theme={theme} data-font-size={fontSize}>*/}
                 <div className={"Body"}>
                     <h1>H1 text here</h1>
                     <h2>H2 lorem ipsum</h2>

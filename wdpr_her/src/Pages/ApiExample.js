@@ -2,8 +2,15 @@ import '../StichtingTheme.css';
 import {apiPath} from "../Helper/Api";
 import axios from "axios";
 import {useState} from "react";
+import Header from "../standaardformats/Header";
+import useLocalStorage from "use-local-storage";
 
 export function ApiExample() {
+
+    const [theme] = useLocalStorage('theme');
+    const [fontSize] = useLocalStorage('font-size');
+
+
     const [testData, setTestData] = useState({
         data: "",
         show: false
@@ -58,11 +65,11 @@ export function ApiExample() {
     const getAllTests = () => {
         axios.get(apiPath + "Test").then((response) => setTestData({data: response.data, show: true}))
     }
-    
+
     const updateTestBool = () => {
         // just because I want to swap the data from true to false and vice versa, normally you just do one axios request
         // getTest sets testData.data to Test with id 1 and testData.data.isTest = true OR false
-        getTest(); 
+        getTest();
         axios
             .put(apiPath + "Test/UpdateIsTest/" + 1 + "?isTest=" + !testData.data.isTest) //since this is without [FromBody] in the api needs the arguments in the url
             .then(response => setTestData({
@@ -79,13 +86,14 @@ export function ApiExample() {
             <ul>
                 {testData.data.map((d) => (
                     <li>
-                        &#40;ID = {d.id}&#41; 
+                        &#40;ID = {d.id}&#41;
                         Naam: {d.name}
                         IsTest: {d.isTest.toString()}
                     </li>
                 ))}
             </ul>
-        ) : (<>Single test data ID = {testData.data.id} =&62; Naam: {testData.data.name} <br/>IsTest: {testData.data.isTest.toString()}</>);
+        ) : (<>Single test data ID = {testData.data.id} =&62; Naam: {testData.data.name}
+            <br/>IsTest: {testData.data.isTest.toString()}</>);
     }
     /* 
     In button ShowTest, change the text to show or hide test based on the current state
@@ -93,12 +101,15 @@ export function ApiExample() {
     */
     return (
         <>
-            <button onClick={AddTest}>Add Test to DB</button>
-            <button onClick={ShowTest}>{testData.show ? "Hide Test" : "Show Test"}</button>
-            <button onClick={getAllTests}>Get all Tests</button>
-            <button onClick={getTest}>Get id = 1 Test</button>
-            <button onClick={updateTestBool}>swap id=1 bool</button>
-            {testData.show ? <TestList/> : null}
+            <div className="Main" data-theme={theme} data-font-size={fontSize}>
+                <Header/>
+                <button onClick={AddTest}>Add Test to DB</button>
+                <button onClick={ShowTest}>{testData.show ? "Hide Test" : "Show Test"}</button>
+                <button onClick={getAllTests}>Get all Tests</button>
+                <button onClick={getTest}>Get id = 1 Test</button>
+                <button onClick={updateTestBool}>swap id=1 bool</button>
+                {testData.show ? <TestList/> : null}
+            </div>
         </>
     )
 }

@@ -10,7 +10,7 @@ const Header = () => {
     const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     //let curThemeLogo = theme === 'light' ? logo : logo_donker_trans;
     // let curThemeLogo = logo;
-    
+
     const [fontSize, setFontSize] = useLocalStorage('font-size', 'normal');
 
     const switchTheme = () => {
@@ -57,40 +57,39 @@ const Header = () => {
 
     return (
         <header>
-            <div className={"Header"}>
-                <div className={"Header-top"}>
-                    <img src={logo} className={"Logo-header"}
-                         alt={"logo stichting accessibility. Klik om naar de homepage te gaan"}/>
-                    <h1>Title</h1>
-                    <div className={"Info-header"}>
-                        <button className={"Button-header-small"} onClick={increaseFont}>+</button>
-                        <h3>Font size</h3>
-                        <button className={"Button-header-small"} onClick={decreaseFont}>-</button>
-                        <button className={"Button-header"} onClick={switchTheme}>theme</button>
-                    </div>
-                </div>
-                <div className={"Navigation"}>
-                    <div className={"Navigation-spacer"}/>
-                    <ul>
-                        <li>
-                            <Link to={"/"}>
-                                <button className={"Button-navigation"}>Page_1</button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to={"/Home"}>
-                                <button className={"Button-navigation"}>Home</button>
-                            </Link>
-                        </li>
-                        <li>
-                            <button className={"Button-navigation"}>Mijn profiel</button>
-                        </li>
-                        <li><Link to={"/Scam"}>
-                            <button className={"Button-navigation"}>Gratis iPhone 20</button>
-                        </Link></li>
-                    </ul>
+            {/*<div className={"Header"}>*/}
+            <div className={"Header-top"}>
+                <img src={logo} className={"Logo-header"}
+                     alt={"logo stichting accessibility. Klik om naar de homepage te gaan"}/>
+                <h1>Title</h1>
+                <div className={"Info-header"}>
+                    <button className={"Button-header-small"} onClick={increaseFont}>+</button>
+                    <h3>Font size</h3>
+                    <button className={"Button-header-small"} onClick={decreaseFont}>-</button>
+                    <button className={"Button-header"} onClick={switchTheme}>theme</button>
                 </div>
             </div>
+            <div className={"Navigation"}>
+                <div className={"Navigation-spacer"}/>
+                <ul>
+                    <li><Link to={"/"}>
+                        <button className={"Button-navigation"}>Home</button>
+                    </Link></li>
+                    <li>
+                        <button className={"Button-navigation"}>Mijn profiel</button>
+                    </li>
+                    <li><Link to={"/Scam"}>
+                        <button className={"Button-navigation"}>Gratis iPhone 20</button>
+                    </Link></li>
+                    <li><Link to={"/Test"}>
+                        <button className={"Button-navigation"}>Api Test Page</button>
+                    </Link></li>
+                    <li><Link to={"/Login"}>
+                        <button className={"Button-navigation"}>Login</button>
+                    </Link></li>
+                </ul>
+            </div>
+            {/*</div>*/}
         </header>
     );
 }

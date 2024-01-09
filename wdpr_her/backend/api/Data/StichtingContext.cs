@@ -6,15 +6,17 @@ namespace api;
 
 public class StichtingContext : IdentityDbContext<Gebruiker, IdentityRole, string>
 {
-    public StichtingContext(DbContextOptions<StichtingContext> options): base(options) { }
+    public StichtingContext(DbContextOptions<StichtingContext> options) : base(options)
+    {
+    }
 // public StichtingContext(DbContextOptions<StichtingContext> options)
     //     : base(options)
     // {
     // }
-    
+
     public DbSet<Test> Tests { get; set; }
     public DbSet<Ervaringsdeskundige> Ervaringsdeskundigen { get; set; }
-    public DbSet<Aandoening> Aandoebingen { get; set; }
+    public DbSet<Aandoening> Aandoeningen { get; set; }
     public DbSet<Bedrijf> Bedrijven { get; set; }
     public DbSet<Beheerder> Beheerders { get; set; }
     public DbSet<Benadering> Benaderingen { get; set; }

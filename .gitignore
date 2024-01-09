@@ -542,3 +542,4 @@ FodyWeavers.xsd
 # Added ignore
 .idea
 .DS_Store
+Migrations/
