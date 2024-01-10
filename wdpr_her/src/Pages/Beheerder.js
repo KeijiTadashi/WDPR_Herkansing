@@ -41,7 +41,7 @@ export const Beheerder = () => {
 
                         <div className="textbox">
                             <h2>Wil je helpen? </h2>
-                            <p>Heb jij een beperking en wil je graag helpen bij onafankelijke onderzoeken, of onderzoeken voor bedrijven.
+                            <p>Heb jij een beperking en wil je graag helpen bij onafhankelijke onderzoeken, of onderzoeken voor bedrijven.
                                 Voor het verbeteren van de ....
                                 On Cracker Island, it was born To the collective of the dawn They were planting seeds at night To grow a made-up paradise Where the truth was auto-tuned</p>
                                 <Link to={"/"}>
