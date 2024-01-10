@@ -15,19 +15,33 @@ export function Login() {
         <>
         <Header/>
             <form>
-                <label>Gebruikersnaam</label>
+                <label for="UsernameField">Gebruikersnaam</label>
                 <br/>
-                <input type={"text"} id={"username"} ref={usernameRef}></input>
+                <input 
+                    type={"text"}
+                    id={"username"}
+                    ref={usernameRef}
+                    name="UsernameField"
+                    aria-label="Invoerveld gebruikersnaam"
+                >
+                </input>
+
                 <br/>
-                <label>Wachtwoord</label>
+
+                <label for="PasswordField">Wachtwoord</label>
                 <br/>
                 <input
                     type={"password"}
                     id={"password"}
                     ref={passwordRef}
-                ></input>
+                    name="PasswordField"
+                    aria-label="Invoerveld wachtwoord"
+                >
+                </input>
                 <br/>
+
                 <button
+                    aria-label="Log in"
                     type="button"
                     onClick={() =>
                         LoginJWT(

@@ -57,39 +57,46 @@ const Header = () => {
 
     return (
         <header>
-            {/*<div className={"Header"}>*/}
+            <div className={"Header"}>
             <div className={"Header-top"}>
                 <img src={logo} className={"Logo-header"}
                      alt={"logo stichting accessibility. Klik om naar de homepage te gaan"}/>
                 <h1>Title</h1>
                 <div className={"Info-header"}>
-                    <button className={"Button-header-small"} onClick={increaseFont}>+</button>
-                    <h3>Font size</h3>
-                    <button className={"Button-header-small"} onClick={decreaseFont}>-</button>
-                    <button className={"Button-header"} onClick={switchTheme}>theme</button>
+                    <ul aria-label="Toegankelijkheid menu">
+                        <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
+                        <li><h3>Font size</h3></li>
+                        <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
+                        <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>
+                    </ul>
                 </div>
             </div>
             <div className={"Navigation"}>
                 <div className={"Navigation-spacer"}/>
-                <ul>
+                <ul aria-label="menubalk">
                     <li><Link to={"/"}>
-                        <button className={"Button-navigation"}>Home</button>
+                        <button className={"Button-navigation"} aria-label="Home">Home</button>
                     </Link></li>
                     <li>
-                        <button className={"Button-navigation"}>Mijn profiel</button>
+                        <button className={"Button-navigation"} aria-label="Mijn profiel">Mijn profiel</button>
                     </li>
+                    <li>
+                        <Link to={"/Beheerder"}>
+                            <button className={"Button-navigation"}aria-label="Beheerder portaal">beheerder</button>
+                        </Link>
+                </  li>
                     <li><Link to={"/Scam"}>
-                        <button className={"Button-navigation"}>Gratis iPhone 20</button>
+                        <button className={"Button-navigation"} aria-label="Logo test pagina">Gratis iPhone 20</button>
                     </Link></li>
                     <li><Link to={"/Test"}>
-                        <button className={"Button-navigation"}>Api Test Page</button>
+                        <button className={"Button-navigation"} aria-label="API test pagina">Api Test Page</button>
                     </Link></li>
                     <li><Link to={"/Login"}>
-                        <button className={"Button-navigation"}>Login</button>
+                        <button className={"Button-navigation"} aria-label="Login pagina">Login</button>
                     </Link></li>
                 </ul>
             </div>
-            {/*</div>*/}
+            </div>
         </header>
     );
 }

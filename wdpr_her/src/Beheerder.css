@@ -1,0 +1,15 @@
+.flex-container {
+    display: flex;
+  }
+  
+.textbox {
+    border: 2px solid blue;
+    padding: 10px;
+    margin-bottom: 20px;
+    flex:1;
+}
+  
+.third-box {
+    align-self: flex-start; 
+    margin-left:20px; 
+}

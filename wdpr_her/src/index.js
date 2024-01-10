@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import {ApiExample} from "./Pages/ApiExample";
 import {Login} from "./Pages/Login";
 import Homepage from './Pages/Homepage';
+import Beheerder from './Pages/Beheerder';
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     {
         path: "/Home",
         element: <Homepage/>
+    },
+    {
+        path: "/beheerder",
+        element: <Beheerder/>
     }
 ]);
 
