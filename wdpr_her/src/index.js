@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import './index.css';
+import './CSS/index.css';
 import App from './Pages/App';
 import Scam from './Pages/Scam';
 import reportWebVitals from './reportWebVitals';

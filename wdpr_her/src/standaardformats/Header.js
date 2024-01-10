@@ -1,5 +1,5 @@
 import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
-import '../StichtingTheme.css';
+import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import {Link} from "react-router-dom";
 
