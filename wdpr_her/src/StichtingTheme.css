@@ -227,28 +227,3 @@ header ul li {
     list-style: none;
 }
 
-/* css voor onderzoeken */
-
-.Onderzoek {
-    font-size: 15px;
-    margin: 30px;
-    margin-left: 100px;
-    padding: 15px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    max-width: 800px;
-  }
-  
-  .Onderzoek p {
-    font-size: 14px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-  }
-  
-  .Beoordeling label{
-    font-size: 14px;
-    display: block;
-    margin: 15px;
-  }
-  
-  /* einde css voor onderzoeken */
