@@ -22,6 +22,7 @@ export function Login() {
                     id={"username"}
                     ref={usernameRef}
                     name="UsernameField"
+                    aria-label="Invoerveld gebruikersnaam"
                 >
                 </input>
 
@@ -34,11 +35,13 @@ export function Login() {
                     id={"password"}
                     ref={passwordRef}
                     name="PasswordField"
+                    aria-label="Invoerveld wachtwoord"
                 >
                 </input>
                 <br/>
-                
+
                 <button
+                    aria-label="Log in"
                     type="button"
                     onClick={() =>
                         LoginJWT(
