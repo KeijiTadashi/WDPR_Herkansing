@@ -31,7 +31,7 @@ public class HelperController : ControllerBase
             return StatusCode(201, onderzoeksType); // Created
         }
         
-        onderzoeksType = new OnderzoeksType() { BitFlag = 1, Type = dto.Naam };
+        await _context.OnderzoeksTypes.AddAsync(new OnderzoeksType() { BitFlag = 1, Type = dto.Naam });
         await _context.SaveChangesAsync();
         return StatusCode(201, onderzoeksType); // Created
     }
@@ -49,6 +49,7 @@ public class HelperController : ControllerBase
         }
         
         aandoening = new Aandoening() { BitFlag = 1, Naam = dto.Naam };
+        await _context.Aandoeningen.AddAsync(new Aandoening() { BitFlag = 1, Naam = dto.Naam });
         await _context.SaveChangesAsync();
         return StatusCode(201, aandoening); // Created
     }
@@ -66,6 +67,7 @@ public class HelperController : ControllerBase
         }
         
         benadering = new Benadering() { BitFlag = 1, Soort = dto.Naam };
+        await _context.Benaderingen.AddAsync(new Benadering() { BitFlag = 1, Soort = dto.Naam });
         await _context.SaveChangesAsync();
         return StatusCode(201, benadering); // Created
     }
@@ -84,6 +86,7 @@ public class HelperController : ControllerBase
         }
         
         beperking = new Beperking() { BitFlag = 1, Naam = dto.Naam };
+        await _context.Beperkingen.AddAsync(new Beperking() { BitFlag = 1, Naam = dto.Naam });
         await _context.SaveChangesAsync();
         return StatusCode(201, beperking); // Created
     }

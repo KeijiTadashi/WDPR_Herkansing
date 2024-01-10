@@ -4,7 +4,7 @@ namespace api;
 
 public class Benadering
 {
-    [Key]
+    public int Id { get; set; }
     public int BitFlag { get; set; }
     public string Soort { get; set; }
 }
