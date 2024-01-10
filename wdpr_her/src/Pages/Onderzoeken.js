@@ -42,26 +42,26 @@ function Onderzoeken() {
 function Beoordeling(){
     return(
         <div className="Beoordeling">
-        <label>
-            <input type="checkbox" value="1"/>
-            Zeer goed
-        </label>
-        <label>
-            <input type="checkbox" value="2"/>
-            Goed
-        </label>
-        <label>
-            <input type="checkbox" value="3"/>
-            Neutraal
-        </label>
-        <label>
-            <input type="checkbox" value="4"/>
-            Slecht
-        </label>
-        <label>
-            <input type="checkbox" value="5"/>
-            Zeer slecht
-        </label>
+            <label for="Beoordeling Zeer goed">
+                <input type="checkbox" value="1" name="Beoordeling Zeer goed" aria-label="Beoordeling Zeer goed"/>
+                Zeer goed
+            </label>
+            <label for="Beoordeling Goed">
+                <input type="checkbox" value="2" name="Beoordeling Goed" aria-label="Beoordeling Goed"/>
+                Goed
+            </label>
+            <label for="Beoordeling Neutraal">
+                <input type="checkbox" value="3" name="Beoordeling Neutraal" aria-label="Beoordeling Neutraal"/>
+                Neutraal
+            </label>
+            <label for="Beoordeling Slecht">
+                <input type="checkbox" value="4" name="Beoordeling Slecht" aria-label="Beoordeling Slecht"/>
+                Slecht
+            </label>
+            <label for="Beoordeling Zeer slecht">
+                <input type="checkbox" value="5" name="Beoordeling Zeer slecht" aria-label="Beoordeling Zeer slecht"/>
+                Zeer slecht
+            </label>
         </div>
     );
 }
