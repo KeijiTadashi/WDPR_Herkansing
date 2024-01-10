@@ -63,10 +63,12 @@ const Header = () => {
                      alt={"logo stichting accessibility. Klik om naar de homepage te gaan"}/>
                 <h1>Title</h1>
                 <div className={"Info-header"}>
-                    <button className={"Button-header-small"} onClick={increaseFont}>+</button>
-                    <h3>Font size</h3>
-                    <button className={"Button-header-small"} onClick={decreaseFont}>-</button>
-                    <button className={"Button-header"} onClick={switchTheme}>theme</button>
+                    <ul aria-label="Toegankelijkheid menu">
+                        <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
+                        <li><h3>Font size</h3></li>
+                        <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
+                        <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>
+                    </ul>
                 </div>
             </div>
             <div className={"Navigation"}>
