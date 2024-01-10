@@ -47,7 +47,7 @@ function Scam() {
                 </div>
                 <div className={"Logo-row"}>
                     <img src={curThemeLogo} className={"App-logo"} alt={"logo stichting accessibility"}/>
-                    <button onClick={switchTheme}>
+                    <button onClick={switchTheme} aria-label="Verander kleurschema">
                         switch to {theme === 'light' ? 'blue' : theme === 'blue' ? 'dark' : 'light'} theme
                     </button>
                 </div>
