@@ -73,21 +73,21 @@ const Header = () => {
             </div>
             <div className={"Navigation"}>
                 <div className={"Navigation-spacer"}/>
-                <ul>
+                <ul aria-label="menubalk">
                     <li><Link to={"/"}>
-                        <button className={"Button-navigation"}>Home</button>
+                        <button className={"Button-navigation"} aria-label="Home">Home</button>
                     </Link></li>
                     <li>
-                        <button className={"Button-navigation"}>Mijn profiel</button>
+                        <button className={"Button-navigation"} aria-label="Mijn profiel">Mijn profiel</button>
                     </li>
                     <li><Link to={"/Scam"}>
-                        <button className={"Button-navigation"}>Gratis iPhone 20</button>
+                        <button className={"Button-navigation"} aria-label="Logo test pagina">Gratis iPhone 20</button>
                     </Link></li>
                     <li><Link to={"/Test"}>
-                        <button className={"Button-navigation"}>Api Test Page</button>
+                        <button className={"Button-navigation"} aria-label="API test pagina">Api Test Page</button>
                     </Link></li>
                     <li><Link to={"/Login"}>
-                        <button className={"Button-navigation"}>Login</button>
+                        <button className={"Button-navigation"} aria-label="Login pagina">Login</button>
                     </Link></li>
                 </ul>
             </div>
