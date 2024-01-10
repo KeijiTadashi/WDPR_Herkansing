@@ -1,4 +1,4 @@
-import '../StichtingTheme.css';
+import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
 import React, { useState } from 'react';

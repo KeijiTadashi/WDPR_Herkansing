@@ -35,7 +35,7 @@ const router = createBrowserRouter([
     {
         path: "/beheerder",
         element: <Beheerder/>
-    }
+    },
     {
         path: "scam",
         element: <Scam/>
