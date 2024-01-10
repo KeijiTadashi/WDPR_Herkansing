@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import OpdrachtPaneel from "./OpdrachtPaneel";
 
 const DynamicOpdrachtPaneel = ({ opdrachtArray }) => {
-  const [opdrachtCounter, setOpdrachtCounter] = useState(1);
+  const [opdrachtCounter] = useState(1);
 
   /*
   Hoe werkt DynamicOpdrachtPaneel?
