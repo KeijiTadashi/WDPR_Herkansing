@@ -9,7 +9,6 @@ import {ApiExample} from "./Pages/ApiExample";
 import {Login} from "./Pages/Login";
 import Homepage from './Pages/Homepage';
 import Beheerder from './Pages/Beheerder';
-import Onderzoeken from './Pages/Onderzoeken';
 import Scam from './Pages/Scam';
 
 const router = createBrowserRouter([
@@ -38,7 +37,7 @@ const router = createBrowserRouter([
         element: <Beheerder/>
     },
     {
-        path: "scam",
+        path: "Scam",
         element: <Scam/>
     }
 ]);
