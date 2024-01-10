@@ -33,11 +33,6 @@ function Onderzoeken() {
                         <p>vraag</p>
                         <Beoordeling/>
                     </div>
-                
-                <div className={"Body"}>
-                    <h1>Onderzoeken</h1>
-                    <h3>Hieronder vind u al uw huidige onderzoeken</h3>
-                </div>
             </div>
         </div>
         </>
