@@ -1,62 +1,74 @@
-import logo from '../Logo Icon/icon_accessibility.png';
-import logo_blauw from '../Logo Icon/Op blauw/icon_accessibility_on-blue.png';
-import logo_blauw_trans from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
-import logo_donker from '../Logo Icon/Op donker/icon_accessibility_on-dark.jpg';
-import logo_donker_trans from '../Logo Icon/Op donker/Transparant/icon_accessibility_on-dark_transp.png';
-// import './App.css';
-import '../Theme.css';
+import '../StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
-// import {useAuth0} from "@auth0/auth0-react";
-import {Link} from "react-router-dom";
+import Header from '../standaardformats/Header';
+import React, { useState } from 'react';
 
-function Scam() {
-    // Check browser default theme preference
+function Onderzoeken() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
-    let curThemeLogo = theme === 'light' ? logo : theme === 'blue' ? logo_blauw_trans : logo_donker_trans;
 
-    const switchTheme = () => {
-        const newTheme = theme === 'light' ? 'blue' : theme === 'blue' ? 'dark' : 'light';
-        setTheme(newTheme);
-        curThemeLogo = theme === 'light' ? logo : theme === 'blue' ? logo_blauw_trans : logo_donker_trans;
-    }
-
-    // const LoginButton = () => {
-    //   const { loginWithRedirect } = useAuth0();
-    //
-    //   return <button onClick={() => loginWithRedirect()}>Log In</button>;
-    // };
+    const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
+    const [fontSize] = useLocalStorage('font-size', 'normal');
 
     return (
-        <div className="App" data-theme={theme}>
-            <header className="App-header">
-                Welkom bij Stichting Accessibility
+        <>
+            <Header/>
+            <div className="Main" data-theme={theme} data-font-size={fontSize}>
+                <div className={"Body"}>
+                    <div className="Onderzoek">
+                        <h3>Doel van het onderzoek</h3>
+                        <p>Het doel van dit onderzoek is om te kijken wat jouw gebruikers ervaring is bij het gebruik van de website.
+                            etc.
+                            and some more info.
+                        </p>
+                    </div>
 
-                <Link to={"/"}><h1>GRATIS iPHONE 20</h1>
-                    <button>CLICK</button>
-                </Link>
-                <h1><font color="#ff0000">DIT IS TOTAAL GEEN SCAM</font></h1>
-                <div className="Logo-row">
-                    <p className="Logo-text"><img src={logo} className="App-logo" alt="logo"/> default logo</p>
-                    <p className="Logo-text"><img src={logo_blauw} className="App-logo" alt="logo"/> logo on blue</p>
-                    <p className="Logo-text"><img src={logo_blauw_trans} className="App-logo" alt="logo"/> logo on blue
-                        transparent</p>
-                    <p className="Logo-text"><img src={logo_donker} className="App-logo" alt="logo"/> logo on dark </p>
-                    <p className="Logo-text"><img src={logo_donker_trans} className="App-logo" alt="logo"/> logo on dark
-                        transparent</p>
-                </div>
-                <div className={"Logo-row"}>
-                    <img src={curThemeLogo} className={"App-logo"} alt={"logo stichting accessibility"}/>
-                    <button onClick={switchTheme} aria-label="Verander kleurschema">
-                        switch to {theme === 'light' ? 'blue' : theme === 'blue' ? 'dark' : 'light'} theme
-                    </button>
-                </div>
+                    <div className="Onderzoek">
+                        <h3>Vragen over onderdeel A</h3>
+                        <p>vraag</p>
+                        <Beoordeling/>
+                    </div>
 
-                <p className={"text-sec"}>Secondary text</p>
-                <p className={"text-accent"}>Text accent</p>
-            </header>
+                    <div className="Onderzoek">
+                        <h3>Vragen over onderdeel B</h3>
+                        <p>vraag</p>
+                        <Beoordeling/>
+                    </div>
+                
+                <div className={"Body"}>
+                    <h1>Onderzoeken</h1>
+                    <h3>Hieronder vind u al uw huidige onderzoeken</h3>
+                </div>
+            </div>
+        </div>
+        </>
+    )
+}
+
+function Beoordeling(){
+    return(
+        <div className="Beoordeling">
+        <label>
+            <input type="checkbox" value="1"/>
+            Zeer goed
+        </label>
+        <label>
+            <input type="checkbox" value="2"/>
+            Goed
+        </label>
+        <label>
+            <input type="checkbox" value="3"/>
+            Neutraal
+        </label>
+        <label>
+            <input type="checkbox" value="4"/>
+            Slecht
+        </label>
+        <label>
+            <input type="checkbox" value="5"/>
+            Zeer slecht
+        </label>
         </div>
     );
 }
 
-export default Scam;
+export default Onderzoeken;
