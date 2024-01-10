@@ -4,10 +4,12 @@ import logo_blauw_trans from '../Logo Icon/Op blauw/Transparant/icon_accessibili
 import logo_donker from '../Logo Icon/Op donker/icon_accessibility_on-dark.jpg';
 import logo_donker_trans from '../Logo Icon/Op donker/Transparant/icon_accessibility_on-dark_transp.png';
 // import './App.css';
-import '../Theme.css';
+import '../CSS/Theme.css';
 import useLocalStorage from 'use-local-storage';
 // import {useAuth0} from "@auth0/auth0-react";
 import {Link} from "react-router-dom";
+
+import {OpdrachtPaneel} from '../standaardformats/Opdrachtpaneel';
 
 function Scam() {
     // Check browser default theme preference
@@ -54,6 +56,7 @@ function Scam() {
 
                 <p className={"text-sec"}>Secondary text</p>
                 <p className={"text-accent"}>Text accent</p>
+                <OpdrachtPaneel naam="Testnaam" status="In progress" aantaldeelnemers='69'/>
             </header>
         </div>
     );
