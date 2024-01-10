@@ -1,7 +1,7 @@
 import React from "react";
 import useLocalStorage from 'use-local-storage';
 import Header from "../standaardformats/Header";
-import "../StichtingTheme.css";
+import "../CSS/StichtingTheme.css";
 
 export const Homepage = () => {
 

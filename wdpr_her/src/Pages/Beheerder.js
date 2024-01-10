@@ -1,8 +1,7 @@
 import React from "react";
 import useLocalStorage from 'use-local-storage';
 import Header from "../standaardformats/Header";
-import "../StichtingTheme.css";
-import "../Beheerder.css"
+import "../CSS/StichtingTheme.css";
 import {Link} from "react-router-dom";
 
 

@@ -1,4 +1,4 @@
-import '../StichtingTheme.css';
+import '../CSS/StichtingTheme.css';
 import {apiPath} from "../Helper/Api";
 import axios from "axios";
 import {useState} from "react";
