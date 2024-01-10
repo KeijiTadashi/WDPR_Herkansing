@@ -45,7 +45,7 @@ export const Beheerder = () => {
                                 Voor het verbeteren van de ....
                                 On Cracker Island, it was born To the collective of the dawn They were planting seeds at night To grow a made-up paradise Where the truth was auto-tuned</p>
                                 <Link to={"/"}>
-                                <button>Registreer</button>
+                                    <button aria-label="registreer">Registreer</button>
                                 </Link>
                         </div>
                     </div>
