@@ -1,7 +1,7 @@
 // DynamicOpdrachtPaneel.js
 
 import React, { useState } from "react";
-import OpdrachtPaneel from "../standaardformats/OpdrachtPaneel";
+import OpdrachtPaneel from "./OpdrachtPaneel";
 
 const DynamicOpdrachtPaneel = ({ opdrachtArray }) => {
   const [opdrachtCounter, setOpdrachtCounter] = useState(1);
