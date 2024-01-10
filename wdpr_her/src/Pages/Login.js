@@ -15,18 +15,29 @@ export function Login() {
         <>
         <Header/>
             <form>
-                <label>Gebruikersnaam</label>
+                <label for="UsernameField">Gebruikersnaam</label>
                 <br/>
-                <input type={"text"} id={"username"} ref={usernameRef}></input>
+                <input 
+                    type={"text"}
+                    id={"username"}
+                    ref={usernameRef}
+                    name="UsernameField"
+                >
+                </input>
+
                 <br/>
-                <label>Wachtwoord</label>
+
+                <label for="PasswordField">Wachtwoord</label>
                 <br/>
                 <input
                     type={"password"}
                     id={"password"}
                     ref={passwordRef}
-                ></input>
+                    name="PasswordField"
+                >
+                </input>
                 <br/>
+                
                 <button
                     type="button"
                     onClick={() =>
