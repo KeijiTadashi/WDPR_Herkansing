@@ -3,6 +3,7 @@ import useLocalStorage from 'use-local-storage';
 import Header from "../standaardformats/Header";
 import "../CSS/StichtingTheme.css";
 import {Link} from "react-router-dom";
+import "../CSS/Beheerder.css"
 
 
 export const Beheerder = () => {

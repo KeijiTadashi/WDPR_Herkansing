@@ -1,7 +1,7 @@
 import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
-import "../Onderzoeken.css"
+import "../CSS/Onderzoeken.css"
 
 function Onderzoeken() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
