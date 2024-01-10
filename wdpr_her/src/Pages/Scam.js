@@ -9,7 +9,8 @@ import useLocalStorage from 'use-local-storage';
 // import {useAuth0} from "@auth0/auth0-react";
 import {Link} from "react-router-dom";
 
-import {OpdrachtPaneel} from '../standaardformats/Opdrachtpaneel';
+import DynamicOpdrachtPaneel from '../standaardformats/DynamicOpdrachtPaneel'
+
 
 function Scam() {
     // Check browser default theme preference
@@ -22,6 +23,14 @@ function Scam() {
         setTheme(newTheme);
         curThemeLogo = theme === 'light' ? logo : theme === 'blue' ? logo_blauw_trans : logo_donker_trans;
     }
+
+    const opdrachtArray = [
+        { naam: "If it hadn't been for", aantaldeelnemers: 69 },
+        { naam: 'Cotton-Eyed Joe', status: "Completed"},
+        { status: "Completed", aantaldeelnemers:420},
+        {naam:"I'd been married long time ago", aantaldeelnemers:314,status:"Beschikbaar"}
+        // Add more opdracht objects as needed
+      ];
 
     // const LoginButton = () => {
     //   const { loginWithRedirect } = useAuth0();
@@ -56,7 +65,7 @@ function Scam() {
 
                 <p className={"text-sec"}>Secondary text</p>
                 <p className={"text-accent"}>Text accent</p>
-                <OpdrachtPaneel naam="Testnaam" status="In progress" aantaldeelnemers='69'/>
+                <DynamicOpdrachtPaneel opdrachtArray={opdrachtArray} />
             </header>
         </div>
     );

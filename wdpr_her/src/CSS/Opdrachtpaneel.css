@@ -68,7 +68,7 @@
   position: relative;
   white-space: nowrap;
   width: 256px;
-  text-align: left
+  text-align: left;
 }
 
 .opdracht-panel .text-wrapper-2 {
@@ -82,7 +82,7 @@
   line-height: var(--WDPR-WDPR-p-line-height);
   margin-top: -1px;
   position: relative;
-  text-align: left;
+  text-align: right;
 }
 
 .opdracht-panel .frame {

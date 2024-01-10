@@ -1,24 +1,20 @@
+// Opdrachtpaneel.js
+
 import React from "react";
-
-import "../CSS/Opdrachtpaneel.css";
-import '../CSS/Theme.css'
-
-import useLocalStorage from "use-local-storage";
 import PropTypes from 'prop-types';
+import "../CSS/Opdrachtpaneel.css";
 
-export const OpdrachtPaneel = (props) => {
+const OpdrachtPaneel = ({ naam, status, aantaldeelnemers, indexnr }) => {
 
-    const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
-
-    const NAAM = props.naam;
-    const STATUS = props.status;
-    const AANTALDEELNEMERS = props.aantaldeelnemers ? props.aantaldeelnemers : 0;
+    const NAAM = naam?naam:"Geen naam opgegeven";
+    const STATUS = status?status:"Status niet beschikbaar"
+    const AANTALDEELNEMERS = aantaldeelnemers?aantaldeelnemers:"-1"
+    const INDEXNR = indexnr?indexnr:1234;
 
     return (
         <div className="opdracht-panel">
             <div className="heading">
-                <p className="text-wrapper">Opdracht 1 - {NAAM}</p>
+                <p className="text-wrapper">{`Opdracht ${INDEXNR} - ${NAAM}`}</p>
             </div>
             <div className="info-line">
                 <div className="div">Status</div>
@@ -38,9 +34,10 @@ export const OpdrachtPaneel = (props) => {
 };
 
 OpdrachtPaneel.propTypes = {
-    naam : PropTypes.string.isRequired,
+    naam: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     aantaldeelnemers: PropTypes.number,
+    indexnr: PropTypes.number,
 };
 
 export default OpdrachtPaneel;
