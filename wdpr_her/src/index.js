@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './CSS/index.css';
 import App from './Pages/App';
-import Scam from './Pages/Scam';
+import Scam from './Pages/Onderzoeken';
 import reportWebVitals from './reportWebVitals';
 import {ApiExample} from "./Pages/ApiExample";
 import {Login} from "./Pages/Login";
 import Homepage from './Pages/Homepage';
+import Beheerder from './Pages/Beheerder';
+import Onderzoeken from './Pages/Onderzoeken';
 
 const router = createBrowserRouter([
     {
-        path: "/Scam",
-        element: <Scam/>,
+        path: "/Onderzoeken",
+        element: <Onderzoeken/>,
     },
     {
         path: "/",
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
     {
         path: "/Home",
         element: <Homepage/>
+    },
+    {
+        path: "/beheerder",
+        element: <Beheerder/>
+    }
+    {
+        path: "scam",
+        element: <Scam/>
     }
 ]);
 
