@@ -57,7 +57,7 @@ const Header = () => {
 
     return (
         <header>
-            {/*<div className={"Header"}>*/}
+            <div className={"Header"}>
             <div className={"Header-top"}>
                 <img src={logo} className={"Logo-header"}
                      alt={"logo stichting accessibility. Klik om naar de homepage te gaan"}/>
@@ -80,6 +80,11 @@ const Header = () => {
                     <li>
                         <button className={"Button-navigation"} aria-label="Mijn profiel">Mijn profiel</button>
                     </li>
+                    <li>
+                        <Link to={"/Beheerder"}>
+                            <button className={"Button-navigation"}aria-label="Beheerder portaal">beheerder</button>
+                        </Link>
+                </  li>
                     <li><Link to={"/Scam"}>
                         <button className={"Button-navigation"} aria-label="Logo test pagina">Gratis iPhone 20</button>
                     </Link></li>
@@ -91,7 +96,7 @@ const Header = () => {
                     </Link></li>
                 </ul>
             </div>
-            {/*</div>*/}
+            </div>
         </header>
     );
 }
