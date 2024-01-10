@@ -1,6 +1,7 @@
 import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
+import "../Onderzoeken.css"
 import React, { useState } from 'react';
 
 function Onderzoeken() {
