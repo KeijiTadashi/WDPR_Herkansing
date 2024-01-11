@@ -50,41 +50,32 @@ public class InitDatabaseData : ControllerBase
 
         #region Enums
 
+        HelperController helperController = new HelperController(_context);
+        
         foreach (var v in setAandoeningen())
         {
-            var exists = await _context.Aandoeningen.AnyAsync(a => a.Naam.ToLower() == v.Naam.ToLower());
-            if (!exists)
-            {
-                // TODO push first
-            }
+            await helperController.AddAandoening(v);
+            await helperController.AddBeperking(v); // Want ik (Brian) weet niet wat het verschil eigenlijk is of dat het dubbel is
         }
+        foreach (var v in setBenadering())
+        {
+            await helperController.AddBenadering(v);
+        }
+        foreach (var v in setOnderzoeksTypes())
+        {
+            await helperController.AddOnderzoeksType(v);
+        }
+        
+        // TODO Add Hulpmiddelen
 
         #endregion
 
+        AccountController accountController = new AccountController(_userManager, _roleManager);
         #region Ervaringsdeskundigen
         
         foreach (var e in setDataErvaringsdeskundiges())
         {
-            Console.WriteLine("Start Deskundige");
-            var userExists = await _userManager.FindByNameAsync(e.Gebruikersnaam);
-            if (userExists == null)
-            {
-                var deskundige = new Ervaringsdeskundige
-                {
-                    Email = e.Email,
-                    Voornaam = e.Voornaam,
-                    Achternaam = e.Acternaam,
-                    Postcode = e.Postcode,
-                    UserName = e.Gebruikersnaam,
-                    PhoneNumber = e.Telefoonnummer,
-                    AccountType = Roles.Ervaringsdeskundige
-                    //Nog meer data over beperkingen en dergelijke, volgt later als dit allemaal werk
-                };
-
-                _userManager.CreateAsync(deskundige, e.Wachtwoord).Wait();
-                _userManager.AddToRoleAsync(deskundige, Roles.Ervaringsdeskundige).Wait();
-                Console.WriteLine("End Deskundige");
-            }
+            await accountController.RegistreerErvaringsdeskundige(e);
         }
         #endregion
         
@@ -92,27 +83,28 @@ public class InitDatabaseData : ControllerBase
         
         foreach (var b in setDataBeheerder())
         {
-            Console.WriteLine(
-                $"Start Beheerder\n{b.Voornaam}, {b.Acternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}, \n");
-            var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
-            if (userExists == null)
-            {
-                var beheerder = new Beheerder
-                {
-                    Email = b.Email,
-                    Voornaam = b.Voornaam,
-                    Achternaam = b.Acternaam,
-                    UserName = b.Gebruikersnaam,
-                    PhoneNumber = b.Telefoonnummer,
-                    AccountType = Roles.Beheerder
-                };
-                Console.WriteLine(
-                    $"Beheerder registreer, gewoon\n{b.Voornaam}, {b.Acternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}\n{beheerder.Voornaam},{beheerder.Achternaam}, {beheerder.UserName},{beheerder.Email},{beheerder.PhoneNumber},\n\n");
-
-                _userManager.CreateAsync(beheerder, b.Wachtwoord).Wait();
-                _userManager.AddToRoleAsync(beheerder, Roles.Beheerder).Wait();
-                Console.WriteLine("End Beheerder");
-            }
+            await accountController.RegistreerBeheerder(b);
+            // Console.WriteLine(
+            //     $"Start Beheerder\n{b.Voornaam}, {b.Acternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}, \n");
+            // var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
+            // if (userExists == null)
+            // {
+            //     var beheerder = new Beheerder
+            //     {
+            //         Email = b.Email,
+            //         Voornaam = b.Voornaam,
+            //         Achternaam = b.Acternaam,
+            //         UserName = b.Gebruikersnaam,
+            //         PhoneNumber = b.Telefoonnummer,
+            //         AccountType = Roles.Beheerder
+            //     };
+            //     Console.WriteLine(
+            //         $"Beheerder registreer, gewoon\n{b.Voornaam}, {b.Acternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}\n{beheerder.Voornaam},{beheerder.Achternaam}, {beheerder.UserName},{beheerder.Email},{beheerder.PhoneNumber},\n\n");
+            //
+            //     _userManager.CreateAsync(beheerder, b.Wachtwoord).Wait();
+            //     _userManager.AddToRoleAsync(beheerder, Roles.Beheerder).Wait();
+            //     Console.WriteLine("End Beheerder");
+            // }
         }
 
         #endregion
@@ -181,6 +173,15 @@ public class InitDatabaseData : ControllerBase
                 Voornaam = "Maria",
                 Acternaam = "Franz",
                 Gebruikersnaam = "Heilung",
+                Wachtwoord = ww,
+                Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
+                Email = $"beheer{emailNum++}@mail.com"
+            },
+            new()
+            {
+                Voornaam = "Sherlock",
+                Acternaam = "Holmes",
+                Gebruikersnaam = "Mycroft",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
                 Email = $"beheer{emailNum++}@mail.com"
@@ -329,7 +330,7 @@ public class InitDatabaseData : ControllerBase
             {
                 Voornaam = "Franck",
                 Acternaam = "Hueso",
-                Gebruikersnaam = "Carpenter Brut",
+                Gebruikersnaam = "Carpenter_Brut",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
                 Email = $"mail_ed{++emailNum}@mail.com",
