@@ -24,7 +24,7 @@ export function Login() {
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
                 <Header />
                 <form>
-                    <label for="UsernameField">Gebruikersnaam</label>
+                    <label htmlFor="UsernameField">Gebruikersnaam</label>
                     <br />
                     <input
                         type={"text"}
@@ -38,7 +38,7 @@ export function Login() {
 
                     <br />
 
-                    <label for="PasswordField">Wachtwoord</label>
+                    <label htmlFor="PasswordField">Wachtwoord</label>
                     <br />
                     <input
                         type={"password"}

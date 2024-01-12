@@ -14,7 +14,7 @@ function Beoordeling() {
         <div className="Main" data-theme={theme} data-font-size={fontSize}>
             <div className="Beoordeling">
                 
-                <label for='checkbox_zeer_goed'>
+                <label htmlFor='checkbox_zeer_goed'>
                     <input
                         type="checkbox"
                         value="1"
@@ -24,7 +24,7 @@ function Beoordeling() {
                 </label>
                 
 
-                <label for='checkbox_goed'>
+                <label htmlFor='checkbox_goed'>
                     <input 
                         type="checkbox"
                         value="2"
@@ -33,7 +33,7 @@ function Beoordeling() {
                     Goed
                 </label>
 
-                <label for='checkbox_neutraal'>
+                <label htmlFor='checkbox_neutraal'>
                     <input
                         type="checkbox"
                         value="3"
@@ -42,7 +42,7 @@ function Beoordeling() {
                     Neutraal
                 </label>
 
-                <label for='checkbox_slecht'>
+                <label htmlFor='checkbox_slecht'>
                     <input
                         type="checkbox"
                         value="4"
@@ -50,7 +50,7 @@ function Beoordeling() {
                     />
                     Slecht
                 </label>
-                <label for='checkbox_zeer_slecht'>
+                <label htmlFor='checkbox_zeer_slecht'>
                     <input
                         type="checkbox"
                         value="5"
