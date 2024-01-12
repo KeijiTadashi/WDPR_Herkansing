@@ -1,5 +1,4 @@
 import '../CSS/StichtingTheme.css';
-import useLocalStorage from 'use-local-storage';
 import Beoordeling from './Beoordeling';
 import PropTypes from 'prop-types';
 
