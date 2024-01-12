@@ -12,8 +12,8 @@ using api;
 namespace api.Migrations
 {
     [DbContext(typeof(StichtingContext))]
-    [Migration("20240112103648_Create_Again_4")]
-    partial class Create_Again_4
+    [Migration("20240112141059_removeEnums")]
+    partial class removeEnums
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,14 +166,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
+                    b.Property<string>("ErvaringsdeskundigeId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ErvaringsdeskundigeId");
 
                     b.ToTable("Aandoeningen");
                 });
@@ -185,9 +187,6 @@ namespace api.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
 
                     b.Property<string>("Soort")
                         .IsRequired()
@@ -206,14 +205,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
+                    b.Property<string>("ErvaringsdeskundigeId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ErvaringsdeskundigeId");
 
                     b.ToTable("Beperkingen");
                 });
@@ -303,14 +304,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
+                    b.Property<string>("ErvaringsdeskundigeId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ErvaringsdeskundigeId");
 
                     b.ToTable("Hulpmiddelen");
                 });
@@ -334,7 +337,7 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OnderzoeksType")
+                    b.Property<int>("OnderzoeksTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Titel")
@@ -346,6 +349,8 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OnderzoeksTypeId");
 
                     b.HasIndex("UitvoerderId");
 
@@ -360,14 +365,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BitFlag")
-                        .HasColumnType("int");
+                    b.Property<string>("ErvaringsdeskundigeId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ErvaringsdeskundigeId");
 
                     b.ToTable("OnderzoeksTypes");
                 });
@@ -460,19 +467,10 @@ namespace api.Migrations
                 {
                     b.HasBaseType("api.Gebruiker");
 
-                    b.Property<int?>("Aandoending")
-                        .HasColumnType("int");
-
                     b.Property<string>("Achternaam")
                         .IsRequired()
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Beperking")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Hulpmiddel")
-                        .HasColumnType("int");
 
                     b.Property<bool>("MagBenaderdWorden")
                         .HasColumnType("bit");
@@ -484,10 +482,7 @@ namespace api.Migrations
                     b.Property<int?>("VerzorgerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VooerkeurOnderzoek")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VoorkeurBenadering")
+                    b.Property<int?>("VoorkeurBenaderingId")
                         .HasColumnType("int");
 
                     b.Property<string>("Voornaam")
@@ -496,6 +491,8 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasIndex("VerzorgerId");
+
+                    b.HasIndex("VoorkeurBenaderingId");
 
                     b.HasDiscriminator().HasValue("Ervaringsdeskundige");
                 });
@@ -551,15 +548,51 @@ namespace api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("api.Aandoening", b =>
+                {
+                    b.HasOne("api.Ervaringsdeskundige", null)
+                        .WithMany("Aandoending")
+                        .HasForeignKey("ErvaringsdeskundigeId");
+                });
+
+            modelBuilder.Entity("api.Beperking", b =>
+                {
+                    b.HasOne("api.Ervaringsdeskundige", null)
+                        .WithMany("Beperking")
+                        .HasForeignKey("ErvaringsdeskundigeId");
+                });
+
+            modelBuilder.Entity("api.Hulpmiddel", b =>
+                {
+                    b.HasOne("api.Ervaringsdeskundige", null)
+                        .WithMany("Hulpmiddel")
+                        .HasForeignKey("ErvaringsdeskundigeId");
+                });
+
             modelBuilder.Entity("api.Onderzoek", b =>
                 {
+                    b.HasOne("api.OnderzoeksType", "OnderzoeksType")
+                        .WithMany()
+                        .HasForeignKey("OnderzoeksTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("api.Gebruiker", "Uitvoerder")
                         .WithMany()
                         .HasForeignKey("UitvoerderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("OnderzoeksType");
+
                     b.Navigation("Uitvoerder");
+                });
+
+            modelBuilder.Entity("api.OnderzoeksType", b =>
+                {
+                    b.HasOne("api.Ervaringsdeskundige", null)
+                        .WithMany("VoorkeurOnderzoek")
+                        .HasForeignKey("ErvaringsdeskundigeId");
                 });
 
             modelBuilder.Entity("api.Ervaringsdeskundige", b =>
@@ -568,7 +601,24 @@ namespace api.Migrations
                         .WithMany()
                         .HasForeignKey("VerzorgerId");
 
+                    b.HasOne("api.Benadering", "VoorkeurBenadering")
+                        .WithMany()
+                        .HasForeignKey("VoorkeurBenaderingId");
+
                     b.Navigation("Verzorger");
+
+                    b.Navigation("VoorkeurBenadering");
+                });
+
+            modelBuilder.Entity("api.Ervaringsdeskundige", b =>
+                {
+                    b.Navigation("Aandoending");
+
+                    b.Navigation("Beperking");
+
+                    b.Navigation("Hulpmiddel");
+
+                    b.Navigation("VoorkeurOnderzoek");
                 });
 #pragma warning restore 612, 618
         }

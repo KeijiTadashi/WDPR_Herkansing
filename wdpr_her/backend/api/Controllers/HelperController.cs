@@ -17,6 +17,53 @@ public class HelperController : ControllerBase
         _context = context;
     }
 
+    [Authorize(Roles = Roles.Beheerder)]
+    [HttpPost("AddOnderzoeksType")]
+    public async Task<ActionResult> AddOnderzoeksType([FromBody] DTOHelper dto)
+    {
+        var onderzoeksType = new OnderzoeksType();
+        await _context.OnderzoeksTypes.AddAsync(new OnderzoeksType() { Type = dto.Naam });
+        await _context.SaveChangesAsync();
+        return StatusCode(201, onderzoeksType); // Created
+    }
+    [Authorize(Roles = Roles.Beheerder)]
+    [HttpPost("AddAandoening")]
+    public async Task<ActionResult> AddAandoening([FromBody] DTOHelper dto)
+    {
+        var aandoening = new Aandoening();
+        await _context.Aandoeningen.AddAsync(new Aandoening() { Naam = dto.Naam });
+        await _context.SaveChangesAsync();
+        return StatusCode(201, aandoening); // Created
+    }
+    [Authorize(Roles = Roles.Beheerder)]
+    [HttpPost("AddBenadering")]
+    public async Task<ActionResult> AddBenadering([FromBody] DTOHelper dto)
+    {
+        var benadering = new Benadering();
+        await _context.Benaderingen.AddAsync(new Benadering() { Soort = dto.Naam });
+        await _context.SaveChangesAsync();
+        return StatusCode(201, benadering); // Created
+    }
+    [Authorize(Roles = Roles.Beheerder)]
+    [HttpPost("AddBeperking")]
+    public async Task<ActionResult> AddBeperking([FromBody] DTOHelper dto)
+    {
+        var beperking = new Beperking();
+        await _context.Beperkingen.AddAsync(new Beperking() { Naam = dto.Naam });
+        await _context.SaveChangesAsync();
+        return StatusCode(201, beperking); // Created
+    }
+    [Authorize(Roles = Roles.Beheerder)]
+    [HttpPost("AddHulpmiddel")]
+    public async Task<ActionResult> AddHulpmiddel([FromBody] DTOHelper dto)
+    {
+        var hulpmiddel = new Hulpmiddel();
+        await _context.Hulpmiddelen.AddAsync(new Hulpmiddel() { Naam = dto.Naam });
+        await _context.SaveChangesAsync();
+        return StatusCode(201, hulpmiddel); // Created
+    }
+
+/*
     #region Add/Post Enums
     [Authorize(Roles = Roles.Beheerder)]
     [HttpPost("AddOnderzoeksType")]
@@ -91,7 +138,7 @@ public class HelperController : ControllerBase
         return StatusCode(201, beperking); // Created
     }
     #endregion
-
+*/
     #region Get Enums
 
     [HttpGet("GetOnderzoeksTypes")]
@@ -113,6 +160,11 @@ public class HelperController : ControllerBase
     public async Task<ActionResult<IEnumerable<Beperking>>> GetBeperkingen()
     {
         return await _context.Beperkingen.ToListAsync();
+    }
+    [HttpGet("GetHulpmiddelen")]
+    public async Task<ActionResult<IEnumerable<Hulpmiddel>>> GetHulpmiddelen()
+    {
+        return await _context.Hulpmiddelen.ToListAsync();
     }
 
     #endregion

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api;
 
@@ -11,9 +12,11 @@ using api;
 namespace api.Migrations
 {
     [DbContext(typeof(StichtingContext))]
-    partial class StichtingContextModelSnapshot : ModelSnapshot
+    [Migration("20240112141415_removeEnums2")]
+    partial class removeEnums2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,66 +24,6 @@ namespace api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AandoeningErvaringsdeskundige", b =>
-                {
-                    b.Property<int>("AandoendingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ErvaringsdeskundigenId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("AandoendingId", "ErvaringsdeskundigenId");
-
-                    b.HasIndex("ErvaringsdeskundigenId");
-
-                    b.ToTable("AandoeningErvaringsdeskundige");
-                });
-
-            modelBuilder.Entity("BeperkingErvaringsdeskundige", b =>
-                {
-                    b.Property<int>("BeperkingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ErvaringsdeskundigenId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("BeperkingId", "ErvaringsdeskundigenId");
-
-                    b.HasIndex("ErvaringsdeskundigenId");
-
-                    b.ToTable("BeperkingErvaringsdeskundige");
-                });
-
-            modelBuilder.Entity("ErvaringsdeskundigeHulpmiddel", b =>
-                {
-                    b.Property<string>("ErvaringsdeskundigenId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("HulpmiddelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ErvaringsdeskundigenId", "HulpmiddelId");
-
-                    b.HasIndex("HulpmiddelId");
-
-                    b.ToTable("ErvaringsdeskundigeHulpmiddel");
-                });
-
-            modelBuilder.Entity("ErvaringsdeskundigeOnderzoeksType", b =>
-                {
-                    b.Property<string>("ErvaringsdeskundigenId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("VoorkeurOnderzoekId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ErvaringsdeskundigenId", "VoorkeurOnderzoekId");
-
-                    b.HasIndex("VoorkeurOnderzoekId");
-
-                    b.ToTable("ErvaringsdeskundigeOnderzoeksType");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -215,21 +158,6 @@ namespace api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OnderzoekOnderzoeksType", b =>
-                {
-                    b.Property<string>("OnderzoekenId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("OnderzoeksTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OnderzoekenId", "OnderzoeksTypeId");
-
-                    b.HasIndex("OnderzoeksTypeId");
-
-                    b.ToTable("OnderzoekOnderzoeksType");
-                });
-
             modelBuilder.Entity("api.Aandoening", b =>
                 {
                     b.Property<int>("Id")
@@ -238,11 +166,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ErvaringsdeskundigeId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ErvaringsdeskundigeId");
 
                     b.ToTable("Aandoeningen");
                 });
@@ -272,11 +205,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ErvaringsdeskundigeId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ErvaringsdeskundigeId");
 
                     b.ToTable("Beperkingen");
                 });
@@ -366,11 +304,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ErvaringsdeskundigeId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ErvaringsdeskundigeId");
 
                     b.ToTable("Hulpmiddelen");
                 });
@@ -394,6 +337,9 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OnderzoeksTypeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Titel")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -403,6 +349,8 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OnderzoeksTypeId");
 
                     b.HasIndex("UitvoerderId");
 
@@ -417,11 +365,16 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ErvaringsdeskundigeId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ErvaringsdeskundigeId");
 
                     b.ToTable("OnderzoeksTypes");
                 });
@@ -544,66 +497,6 @@ namespace api.Migrations
                     b.HasDiscriminator().HasValue("Ervaringsdeskundige");
                 });
 
-            modelBuilder.Entity("AandoeningErvaringsdeskundige", b =>
-                {
-                    b.HasOne("api.Aandoening", null)
-                        .WithMany()
-                        .HasForeignKey("AandoendingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("api.Ervaringsdeskundige", null)
-                        .WithMany()
-                        .HasForeignKey("ErvaringsdeskundigenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BeperkingErvaringsdeskundige", b =>
-                {
-                    b.HasOne("api.Beperking", null)
-                        .WithMany()
-                        .HasForeignKey("BeperkingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("api.Ervaringsdeskundige", null)
-                        .WithMany()
-                        .HasForeignKey("ErvaringsdeskundigenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ErvaringsdeskundigeHulpmiddel", b =>
-                {
-                    b.HasOne("api.Ervaringsdeskundige", null)
-                        .WithMany()
-                        .HasForeignKey("ErvaringsdeskundigenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("api.Hulpmiddel", null)
-                        .WithMany()
-                        .HasForeignKey("HulpmiddelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ErvaringsdeskundigeOnderzoeksType", b =>
-                {
-                    b.HasOne("api.Ervaringsdeskundige", null)
-                        .WithMany()
-                        .HasForeignKey("ErvaringsdeskundigenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("api.OnderzoeksType", null)
-                        .WithMany()
-                        .HasForeignKey("VoorkeurOnderzoekId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -655,30 +548,51 @@ namespace api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OnderzoekOnderzoeksType", b =>
+            modelBuilder.Entity("api.Aandoening", b =>
                 {
-                    b.HasOne("api.Onderzoek", null)
-                        .WithMany()
-                        .HasForeignKey("OnderzoekenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("api.Ervaringsdeskundige", null)
+                        .WithMany("Aandoending")
+                        .HasForeignKey("ErvaringsdeskundigeId");
+                });
 
-                    b.HasOne("api.OnderzoeksType", null)
-                        .WithMany()
-                        .HasForeignKey("OnderzoeksTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("api.Beperking", b =>
+                {
+                    b.HasOne("api.Ervaringsdeskundige", null)
+                        .WithMany("Beperking")
+                        .HasForeignKey("ErvaringsdeskundigeId");
+                });
+
+            modelBuilder.Entity("api.Hulpmiddel", b =>
+                {
+                    b.HasOne("api.Ervaringsdeskundige", null)
+                        .WithMany("Hulpmiddel")
+                        .HasForeignKey("ErvaringsdeskundigeId");
                 });
 
             modelBuilder.Entity("api.Onderzoek", b =>
                 {
+                    b.HasOne("api.OnderzoeksType", "OnderzoeksType")
+                        .WithMany()
+                        .HasForeignKey("OnderzoeksTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("api.Gebruiker", "Uitvoerder")
                         .WithMany()
                         .HasForeignKey("UitvoerderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("OnderzoeksType");
+
                     b.Navigation("Uitvoerder");
+                });
+
+            modelBuilder.Entity("api.OnderzoeksType", b =>
+                {
+                    b.HasOne("api.Ervaringsdeskundige", null)
+                        .WithMany("VoorkeurOnderzoek")
+                        .HasForeignKey("ErvaringsdeskundigeId");
                 });
 
             modelBuilder.Entity("api.Ervaringsdeskundige", b =>
@@ -694,6 +608,17 @@ namespace api.Migrations
                     b.Navigation("Verzorger");
 
                     b.Navigation("VoorkeurBenadering");
+                });
+
+            modelBuilder.Entity("api.Ervaringsdeskundige", b =>
+                {
+                    b.Navigation("Aandoending");
+
+                    b.Navigation("Beperking");
+
+                    b.Navigation("Hulpmiddel");
+
+                    b.Navigation("VoorkeurOnderzoek");
                 });
 #pragma warning restore 612, 618
         }
