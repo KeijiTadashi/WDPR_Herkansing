@@ -54,8 +54,8 @@ export const Beheerder = () => {
                     <div className="textbox third-box">
                         <h2>Wil je helpen? </h2>
                         <p>Heb jij een beperking en wil je graag helpen bij onafankelijke onderzoeken, of onderzoeken voor bedrijven.
-Voor het verbeteren van de ....
-Oh freddled gruntbuggly,Thy micturations are to me As plurdled gabbleblotchits on a lurgid bee.Groop, I implore thee, my foonting turlingdromes,And hooptiously drangle me with crinkly bindlewurdles,Or I will rend thee in the gobberwarts With my blurglecruncheon, see if I don't!</p>
+                        Voor het verbeteren van de ....
+                        Oh freddled gruntbuggly,Thy micturations are to me As plurdled gabbleblotchits on a lurgid bee.Groop, I implore thee, my foonting turlingdromes,And hooptiously drangle me with crinkly bindlewurdles,Or I will rend thee in the gobberwarts With my blurglecruncheon, see if I don't!</p>
                     </div>
                 </div>
             </div >
