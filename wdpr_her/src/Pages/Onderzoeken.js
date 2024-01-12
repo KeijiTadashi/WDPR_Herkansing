@@ -10,6 +10,10 @@ function Onderzoeken() {
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
 
+    /*
+    *Laad de volgende array in met de vragen uit de database.
+    *Er wordt automatisch een nummer aan gegeven, en de vragen worden automatisch ingeladen.
+    */
     const onderzoekArray = [
         {vraag: 'Hoe gaat het met je?'},
         {vraag: 'Hoe goed vind je deze vraag?'},
