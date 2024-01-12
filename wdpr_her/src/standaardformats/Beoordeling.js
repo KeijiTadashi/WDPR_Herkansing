@@ -1,60 +1,65 @@
-// Beoordeling.js
 import React from 'react';
-import '../CSS/StichtingTheme.css'
+import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 
-function Beoordeling() {
-
+function Beoordeling({ index }) {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
 
+    const namePrefix = `beoordeling_${index}`;
+
     return (
         <div className="Main" data-theme={theme} data-font-size={fontSize}>
             <div className="Beoordeling">
                 
-                <label htmlFor='checkbox_zeer_goed'>
+                <label htmlFor={`${namePrefix}_zeer_goed`}>
                     <input
-                        type="checkbox"
+                        type="radio"
                         value="1"
-                        name='checkbox_zeer_goed'
+                        name={namePrefix}
+                        id={`${namePrefix}_zeer_goed`}
                     />
                     Zeer goed
                 </label>
                 
-
-                <label htmlFor='checkbox_goed'>
+                <label htmlFor={`${namePrefix}_goed`}>
                     <input 
-                        type="checkbox"
+                        type="radio"
                         value="2"
-                        name='checkbox_goed' 
+                        name={namePrefix}
+                        id={`${namePrefix}_goed`}
                     />
                     Goed
                 </label>
 
-                <label htmlFor='checkbox_neutraal'>
+                <label htmlFor={`${namePrefix}_neutraal`}>
                     <input
-                        type="checkbox"
+                        type="radio"
                         value="3"
-                        name='checkbox_neutraal'
+                        name={namePrefix}
+                        id={`${namePrefix}_neutraal`}
                     />
                     Neutraal
                 </label>
 
-                <label htmlFor='checkbox_slecht'>
+                <label htmlFor={`${namePrefix}_slecht`}>
                     <input
-                        type="checkbox"
+                        type="radio"
                         value="4"
-                        name='checkbox_slecht'
+                        name={namePrefix}
+                        id={`${namePrefix}_slecht`}
                     />
                     Slecht
                 </label>
-                <label htmlFor='checkbox_zeer_slecht'>
+                
+                <label htmlFor={`${namePrefix}_zeer_slecht`}>
                     <input
-                        type="checkbox"
+                        type="radio"
                         value="5"
-                        name='checkbox_zeer_slecht'
+                        name={namePrefix}
+                        id={`${namePrefix}_zeer_slecht`}
                     />
                     Zeer slecht
                 </label>

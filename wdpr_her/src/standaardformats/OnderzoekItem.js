@@ -12,7 +12,7 @@ const OnderzoekItem = ({indexnr, vraag, maxVraagNr}) => {
         <div className="Onderzoek">
             <h3>{`Vraag ${INDEX} van ${TOTAALAANTALVRAGEN}`}</h3>
             <p>{`${VRAAG}`}</p>
-            <Beoordeling />
+            <Beoordeling index={INDEX}/>
         </div>
     )
 }
