@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import OnderzoekItem from '../standaardformats/OnderzoekItem';
 
 const DynamicOnderzoekPaneel = ({ onderzoekArray }) => {
