@@ -51,11 +51,11 @@ public class AuthService : ControllerBase
 
         (string token, DateTime validTo) token = ("", DateTime.Now);
         if (userRoles.Contains(Roles.Beheerder))
-            token = GenerateToken(authClaims, _configuration["Jwt:BeheerderExpirationInHours"]);
+            token = GenerateToken(authClaims, _configuration["JWT:BeheerderExpirationTime"]);
         else if (userRoles.Contains(Roles.Bedrijf))
-            token = GenerateToken(authClaims, _configuration["Jwt:BedrijfExpirationInHours"]);
+            token = GenerateToken(authClaims, _configuration["JWT:BedrijfExpirationTime"]);
         else if (userRoles.Contains(Roles.Ervaringsdeskundige))
-            token = GenerateToken(authClaims, _configuration["Jwt:ErvaringsdeskundigeExpirationInHours"]);
+            token = GenerateToken(authClaims, _configuration["JWT:ErvaringsdeskundigeExpirationTime"]);
 
         if (token.token != "")
             return Ok(new
@@ -83,34 +83,5 @@ public class AuthService : ControllerBase
         );
         return (new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);
     }
-
-    [Authorize(Roles = $"{Roles.Ervaringsdeskundige}, {Roles.Beheerder}")]
-    [HttpPut("UpdateErvaringsdeskundige")]
-    public async Task<ActionResult> UpdateErvaringsdeskundife([FromBody] DTOErvaringsdeskundige dto)
-    {
-        //Add some logic if the user has role beheerder, because they can edit someone else
-
-        var userId = User.FindFirstValue(ClaimTypes.Name);
-        Console.WriteLine($"UserId: {userId}");
-        var deskundige = (Ervaringsdeskundige)await _userManager.FindByNameAsync(userId);
-        if (deskundige == null)
-            return BadRequest("Ervaringsdeskundige is niet gevonden");
-
-        deskundige.Voornaam = dto.Voornaam != null ? deskundige.Voornaam = dto.Voornaam : deskundige.Voornaam;
-        deskundige.Achternaam = dto.Achternaam != null ? deskundige.Achternaam = dto.Achternaam : deskundige.Achternaam;
-        deskundige.PhoneNumber = dto.TelefoonNummer != null
-            ? deskundige.PhoneNumber = dto.TelefoonNummer
-            : deskundige.PhoneNumber;
-        deskundige.Postcode = dto.Postcode != null ? deskundige.Postcode = dto.Postcode : deskundige.Postcode;
-        deskundige.Email = dto.Email != null ? deskundige.Email = dto.Email : deskundige.Email;
-        if (dto.NieuwWachtwoord != null)
-        {
-            var result = await _userManager.ChangePasswordAsync(deskundige, dto.HuidigWachtwoord, dto.NieuwWachtwoord);
-            if (!result.Succeeded)
-                return BadRequest(result.Errors);
-        }
-
-        await _userManager.UpdateAsync(deskundige);
-        return Ok("De gebuikers informatie is geupdate.");
-    }
+    
 }

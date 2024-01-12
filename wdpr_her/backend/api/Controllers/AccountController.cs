@@ -1,4 +1,5 @@
-﻿using api.DataTemplate;
+﻿using System.Security.Claims;
+using api.DataTemplate;
 using api.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,7 @@ public class AccountController : ControllerBase
         _roleManager = roleManager;
     }
     
+    #region Registreer
     [HttpPost("RegistreerErvaringsdeskundige")]
     public async Task<ActionResult> RegistreerErvaringsdeskundige([FromBody] DTORegistreerErvaringsdeskundige dto)
     {
@@ -98,11 +100,151 @@ public class AccountController : ControllerBase
         if (!result.Succeeded)
             return BadRequest("Het aanmaken van een gebruiker is mislukt.");
 
-        // Todo For now don't give them a role, only after een beheerder het bedrijf heeft goedgekeured
-        // result = await _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf);
+        // Todo Don't give them a role, only after een beheerder het bedrijf heeft goedgekeured
+        result = await _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf);
         if (result.Succeeded)
             return Created("", "Registratie gelukt.");
 
         return BadRequest(result.Errors);
     }
+    #endregion
+    
+    #region Update
+    [Authorize(Roles = $"{Roles.Ervaringsdeskundige}, {Roles.Beheerder}")]
+    [HttpPut("UpdateErvaringsdeskundige")]
+    public async Task<ActionResult> UpdateErvaringsdeskundige([FromBody] DTOErvaringsdeskundige dto)
+    {
+        string userName;
+        if (User.FindFirstValue(ClaimTypes.Role) == Roles.Beheerder)
+        {
+            if (dto.UserName == null)
+                return BadRequest("Er is niet bekend welke ervaringsdeskundige moet worden aamgepast.");
+            userName = dto.UserName;
+        }
+        else
+        {
+            userName = User.FindFirstValue(ClaimTypes.Name);
+        }
+        var deskundige = (Ervaringsdeskundige)await _userManager.FindByNameAsync(userName);
+        if (deskundige == null)
+            return BadRequest("Ervaringsdeskundige is niet gevonden");
+
+        deskundige.Voornaam = dto.Voornaam ?? deskundige.Voornaam;
+        deskundige.Achternaam = dto.Achternaam ?? deskundige.Achternaam;
+        deskundige.PhoneNumber = dto.TelefoonNummer ?? deskundige.PhoneNumber;
+        deskundige.Postcode = dto.Postcode ?? deskundige.Postcode;
+        deskundige.Email = dto.Email ?? deskundige.Email;
+        
+        
+        // Change password
+        if (dto.NieuwWachtwoord != null)
+        {
+            var result = await _userManager.ChangePasswordAsync(deskundige, dto.HuidigWachtwoord, dto.NieuwWachtwoord);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+        }
+
+        // Change username
+        if (dto.NewUserName != null)
+        {
+            var userExists = await _userManager.FindByNameAsync(dto.NewUserName);
+            if (userExists != null)
+                return Conflict("De gebruikersnaam bestaat al.");
+            deskundige.UserName = dto.NewUserName;
+            await _userManager.UpdateNormalizedUserNameAsync(deskundige);
+        }
+
+        await _userManager.UpdateAsync(deskundige);
+        return Ok("De gebuikers informatie is geupdate.");
+    }
+    
+    
+    [Authorize(Roles = $"{Roles.Bedrijf}, {Roles.Beheerder}")]
+    [HttpPut("UpdateBedrijf")]
+    public async Task<ActionResult> UpdateBedrijf([FromBody] DTOBedrijf dto)
+    {
+        string userName;
+        if (User.FindFirstValue(ClaimTypes.Role) == Roles.Beheerder)
+        {
+            if (dto.UserName == null)
+                return BadRequest("Er is niet bekend welk bedrijf moet worden aamgepast.");
+            userName = dto.UserName;
+        }
+        else
+        {
+            userName = User.FindFirstValue(ClaimTypes.Name);
+        }
+        var bedrijf = (Bedrijf)await _userManager.FindByNameAsync(userName);
+        if (bedrijf == null)
+            return BadRequest("Ervaringsdeskundige is niet gevonden");
+
+        bedrijf.Kvk = dto.Kvk ?? bedrijf.Kvk;
+        bedrijf.Email = dto.Email ?? bedrijf.Email;
+        bedrijf.Naam = dto.Naam ?? bedrijf.Naam;
+        bedrijf.Locatie = dto.Locatie ?? bedrijf.Locatie;
+        bedrijf.PhoneNumber = dto.TelefoonNummer ?? bedrijf.PhoneNumber;
+        bedrijf.Website = dto.Website ?? bedrijf.Website;
+        
+        // Change password
+        if (dto.NieuwWachtwoord != null)
+        {
+            var result = await _userManager.ChangePasswordAsync(bedrijf, dto.HuidigWachtwoord, dto.NieuwWachtwoord);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+        }
+
+        // Change username
+        if (dto.NewUserName != null)
+        {
+            var userExists = await _userManager.FindByNameAsync(dto.NewUserName);
+            if (userExists != null)
+                return Conflict("De gebruikersnaam bestaat al.");
+            bedrijf.UserName = dto.NewUserName;
+            await _userManager.UpdateNormalizedUserNameAsync(bedrijf);
+        }
+
+        await _userManager.UpdateAsync(bedrijf);
+        return Ok("De gebuikers informatie is geupdate.");
+    }
+    
+    [Authorize(Roles = Roles.Beheerder)]
+    [HttpPut("UpdateBeheerder")]
+    public async Task<ActionResult> UpdateBeheerder([FromBody] DTOBeheerder dto)
+    {
+        string userName;
+        userName = User.FindFirstValue(ClaimTypes.Name);
+        
+        var beheerder = (Beheerder)await _userManager.FindByNameAsync(userName);
+        if (beheerder == null)
+            return BadRequest("Beheerder is niet gevonden");
+
+        beheerder.Achternaam = dto.Achternaam ?? beheerder.Achternaam;
+        beheerder.Voornaam = dto.Voornaam ?? beheerder.Voornaam;
+        beheerder.Email = dto.Email ?? beheerder.Email;
+        beheerder.PhoneNumber = dto.TelefoonNummer ?? beheerder.PhoneNumber;
+
+        // Change password
+        if (dto.NieuwWachtwoord != null)
+        {
+            var result = await _userManager.ChangePasswordAsync(beheerder, dto.HuidigWachtwoord, dto.NieuwWachtwoord);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+        }
+
+        // Change username
+        if (dto.NewUserName != null)
+        {
+            var userExists = await _userManager.FindByNameAsync(dto.NewUserName);
+            if (userExists != null)
+                return Conflict("De gebruikersnaam bestaat al.");
+            beheerder.UserName = dto.NewUserName;
+            await _userManager.UpdateNormalizedUserNameAsync(beheerder);
+        }
+
+        await _userManager.UpdateAsync(beheerder);
+        return Ok("De gebuikers informatie is geupdate.");
+    }
+
+    
+    #endregion
 }
