@@ -1,6 +1,6 @@
 ﻿namespace api.DataTemplate;
 
-public class DTOErvaringsdeskundige
+public class DTOUpdateErvaringsdeskundige
 {
     public string? UserName { get; set; } //Only needed if you aren't the user (aka beheerder)
     public string? NewUserName { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace api.DataTemplate;
 
-public class DTOBeheerder
+public class DTOUpdateBeheerder
 {
     public string? NewUserName { get; set; }
     public string? Voornaam { get; set; }

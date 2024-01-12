@@ -1,6 +1,6 @@
 ﻿namespace api.DataTemplate;
 
-public class DTOBedrijf
+public class DTOUpdateBedrijf
 {
     public string? UserName { get; set; } //Only needed if you aren't the user (aka beheerder)
     public string? NewUserName { get; set; }
