@@ -7,7 +7,7 @@ public class Onderzoek
     public Gebruiker Uitvoerder { get; init; } // Beheerder of Bedrijf
     public string? Locatie { get; set; }
     public string? Beloning { get; set; }
-    public int OnderzoeksType { get; set; }
+    public List<OnderzoeksType> OnderzoeksType { get; set; }
     public string Beschrijving { get; set; }
     public string OnderzoeksData { get; set; }
 }

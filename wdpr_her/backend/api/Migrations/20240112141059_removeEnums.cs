@@ -6,25 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class Create_Again_4 : Migration
+    public partial class removeEnums : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Aandoeningen",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BitFlag = table.Column<int>(type: "int", nullable: false),
-                    Naam = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Aandoeningen", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -45,54 +31,11 @@ namespace api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BitFlag = table.Column<int>(type: "int", nullable: false),
                     Soort = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Benaderingen", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Beperkingen",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BitFlag = table.Column<int>(type: "int", nullable: false),
-                    Naam = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Beperkingen", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Hulpmiddelen",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BitFlag = table.Column<int>(type: "int", nullable: false),
-                    Naam = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hulpmiddelen", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OnderzoeksTypes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BitFlag = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OnderzoeksTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,11 +103,7 @@ namespace api.Migrations
                     Voornaam = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Achternaam = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Postcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Aandoending = table.Column<int>(type: "int", nullable: true),
-                    Hulpmiddel = table.Column<int>(type: "int", nullable: true),
-                    Beperking = table.Column<int>(type: "int", nullable: true),
-                    VoorkeurBenadering = table.Column<int>(type: "int", nullable: true),
-                    VooerkeurOnderzoek = table.Column<int>(type: "int", nullable: true),
+                    VoorkeurBenaderingId = table.Column<int>(type: "int", nullable: true),
                     MagBenaderdWorden = table.Column<bool>(type: "bit", nullable: true),
                     VerzorgerId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -186,9 +125,33 @@ namespace api.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_AspNetUsers_Benaderingen_VoorkeurBenaderingId",
+                        column: x => x.VoorkeurBenaderingId,
+                        principalTable: "Benaderingen",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_AspNetUsers_Verzorgers_VerzorgerId",
                         column: x => x.VerzorgerId,
                         principalTable: "Verzorgers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Aandoeningen",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ErvaringsdeskundigeId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Aandoeningen", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Aandoeningen_AspNetUsers_ErvaringsdeskundigeId",
+                        column: x => x.ErvaringsdeskundigeId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
 
@@ -278,6 +241,63 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Beperkingen",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ErvaringsdeskundigeId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Beperkingen", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Beperkingen_AspNetUsers_ErvaringsdeskundigeId",
+                        column: x => x.ErvaringsdeskundigeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Hulpmiddelen",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ErvaringsdeskundigeId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hulpmiddelen", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Hulpmiddelen_AspNetUsers_ErvaringsdeskundigeId",
+                        column: x => x.ErvaringsdeskundigeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OnderzoeksTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ErvaringsdeskundigeId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OnderzoeksTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OnderzoeksTypes_AspNetUsers_ErvaringsdeskundigeId",
+                        column: x => x.ErvaringsdeskundigeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Onderzoeken",
                 columns: table => new
                 {
@@ -286,7 +306,7 @@ namespace api.Migrations
                     UitvoerderId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Locatie = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Beloning = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OnderzoeksType = table.Column<int>(type: "int", nullable: false),
+                    OnderzoeksTypeId = table.Column<int>(type: "int", nullable: false),
                     Beschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OnderzoeksData = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -299,7 +319,18 @@ namespace api.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Onderzoeken_OnderzoeksTypes_OnderzoeksTypeId",
+                        column: x => x.OnderzoeksTypeId,
+                        principalTable: "OnderzoeksTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Aandoeningen_ErvaringsdeskundigeId",
+                table: "Aandoeningen",
+                column: "ErvaringsdeskundigeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -339,6 +370,11 @@ namespace api.Migrations
                 column: "VerzorgerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_VoorkeurBenaderingId",
+                table: "AspNetUsers",
+                column: "VoorkeurBenaderingId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -346,9 +382,29 @@ namespace api.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Beperkingen_ErvaringsdeskundigeId",
+                table: "Beperkingen",
+                column: "ErvaringsdeskundigeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hulpmiddelen_ErvaringsdeskundigeId",
+                table: "Hulpmiddelen",
+                column: "ErvaringsdeskundigeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Onderzoeken_OnderzoeksTypeId",
+                table: "Onderzoeken",
+                column: "OnderzoeksTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Onderzoeken_UitvoerderId",
                 table: "Onderzoeken",
                 column: "UitvoerderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OnderzoeksTypes_ErvaringsdeskundigeId",
+                table: "OnderzoeksTypes",
+                column: "ErvaringsdeskundigeId");
         }
 
         /// <inheritdoc />
@@ -373,9 +429,6 @@ namespace api.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Benaderingen");
-
-            migrationBuilder.DropTable(
                 name: "Beperkingen");
 
             migrationBuilder.DropTable(
@@ -385,16 +438,19 @@ namespace api.Migrations
                 name: "Onderzoeken");
 
             migrationBuilder.DropTable(
-                name: "OnderzoeksTypes");
-
-            migrationBuilder.DropTable(
                 name: "Tests");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "OnderzoeksTypes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Benaderingen");
 
             migrationBuilder.DropTable(
                 name: "Verzorgers");
