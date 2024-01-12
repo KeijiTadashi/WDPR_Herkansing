@@ -9,6 +9,7 @@ import {ApiExample} from "./Pages/ApiExample";
 import {Login} from "./Pages/Login";
 import Homepage from './Pages/Homepage';
 import Beheerder from './Pages/Beheerder';
+import Ervaringdeskundige from './Pages/Ervaringdeskundige';
 import Scam from './Pages/Scam';
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
     {
         path: "/beheerder",
         element: <Beheerder/>
+    },
+    {
+        path: "/Ervaringdeskundige",
+        element: <Ervaringdeskundige/>
     },
     {
         path: "Scam",

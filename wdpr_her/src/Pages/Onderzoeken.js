@@ -4,6 +4,7 @@ import Header from '../standaardformats/Header';
 import "../CSS/Onderzoeken.css";
 import DynamicOnderzoekPaneel from '../standaardformats/DynamicOnderzoekPaneel';
 
+
 function Onderzoeken() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -41,6 +42,7 @@ function Onderzoeken() {
         </>
     )
 }
+
 
 
 export default Onderzoeken;
