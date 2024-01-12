@@ -1,14 +1,20 @@
 import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
-import "../Onderzoeken.css"
-import Beoordeling from '../standaardformats/Beoordeling'
+import "../CSS/Onderzoeken.css";
+import DynamicOnderzoekPaneel from '../standaardformats/DynamicOnderzoekPaneel';
 
 function Onderzoeken() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
+
+    const onderzoekArray = [
+        {vraag: 'Hoe gaat het met je?'},
+        {vraag: 'Hoe goed vind je deze vraag?'},
+        {vraag: 'Wat wordt de beoordeling voor deze website?'},
+    ]
 
     return (
         <>
@@ -23,17 +29,8 @@ function Onderzoeken() {
                         </p>
                     </div>
 
-                    <div className="Onderzoek">
-                        <h3>Vragen over onderdeel A</h3>
-                        <p>vraag</p>
-                        <Beoordeling/>
-                    </div>
+                    <DynamicOnderzoekPaneel onderzoekArray={onderzoekArray}/>
 
-                    <div className="Onderzoek">
-                        <h3>Vragen over onderdeel B</h3>
-                        <p>vraag</p>
-                        <Beoordeling/>
-                    </div>
             </div>
         </div>
         </>

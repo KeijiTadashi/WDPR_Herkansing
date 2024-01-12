@@ -7,9 +7,9 @@ import "../CSS/Opdrachtpaneel.css";
 const OpdrachtPaneel = ({ naam, status, aantaldeelnemers, indexnr }) => {
 
     const NAAM = naam?naam:"Geen naam opgegeven";
-    const STATUS = status?status:"Status niet beschikbaar"
-    const AANTALDEELNEMERS = aantaldeelnemers?aantaldeelnemers:"-1"
-    const INDEXNR = indexnr?indexnr:1234;
+    const STATUS = status?status:"Status niet beschikbaar";
+    const AANTALDEELNEMERS = aantaldeelnemers?aantaldeelnemers:-1;
+    const INDEXNR = indexnr?indexnr:-1;
 
     return (
         <div className="opdracht-panel">
