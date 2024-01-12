@@ -12,8 +12,8 @@ function Onderzoeken() {
 
     return (
         <>
-            <Header/>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
+                <Header/>
                 <div className={"Body"}>
                     <div className="Onderzoek">
                         <h3>Doel van het onderzoek</h3>
