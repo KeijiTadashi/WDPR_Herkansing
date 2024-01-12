@@ -14,6 +14,7 @@ function Onderzoeken() {
     *Laad de volgende array in met de vragen uit de database.
     *Er wordt automatisch een nummer aan gegeven, en de vragen worden automatisch ingeladen.
     */
+   //TODO laad hier dus die arrays in
     const onderzoekArray = [
         {vraag: 'Hoe gaat het met je?'},
         {vraag: 'Hoe goed vind je deze vraag?'},
