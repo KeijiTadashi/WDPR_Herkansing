@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import OnderzoekItem from '../standaardformats/OnderzoekItem';
 
 const DynamicOnderzoekPaneel = ({ onderzoekArray }) => {
-    const [vraagCounter] = useState(1);
     const amountOfElements = onderzoekArray.length;
     return (
         <>
