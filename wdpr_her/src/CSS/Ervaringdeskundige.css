@@ -1,0 +1,10 @@
+.box{
+    width: 500%;
+    font-size: 15px;
+    margin: 30px;
+    margin-left: 200px;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    max-width: 800px;
+  }
