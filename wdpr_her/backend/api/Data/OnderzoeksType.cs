@@ -4,7 +4,6 @@ namespace api;
 
 public class OnderzoeksType
 {
-    [Key]
-    public int BitFlag { get; set; }
+    public int Id { get; set; }
     public string Type { get; set; }
 }
