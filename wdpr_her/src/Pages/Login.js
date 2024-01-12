@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRef } from "react";
 import { SetAuthToken } from "../Helper/AuthToken";
 
+import "../CSS/StichtingTheme.css"
 import useLocalStorage from "use-local-storage";
 
 
@@ -31,6 +32,7 @@ export function Login() {
                         ref={usernameRef}
                         name="UsernameField"
                         aria-label="Invoerveld gebruikersnaam"
+                        className="inputFontSize"
                     >
                     </input>
 
@@ -44,6 +46,7 @@ export function Login() {
                         ref={passwordRef}
                         name="PasswordField"
                         aria-label="Invoerveld wachtwoord"
+                        className="inputFontSize"
                     >
                     </input>
                     <br />
