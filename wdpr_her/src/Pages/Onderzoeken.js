@@ -2,6 +2,7 @@ import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
 import "../Onderzoeken.css"
+import Beoordeling from '../standaardformats/Beoordeling'
 
 function Onderzoeken() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -39,31 +40,5 @@ function Onderzoeken() {
     )
 }
 
-function Beoordeling(){
-    return(
-        <div className="Beoordeling">
-        <label>
-            <input type="checkbox" value="1"/>
-            Zeer goed
-        </label>
-        <label>
-            <input type="checkbox" value="2"/>
-            Goed
-        </label>
-        <label>
-            <input type="checkbox" value="3"/>
-            Neutraal
-        </label>
-        <label>
-            <input type="checkbox" value="4"/>
-            Slecht
-        </label>
-        <label>
-            <input type="checkbox" value="5"/>
-            Zeer slecht
-        </label>
-        </div>
-    );
-}
 
 export default Onderzoeken;
