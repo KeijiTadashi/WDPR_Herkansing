@@ -21,8 +21,8 @@ export function Login() {
     return (
         // <Layout>
         <>
-            <Header />
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
+                <Header />
                 <form>
                     <label for="UsernameField">Gebruikersnaam</label>
                     <br />
