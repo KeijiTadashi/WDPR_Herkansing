@@ -9,6 +9,8 @@ import {ApiExample} from "./Pages/ApiExample";
 import {Login} from "./Pages/Login";
 import Homepage from './Pages/Homepage';
 import Beheerder from './Pages/Beheerder';
+//import Ervaringdeskundige from './Pages/Ervaringdeskundige';
+import Bedrijven from './Pages/Bedrijven';
 
 const router = createBrowserRouter([
     {
@@ -34,6 +36,18 @@ const router = createBrowserRouter([
     {
         path: "/beheerder",
         element: <Beheerder/>
+    },
+    {
+       // path: "/Ervaringdeskundige",
+        //element: <Ervaringdeskundige/>
+    },
+    {
+        path: "/Bedrijven",
+        element: <Bedrijven/>
+    },
+    {
+        path: "Scam",
+        element: <Scam/>
     }
 ]);
 

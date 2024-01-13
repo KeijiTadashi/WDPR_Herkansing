@@ -4,6 +4,7 @@ import Header from "../standaardformats/Header";
 import "../StichtingTheme.css";
 import "../Beheerder.css"
 import {Link} from "react-router-dom";
+import "../Beheerder.css"
 
 
 export const Beheerder = () => {
@@ -20,7 +21,7 @@ export const Beheerder = () => {
                 <div className={"Body"}>
 
                     <div className="flex-container">
-                        <div className="textbox">
+                        <div className="textbox border">
                             <h2>Wie zijn wij? </h2>
                             <p>Wij zijn stichting accessability en wij....
 
@@ -41,22 +42,25 @@ export const Beheerder = () => {
                         </div>
 
                         <div className="textbox">
-                            <h2>Wil je helpen? </h2>
-                            <p>Heb jij een beperking en wil je graag helpen bij onafankelijke onderzoeken, of onderzoeken voor bedrijven.
-                                Voor het verbeteren van de ....
-                                On Cracker Island, it was born To the collective of the dawn They were planting seeds at night To grow a made-up paradise Where the truth was auto-tuned</p>
+                            <div className="border">
+                                <h2>Wil je helpen? </h2>
+                                <p>Heb jij een beperking en wil je graag helpen bij onafhankelijke onderzoeken, of onderzoeken voor bedrijven.
+                                    Voor het verbeteren van de ....
+                                    On Cracker Island, it was born To the collective of the dawn They were planting seeds at nigh.</p>
                                 <Link to={"/"}>
                                 <button>Registreer</button>
                                 </Link>
+                            </div>
+                            <div className="border">
+                                <h2>Wil je helpen? </h2>
+                                <p>Heb jij een beperking en wil je graag helpen bij onafankelijke onderzoeken, of onderzoeken voor bedrijven.
+                                    Voor het verbeteren van de ....
+                                    Oh freddled gruntbuggly,Thy micturations are to me As plurdled gabbleblotchits on a lurgid bee.Groop, I implore thee, my foonting turlingdromes,And hooptiously drangle me with crinkly bindlewurdles,Or I will rend thee in the gobberwarts With my blurglecruncheon, see if I don't!</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="textbox third-box">
-                        <h2>Wil je helpen? </h2>
-                        <p>Heb jij een beperking en wil je graag helpen bij onafankelijke onderzoeken, of onderzoeken voor bedrijven.
-Voor het verbeteren van de ....
-Oh freddled gruntbuggly,Thy micturations are to me As plurdled gabbleblotchits on a lurgid bee.Groop, I implore thee, my foonting turlingdromes,And hooptiously drangle me with crinkly bindlewurdles,Or I will rend thee in the gobberwarts With my blurglecruncheon, see if I don't!</p>
-                    </div>
+
                 </div>
             </div >
         </>
