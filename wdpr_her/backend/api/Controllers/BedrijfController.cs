@@ -1,3 +1,4 @@
+
 ﻿using api.DataTemplate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,7 @@ public class BedrijfController : ControllerBase
         _roleManager = roleManager;
         _context = context;
     }
+
 
     
     // TODO CHANGE TO USEFULL INFO AND NEW DTO

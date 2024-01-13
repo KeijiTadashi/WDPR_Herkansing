@@ -1,15 +1,27 @@
 .flex-container {
     display: flex;
+    padding-left: 32px;
+    padding-right: 32px;
+    gap: 16px;
+    margin-top: 32px;
+    width: 100%;
+    justify-content: center;
   }
   
 .textbox {
-    border: 2px solid blue;
-    padding: 10px;
+    height: fit-content;
+    width: 100% !important;
     margin-bottom: 20px;
-    flex:1;
 }
-  
-.third-box {
-    align-self: flex-start; 
-    margin-left:20px; 
+
+.flex-container div{
+    width: 80%;
+}
+
+.border{
+    border: 2px solid blue;
+    border-radius: 32px;
+    padding: 10px;
+    margin-top: 16px;
+    width: 100%;
 }
