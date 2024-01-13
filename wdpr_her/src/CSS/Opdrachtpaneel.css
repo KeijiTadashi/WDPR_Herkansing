@@ -1,0 +1,114 @@
+.opdracht-panel {
+  align-items: flex-start;
+  border: 1px solid;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px 16px;
+  position: relative;
+  width:50%
+}
+
+.opdracht-panel.blue-background {
+  border-color: white;
+}
+
+.opdracht-panel.white-background {
+  border-color: var(--background);
+}
+
+.opdracht-panel.dark-background {
+  border-color: white;
+}
+
+.opdracht-panel .heading {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  position: relative;
+  width: 100%;
+}
+
+.opdracht-panel .text-wrapper {
+  align-self: stretch;
+  color: #000000;
+  font-family: var(--h-3-font-family);
+  font-size: var(--h-3-font-size);
+  font-style: var(--h-3-font-style);
+  font-weight: var(--h-3-font-weight);
+  letter-spacing: var(--h-3-letter-spacing);
+  line-height: var(--h-3-line-height);
+  margin-top: -1px;
+  position: relative;
+  text-align: left;
+}
+
+.opdracht-panel .info-line {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 13px 16px;
+  position: relative;
+  width: 100%;
+}
+
+.opdracht-panel .div {
+  color: #000000;
+  font-family: var(--WDPR-p-bold-font-family);
+  font-size: var(--WDPR-p-bold-font-size);
+  font-style: var(--WDPR-p-bold-font-style);
+  font-weight: var(--WDPR-p-bold-font-weight);
+  height: 15px;
+  letter-spacing: var(--WDPR-p-bold-letter-spacing);
+  line-height: var(--WDPR-p-bold-line-height);
+  position: relative;
+  white-space: nowrap;
+  width: 256px;
+  text-align: left;
+}
+
+.opdracht-panel .text-wrapper-2 {
+  color: #000000;
+  flex: 1;
+  font-family: var(--WDPR-WDPR-p-font-family);
+  font-size: var(--WDPR-WDPR-p-font-size);
+  font-style: var(--WDPR-WDPR-p-font-style);
+  font-weight: var(--WDPR-WDPR-p-font-weight);
+  letter-spacing: var(--WDPR-WDPR-p-letter-spacing);
+  line-height: var(--WDPR-WDPR-p-line-height);
+  margin-top: -1px;
+  position: relative;
+  text-align: right;
+}
+
+.opdracht-panel .frame {
+  align-items: flex-end;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0px 16px 16px;
+  position: relative;
+  width: 100%;
+}
+
+.opdracht-panel * {
+  box-sizing: border-box;
+}
+
+.opdracht-panel .info-line{
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 13px 16px;
+  position: relative;
+  width: 100%;
+  
+}

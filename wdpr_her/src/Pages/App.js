@@ -1,4 +1,4 @@
-import '../StichtingTheme.css';
+import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
 
@@ -20,6 +20,8 @@ function App() {
                     <h1>H1 text here</h1>
                     <h2>H2 lorem ipsum</h2>
                     <h3>H3 example</h3>
+                    
+                    <p>Er staat ook een OpdrachtPaneel in Scam</p>
                     <p>P als een example stuk text hier</p>
                     <p>
 

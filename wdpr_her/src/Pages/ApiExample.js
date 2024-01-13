@@ -1,5 +1,5 @@
-import '../StichtingTheme.css';
-import {apiPath, apiPost} from "../Helper/Api";
+import '../CSS/StichtingTheme.css';
+import {apiPath} from "../Helper/Api";
 import axios from "axios";
 import {useState} from "react";
 import Header from "../standaardformats/Header";
@@ -25,13 +25,11 @@ export function ApiExample() {
                 "name": "test",
                 "ditiseentestbool": true
             }
-        // axios
-        //     .post(apiPath + "Test/CreateTest", testInfo) //{api url}/Test/CreateTest with the testInfo as the provided data
-        //     .then((response) => {
-        //         console.log(response);
-        //     });
-        
-        apiPost("Test/CreateTest", testInfo);
+        axios
+            .post(apiPath + "Test/CreateTest", testInfo) //{api url}/Test/CreateTest with the testInfo as the provided data
+            .then((response) => {
+                console.log(response);
+            });
     }
 
     const ShowTest = () => {

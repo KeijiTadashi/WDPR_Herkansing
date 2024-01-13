@@ -227,3 +227,6 @@ header ul li {
     list-style: none;
 }
 
+.inputFontSize {
+    font-size: var(--font-size); /*Voornamelijk voor de login-velden in Login.js*/
+  }

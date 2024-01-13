@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+
+﻿using api.DataTemplate;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,9 +20,18 @@ public class BedrijfController : ControllerBase
         _context = context;
     }
 
+
+    
+    // TODO CHANGE TO USEFULL INFO AND NEW DTO
     [HttpGet("GetAllBedrijven")]
-    public async Task<ActionResult<IEnumerable<Bedrijf>>> GetAllBedrijven()
+    public async Task<ActionResult<IEnumerable<DTOLogin>>> GetAllBedrijven()
     {
-        return await _context.Bedrijven.ToListAsync();
+        var bedrijven = await _context.Bedrijven.Select(b => new DTOLogin()
+        {
+            Gebruikersnaam = b.UserName,
+            Wachtwoord = b.PasswordHash
+            //etc
+        }).ToListAsync();
+        return bedrijven;
     }
 }

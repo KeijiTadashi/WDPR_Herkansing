@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import './index.css';
+import './CSS/index.css';
 import App from './Pages/App';
-import Scam from './Pages/Scam';
+import Onderzoeken from './Pages/Onderzoeken';
 import reportWebVitals from './reportWebVitals';
 import {ApiExample} from "./Pages/ApiExample";
 import {Login} from "./Pages/Login";
@@ -12,10 +12,13 @@ import Beheerder from './Pages/Beheerder';
 //import Ervaringdeskundige from './Pages/Ervaringdeskundige';
 import Bedrijven from './Pages/Bedrijven';
 
+import Ervaringdeskundige from './Pages/Ervaringdeskundige';
+import Scam from './Pages/Scam';
+
 const router = createBrowserRouter([
     {
-        path: "/Scam",
-        element: <Scam/>,
+        path: "/Onderzoeken",
+        element: <Onderzoeken/>,
     },
     {
         path: "/",
@@ -38,12 +41,12 @@ const router = createBrowserRouter([
         element: <Beheerder/>
     },
     {
-       // path: "/Ervaringdeskundige",
-        //element: <Ervaringdeskundige/>
-    },
-    {
         path: "/Bedrijven",
         element: <Bedrijven/>
+    },
+    {
+        path: "/Ervaringdeskundige",
+        element: <Ervaringdeskundige/>
     },
     {
         path: "Scam",
