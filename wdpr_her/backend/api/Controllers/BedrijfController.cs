@@ -1,5 +1,5 @@
 
-﻿using api.DataTemplate;
+using api.DataTemplate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,17 +21,24 @@ public class BedrijfController : ControllerBase
     }
 
 
-    
+
     // TODO CHANGE TO USEFULL INFO AND NEW DTO
     [HttpGet("GetAllBedrijven")]
     public async Task<ActionResult<IEnumerable<DTOLogin>>> GetAllBedrijven()
     {
-        var bedrijven = await _context.Bedrijven.Select(b => new DTOLogin()
+        try
         {
-            Gebruikersnaam = b.UserName,
-            Wachtwoord = b.PasswordHash
-            //etc
-        }).ToListAsync();
-        return bedrijven;
+
+            var bedrijven = await _context.Bedrijven.Select(b => new DTOLogin()
+            {
+                Gebruikersnaam = b.UserName,
+                Wachtwoord = b.PasswordHash
+                //etc
+            }).ToListAsync();
+            return bedrijven;
+        }catch(Exception Þ){
+        //hoofdletter þ (thorn)
+        return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven");
+        }
     }
 }
