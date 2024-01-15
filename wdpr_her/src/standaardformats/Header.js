@@ -1,7 +1,7 @@
 import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
 import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     // Abstact this out
@@ -22,16 +22,16 @@ const Header = () => {
     const increaseFont = () => {
         let newFontSize = fontSize;
         switch (fontSize) {
-            case 'normal' :
+            case 'normal':
                 newFontSize = 'big';
                 break;
-            case 'big' :
+            case 'big':
                 newFontSize = 'bigger';
                 break;
-            case 'bigger' :
+            case 'bigger':
                 newFontSize = 'biggest';
                 break;
-            default :
+            default:
                 break;
         }
         setFontSize(newFontSize);
@@ -40,16 +40,16 @@ const Header = () => {
     const decreaseFont = () => {
         let newFontSize = fontSize;
         switch (fontSize) {
-            case 'big' :
+            case 'big':
                 newFontSize = 'normal';
                 break;
-            case 'bigger' :
+            case 'bigger':
                 newFontSize = 'big';
                 break;
-            case 'biggest' :
+            case 'biggest':
                 newFontSize = 'bigger';
                 break;
-            default :
+            default:
                 break;
         }
         setFontSize(newFontSize);
@@ -58,50 +58,51 @@ const Header = () => {
     return (
         <header>
             <div className={"Header"}>
-            <div className={"Header-top"}>
-                <img src={logo} className={"Logo-header"}
-                     alt={"logo stichting accessibility. Klik om naar de homepage te gaan"}/>
-                <h1>Title</h1>
-                <div className={"Info-header"}>
-                    <ul aria-label="Toegankelijkheid menu">
-                        <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
-                        <li><h3>Font size</h3></li>
-                        <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
-                        <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>
+                <div className={"Header-top"}>
+                    <img src={logo} className={"Logo-header"}
+                        alt={"logo stichting accessibility. Klik om naar de homepage te gaan"} />
+                    <h1>Title</h1>
+                    <div className={"Info-header"}>
+                        <ul aria-label="Toegankelijkheid menu">
+                            <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
+                            <li><h3>Font size</h3></li>
+                            <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
+                            <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div className={"Navigation"}>
+                    <div className={"Navigation-spacer"} />
+                    <ul aria-label="menubalk">
+                        <li>
+                            <Link to={"/"}><button className={"Button-navigation"} aria-label="Home">Home</button></Link>
+                        </li>
+                        <li>
+                            <button className={"Button-navigation"} aria-label="Mijn profiel">Mijn profiel</button>
+                        </li>
+                        <li>
+                            <Link to={"/Beheerder"}><button className={"Button-navigation"} aria-label="Beheerder portaal">beheerder</button></Link>
+                        </li>
+                        <li>
+                            <Link to={"/Onderzoeken"}><button className={"Button-navigation"} aria-label="Onderzoeken">Onderzoeken</button></Link>
+                        </li>
+                        <li>
+                            <Link to={"/Test"}><button className={"Button-navigation"} aria-label="API test pagina">Api Test Page</button></Link>
+                        </li>
+                        <li>
+                            <Link to={"/Login"}><button className={"Button-navigation"} aria-label="Login pagina">Login</button></Link>
+                        </li>
+                        <li>'
+                            <Link to={"/Scam"}><button className={"Button-navigation"} aria-label="Testing Playground Scam pagina">Scam</button></Link>
+                        </li>
+                        <li>
+                            <Link to={"/Ervaringdeskundige"}><button className={"Button-navigation"} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button></Link>
+                        </li>
+                        <li>
+                            <Link to={"/Bedrijven"}><button className={"Button-navigation"} aria-label="Bedrijven portaal">Bedrijven</button></Link>
+                        </li>
                     </ul>
                 </div>
-            </div>
-            <div className={"Navigation"}>
-                <div className={"Navigation-spacer"}/>
-                <ul aria-label="menubalk">
-                    <li><Link to={"/"}>
-                        <button className={"Button-navigation"} aria-label="Home">Home</button>
-                    </Link></li>
-                    <li>
-                        <button className={"Button-navigation"} aria-label="Mijn profiel">Mijn profiel</button>
-                    </li>
-                    <li>
-                        <Link to={"/Beheerder"}>
-                            <button className={"Button-navigation"}aria-label="Beheerder portaal">beheerder</button>
-                        </Link>
-                </  li>
-                    <li><Link to={"/Onderzoeken"}>
-                        <button className={"Button-navigation"} aria-label="Onderzoeken">Onderzoeken</button>
-                    </Link></li>
-                    <li><Link to={"/Test"}>
-                        <button className={"Button-navigation"} aria-label="API test pagina">Api Test Page</button>
-                    </Link></li>
-                    <li><Link to={"/Login"}>
-                        <button className={"Button-navigation"} aria-label="Login pagina">Login</button>
-                    </Link></li>
-                    <li><Link to={"/Scam"}>
-                        <button className={"Button-navigation"} aria-label="Testing Playground Scam pagina">Scam</button>
-                    </Link></li>
-                    <li><Link to={"/Ervaringdeskundige"}>
-                        <button className={"Button-navigation"} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button>
-                    </Link></li>
-                </ul>
-            </div>
             </div>
         </header>
     );
