@@ -37,8 +37,8 @@ public class BedrijfController : ControllerBase
             }).ToListAsync();
             return bedrijven;
         }catch(Exception Þ){
-        //hoofdletter þ (thorn)
-        return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven");
+            //hoofdletter þ (thorn)
+            return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven");
         }
     }
 }
