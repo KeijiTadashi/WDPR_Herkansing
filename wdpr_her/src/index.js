@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './CSS/index.css';
 import App from './Pages/App';
+import ErvaringsdeskundigeOnderzoek from './Pages/ErvaringsdeskundigeOnderzoek';
 import Onderzoeken from './Pages/Onderzoeken';
 import reportWebVitals from './reportWebVitals';
 import {ApiExample} from "./Pages/ApiExample";
@@ -16,6 +17,10 @@ import Ervaringdeskundige from './Pages/Ervaringdeskundige';
 import Scam from './Pages/Scam';
 
 const router = createBrowserRouter([
+    {
+        path: "/ErvaringsdeskundigeOnderzoek",
+        element: <ErvaringsdeskundigeOnderzoek/>,
+    },
     {
         path: "/Onderzoeken",
         element: <Onderzoeken/>,
