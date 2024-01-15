@@ -12,132 +12,141 @@ public class InitDatabaseData : ControllerBase
     private readonly StichtingContext _context;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<Gebruiker> _userManager;
-    
+
     public InitDatabaseData(StichtingContext context, UserManager<Gebruiker> userManager, RoleManager<IdentityRole> roleManager)
     {
         _context = context;
         _userManager = userManager;
         _roleManager = roleManager;
     }
-    
+
     [HttpPost("InitData")]
     public async Task<ActionResult> InitData()
     {
-        #region Roles
-        
-        if (!_roleManager.RoleExistsAsync(Roles.Beheerder).Result)
+        try
         {
-            var role = new IdentityRole();
-            role.Name = Roles.Beheerder;
-            _roleManager.CreateAsync(role).Wait();
-        }
+            #region Roles
 
-        if (!_roleManager.RoleExistsAsync(Roles.Ervaringsdeskundige).Result)
-        {
-            var role = new IdentityRole();
-            role.Name = Roles.Ervaringsdeskundige;
-            _roleManager.CreateAsync(role).Wait();
-        }
 
-        if (!_roleManager.RoleExistsAsync(Roles.Bedrijf).Result)
-        {
-            var role = new IdentityRole();
-            role.Name = Roles.Bedrijf;
-            _roleManager.CreateAsync(role).Wait();
-        }
-
-        #endregion
-
-        #region Enums
-
-        HelperController helperController = new HelperController(_context);
-        
-        foreach (var v in setAandoeningen())
-        {
-            await helperController.AddAandoening(v);
-            await helperController.AddBeperking(v); // Want ik (Brian) weet niet wat het verschil eigenlijk is of dat het dubbel is
-        }
-        foreach (var v in setBenadering())
-        {
-            await helperController.AddBenadering(v);
-        }
-        foreach (var v in setOnderzoeksTypes())
-        {
-            await helperController.AddOnderzoeksType(v);
-        }
-        
-        // TODO Add Hulpmiddelen
-
-        #endregion
-
-        AccountController accountController = new AccountController(_userManager, _roleManager);
-        #region Ervaringsdeskundigen
-        
-        foreach (var e in setDataErvaringsdeskundiges())
-        {
-            await accountController.RegistreerErvaringsdeskundige(e);
-        }
-        #endregion
-        
-        #region Beheerders
-        
-        foreach (var b in setDataBeheerder())
-        {
-            await accountController.RegistreerBeheerder(b);
-            // Console.WriteLine(
-            //     $"Start Beheerder\n{b.Voornaam}, {b.Acternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}, \n");
-            // var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
-            // if (userExists == null)
-            // {
-            //     var beheerder = new Beheerder
-            //     {
-            //         Email = b.Email,
-            //         Voornaam = b.Voornaam,
-            //         Achternaam = b.Acternaam,
-            //         UserName = b.Gebruikersnaam,
-            //         PhoneNumber = b.Telefoonnummer,
-            //         AccountType = Roles.Beheerder
-            //     };
-            //     Console.WriteLine(
-            //         $"Beheerder registreer, gewoon\n{b.Voornaam}, {b.Acternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}\n{beheerder.Voornaam},{beheerder.Achternaam}, {beheerder.UserName},{beheerder.Email},{beheerder.PhoneNumber},\n\n");
-            //
-            //     _userManager.CreateAsync(beheerder, b.Wachtwoord).Wait();
-            //     _userManager.AddToRoleAsync(beheerder, Roles.Beheerder).Wait();
-            //     Console.WriteLine("End Beheerder");
-            // }
-        }
-
-        #endregion
-        
-        #region Bedrijven
-
-        foreach (var b in setDataBedrijf())
-        {
-            Console.WriteLine("Start Bedrijf");
-            var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
-            if (userExists == null)
+            if (!_roleManager.RoleExistsAsync(Roles.Beheerder).Result)
             {
-                var bedrijf = new Bedrijf
-                {
-                    Email = b.Email,
-                    Kvk = b.Kvk,
-                    Locatie = b.Locatie,
-                    Naam = b.Bedrijfsnaam,
-                    Website = b.Website,
-                    UserName = b.Gebruikersnaam,
-                    PhoneNumber = b.Telefoonnummer,
-                    AccountType = Roles.Bedrijf
-                };
-                _userManager.CreateAsync(bedrijf, b.Wachtwoord).Wait();
-                _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf).Wait();
-
-                Console.WriteLine("End Bedrijf");
+                var role = new IdentityRole();
+                role.Name = Roles.Beheerder;
+                _roleManager.CreateAsync(role).Wait();
             }
-        }
 
-        #endregion
-        
-        return Ok();
+            if (!_roleManager.RoleExistsAsync(Roles.Ervaringsdeskundige).Result)
+            {
+                var role = new IdentityRole();
+                role.Name = Roles.Ervaringsdeskundige;
+                _roleManager.CreateAsync(role).Wait();
+            }
+
+            if (!_roleManager.RoleExistsAsync(Roles.Bedrijf).Result)
+            {
+                var role = new IdentityRole();
+                role.Name = Roles.Bedrijf;
+                _roleManager.CreateAsync(role).Wait();
+            }
+
+            #endregion
+
+            #region Enums
+
+            HelperController helperController = new HelperController(_context);
+
+            foreach (var v in setAandoeningen())
+            {
+                await helperController.AddAandoening(v);
+                await helperController.AddBeperking(v); // Want ik (Brian) weet niet wat het verschil eigenlijk is of dat het dubbel is
+            }
+            foreach (var v in setBenadering())
+            {
+                await helperController.AddBenadering(v);
+            }
+            foreach (var v in setOnderzoeksTypes())
+            {
+                await helperController.AddOnderzoeksType(v);
+            }
+
+            // TODO Add Hulpmiddelen
+
+            #endregion
+
+            AccountController accountController = new AccountController(_userManager, _roleManager);
+            #region Ervaringsdeskundigen
+
+            foreach (var e in setDataErvaringsdeskundiges())
+            {
+                await accountController.RegistreerErvaringsdeskundige(e);
+            }
+            #endregion
+
+            #region Beheerders
+
+            foreach (var b in setDataBeheerder())
+            {
+                await accountController.RegistreerBeheerder(b);
+                // Console.WriteLine(
+                //     $"Start Beheerder\n{b.Voornaam}, {b.Acternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}, \n");
+                // var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
+                // if (userExists == null)
+                // {
+                //     var beheerder = new Beheerder
+                //     {
+                //         Email = b.Email,
+                //         Voornaam = b.Voornaam,
+                //         Achternaam = b.Acternaam,
+                //         UserName = b.Gebruikersnaam,
+                //         PhoneNumber = b.Telefoonnummer,
+                //         AccountType = Roles.Beheerder
+                //     };
+                //     Console.WriteLine(
+                //         $"Beheerder registreer, gewoon\n{b.Voornaam}, {b.Acternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}\n{beheerder.Voornaam},{beheerder.Achternaam}, {beheerder.UserName},{beheerder.Email},{beheerder.PhoneNumber},\n\n");
+                //
+                //     _userManager.CreateAsync(beheerder, b.Wachtwoord).Wait();
+                //     _userManager.AddToRoleAsync(beheerder, Roles.Beheerder).Wait();
+                //     Console.WriteLine("End Beheerder");
+                // }
+            }
+
+            #endregion
+
+            #region Bedrijven
+
+            foreach (var b in setDataBedrijf())
+            {
+                Console.WriteLine("Start Bedrijf");
+                var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
+                if (userExists == null)
+                {
+                    var bedrijf = new Bedrijf
+                    {
+                        Email = b.Email,
+                        Kvk = b.Kvk,
+                        Locatie = b.Locatie,
+                        Naam = b.Bedrijfsnaam,
+                        Website = b.Website,
+                        UserName = b.Gebruikersnaam,
+                        PhoneNumber = b.Telefoonnummer,
+                        AccountType = Roles.Bedrijf
+                    };
+                    _userManager.CreateAsync(bedrijf, b.Wachtwoord).Wait();
+                    _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf).Wait();
+
+                    Console.WriteLine("End Bedrijf");
+                }
+            }
+
+            #endregion
+
+            return Ok();
+        }
+        catch (Exception अ)
+        {
+            //Kanthya
+            return StatusCode(500, "Internal server error: er gaat iets mis in InitDatabaseData/InitData");
+        }
     }
 
     #region Data
@@ -188,7 +197,7 @@ public class InitDatabaseData : ControllerBase
             }
         };
     }
-    
+
     private List<DTORegistreerBedrijf> setDataBedrijf()
     {
         var rnd = new Random();
@@ -351,7 +360,7 @@ public class InitDatabaseData : ControllerBase
             new DTOHelper() { Naam = "Doof" }
         };
     }
-    
+
     private List<DTOHelper> setBenadering()
     {
         return new List<DTOHelper>()
@@ -361,7 +370,7 @@ public class InitDatabaseData : ControllerBase
             new DTOHelper() { Naam = "Chat" }
         };
     }
-    
+
     private List<DTOHelper> setOnderzoeksTypes()
     {
         return new List<DTOHelper>()
