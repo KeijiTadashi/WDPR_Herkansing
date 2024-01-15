@@ -64,10 +64,11 @@ const Header = () => {
                     <h1>Title</h1>
                     <div className={"Info-header"}>
                         <ul aria-label="Toegankelijkheid menu">
-                            <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
-                            <li><h3>Font size</h3></li>
-                            <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
                             <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>
+                            <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
+                            <li><h3 className={"header-text"}>Font size</h3></li>
+                            <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
+
                         </ul>
                     </div>
                 </div>
@@ -92,7 +93,7 @@ const Header = () => {
                         <li>
                             <Link to={"/Login"}><button className={"Button-navigation"} aria-label="Login pagina">Login</button></Link>
                         </li>
-                        <li>'
+                        <li>
                             <Link to={"/Scam"}><button className={"Button-navigation"} aria-label="Testing Playground Scam pagina">Scam</button></Link>
                         </li>
                         <li>
