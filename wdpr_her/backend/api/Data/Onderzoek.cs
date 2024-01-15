@@ -9,5 +9,5 @@ public class Onderzoek
     public string? Beloning { get; set; }
     public List<OnderzoeksType> OnderzoeksType { get; set; }
     public string Beschrijving { get; set; }
-    public string OnderzoeksData { get; set; }
+    public string OnderzoeksData { get; set; } // Format van vragen etc in JSON format
 }
