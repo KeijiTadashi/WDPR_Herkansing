@@ -84,7 +84,7 @@ const Header = () => {
                             <Link to={"/Beheerder"}><button className={"Button-navigation"} aria-label="Beheerder portaal">beheerder</button></Link>
                         </li>
                         <li>
-                            <Link to={"/Onderzoeken"}><button className={"Button-navigation"} aria-label="Onderzoeken">Onderzoeken</button></Link>
+                            <Link to={"/ErvaringsdeskundigeOnderzoek"}><button className={"Button-navigation"} aria-label="Onderzoek">Onderzoeken</button></Link>
                         </li>
                         <li>
                             <Link to={"/Test"}><button className={"Button-navigation"} aria-label="API test pagina">Api Test Page</button></Link>
