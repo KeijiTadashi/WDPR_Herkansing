@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Header from '../standaardformats/Header';
 import useLocalStorage from 'use-local-storage';
 import "../Bedrijven.css"
+import axios from "axios";
+import {apiPath} from "../Helper/Api";
 
 const Bedrijven = () => {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -19,12 +21,20 @@ const Bedrijven = () => {
     }, [])
 
     async function getBedrijven() {
-        try {
-            await fetch("http://localhost:5027/Bedrijf/GetAllBedrijven").then(res=>res.json()).then(data=>{
-            setbedrijvenList(data)
-        })
-        }catch{}
-        
+        axios.get(apiPath + "Bedrijf/GetAllBedrijven")
+            .then(response => {
+                console.log(response.data);
+                setbedrijvenList(response.data);
+            })
+            .catch(e => {
+                console.log(e)
+            })
+        // try {
+        //     await fetch("http://localhost:5027/Bedrijf/GetAllBedrijven").then(res=>res.json()).then(data=>{
+        //     setbedrijvenList(data)
+        // })
+        // }catch{}
+        //
     }
 
     return (

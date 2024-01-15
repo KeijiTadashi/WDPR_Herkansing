@@ -1,6 +1,8 @@
 
 ﻿using api.DataTemplate;
-using Microsoft.AspNetCore.Identity;
+ using api.Helper;
+ using Microsoft.AspNetCore.Authorization;
+ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,19 +21,21 @@ public class BedrijfController : ControllerBase
         _roleManager = roleManager;
         _context = context;
     }
-
-
     
-    // TODO CHANGE TO USEFULL INFO AND NEW DTO
+    // Commented out for easier testing
+    // [Authorize(Roles = Roles.Beheerder)]
     [HttpGet("GetAllBedrijven")]
-    public async Task<ActionResult<IEnumerable<DTOLogin>>> GetAllBedrijven()
+    public async Task<ActionResult<IEnumerable<DTOGetBedrijf>>> GetAllBedrijven()
     {
-        var bedrijven = await _context.Bedrijven.Select(b => new DTOLogin()
+        var bedrijven = await _context.Bedrijven.Select(b => new DTOGetBedrijf()
         {
-            Gebruikersnaam = b.UserName,
-            Wachtwoord = b.PasswordHash
-            //etc
+            Bedrijfsnaam = b.Naam,
+            Email = b.Email,
+            Kvk = b.Kvk,
+            Telefoonnummer = b.PhoneNumber,
+            Locatie = b.Locatie, 
+            Website = b.Website
         }).ToListAsync();
-        return bedrijven;
+        return Ok(bedrijven);
     }
 }
