@@ -24,13 +24,12 @@ export function Login() {
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
                 <Header />
                 <form>
-                    <label htmlFor="UsernameField">Gebruikersnaam</label>
+                    <label htmlFor="username">Gebruikersnaam</label>
                     <br />
                     <input
                         type={"text"}
                         id={"username"}
                         ref={usernameRef}
-                        name="UsernameField"
                         aria-label="Invoerveld gebruikersnaam"
                         className="inputFontSize"
                     >
@@ -38,13 +37,12 @@ export function Login() {
 
                     <br />
 
-                    <label htmlFor="PasswordField">Wachtwoord</label>
+                    <label htmlFor="password">Wachtwoord</label>
                     <br />
                     <input
                         type={"password"}
                         id={"password"}
                         ref={passwordRef}
-                        name="PasswordField"
                         aria-label="Invoerveld wachtwoord"
                         className="inputFontSize"
                     >

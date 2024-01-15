@@ -18,8 +18,6 @@ function Onderzoeken() {
    //TODO laad hier dus die arrays in
     const onderzoekArray = [
         {vraag: 'Hoe gaat het met je?'},
-        {vraag: 'Hoe goed vind je deze vraag?'},
-        {vraag: 'Wat wordt de beoordeling voor deze website?'},
     ]
 
     return (
@@ -28,7 +26,7 @@ function Onderzoeken() {
                 <Header/>
                 <div className={"Body"}>
                     <div className="Onderzoek">
-                        <h3>Doel van het onderzoek</h3>
+                        <h2>Doel van het onderzoek</h2>
                         <p>Het doel van dit onderzoek is om te kijken wat jouw gebruikers ervaring is bij het gebruik van de website.
                             etc.
                             and some more info.
