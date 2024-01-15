@@ -27,5 +27,5 @@ public class StichtingContext : IdentityDbContext<Gebruiker, IdentityRole, strin
     public DbSet<OnderzoeksType> OnderzoeksTypes { get; set; }
     public DbSet<Verzorger> Verzorgers { get; set; }
     public DbSet<Gebruiker> Gebruikers { get; set; } = default!;
-    public DbSet<OpdrachtRespons> Opdracht {get;set;}
+    public DbSet<OpdrachtRespons> OpdrachtResponsEntries {get;set;}
 }
