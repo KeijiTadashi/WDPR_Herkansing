@@ -30,32 +30,35 @@ namespace api;
  *      {api url}/Test
  */
 [ApiController]
-[Route("[controller]")] 
+[Route("[controller]")]
 public class TestController : ControllerBase
 {
     private readonly StichtingContext _context;
-    
+
     public TestController(StichtingContext context)
     {
         _context = context;
     }
     // End Create Step
-    
+
     // Route = {api url}/Test/CreateTest
     [HttpPost("CreateTest")]
     public async Task<ActionResult> CreateTest([FromBody] DTOCreateTest ct)
     {
-        try{
-        Test t = new Test() { Name = ct.Name, IsTest = ct.DitIsEenTestBool };
-        
-        
-        await _context.Tests.AddAsync(t); // Add this to the list of changes to make during SaveChanges(Async)
-        var saved = await _context.SaveChangesAsync(); // 
-        
-        
-        // return StatusCode(201); // 201 = Created
-        return Created("TestDB", $"Saved {saved} tests");
-        }catch(Exception इ){
+        try
+        {
+            Test t = new Test() { Name = ct.Name, IsTest = ct.DitIsEenTestBool };
+
+
+            await _context.Tests.AddAsync(t); // Add this to the list of changes to make during SaveChanges(Async)
+            var saved = await _context.SaveChangesAsync(); // 
+
+
+            // return StatusCode(201); // 201 = Created
+            return Created("TestDB", $"Saved {saved} tests");
+        }
+        catch (Exception इ)
+        {
             //talavya
             return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/CreateTest");
         }
@@ -65,11 +68,14 @@ public class TestController : ControllerBase
     [HttpPost("CreateTestDefault")]
     public async Task<ActionResult> CreateTest2()
     {
-        try{
-        await _context.Tests.AddAsync(new Test() { Name = "Default", IsTest = true });
-        await _context.SaveChangesAsync();
-        return Ok(); // Return Ok (200) without data
-        }catch(Exception उ){
+        try
+        {
+            await _context.Tests.AddAsync(new Test() { Name = "Default", IsTest = true });
+            await _context.SaveChangesAsync();
+            return Ok(); // Return Ok (200) without data
+        }
+        catch (Exception उ)
+        {
             //osthya
             return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/CreateTest2");
 
@@ -80,9 +86,12 @@ public class TestController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Test>>> GetAllTests()
     {
-        try{
-            return await _context.Tests.ToListAsync(); 
-        }catch(Exception ऋ){
+        try
+        {
+            return await _context.Tests.ToListAsync();
+        }
+        catch (Exception ऋ)
+        {
             //murdhanya
             return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/GetAllTests");
         }
@@ -96,13 +105,13 @@ public class TestController : ControllerBase
         try
         {
             var t = await _context.Tests.FirstAsync(t => t.Id == id); // If it isn't found, it will fail here and go to catch
-            
+
             return Ok(t); // return Ok (200) with the Test that was found
         }
         catch (Exception e)
         {
             Console.WriteLine($"Error: \n{e}"); // Not necessary but helps with understanding what happens during development
-            
+
             //Either return a default/faulty data or a BadRequest/other error (with or without data)
             //return new Test() { IsTest = null, Id = -1, Name = "NOT FOUND" }; // This will give a code 200 OK (which in most cases is not OK)
             // return BadRequest();
