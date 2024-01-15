@@ -32,6 +32,7 @@ public class AuthService : ControllerBase
     [HttpPost("Login")]
     public async Task<ActionResult> Login([FromBody] DTOLogin dto)
     {
+        try{
         var gebruiker = await _userManager.FindByNameAsync(dto.Gebruikersnaam);
         Console.WriteLine($"Gebruiker {gebruiker}");
 
@@ -68,6 +69,9 @@ public class AuthService : ControllerBase
             });
 
         return BadRequest("Couldn't generate jwt token.");
+        }catch(Exception þ){
+            return StatusCode(500, "Internal server error: er gaat iets mis in AuthService/Login");
+        }
     }
 
     private (string, DateTime) GenerateToken(IEnumerable<Claim> claims, string expirationInHours)
