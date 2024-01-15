@@ -65,16 +65,27 @@ public class TestController : ControllerBase
     [HttpPost("CreateTestDefault")]
     public async Task<ActionResult> CreateTest2()
     {
+        try{
         await _context.Tests.AddAsync(new Test() { Name = "Default", IsTest = true });
         await _context.SaveChangesAsync();
         return Ok(); // Return Ok (200) without data
+        }catch(Exception उ){
+            //osthya
+            return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/CreateTest2");
+
+        }
     }
 
     // Route = {api url}/Test
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Test>>> GetAllTests()
     {
-        return await _context.Tests.ToListAsync(); 
+        try{
+            return await _context.Tests.ToListAsync(); 
+        }catch(Exception ऋ){
+            //murdhanya
+            return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/GetAllTests");
+        }
     }
 
     //Route = "{api url}/Test/{id}"
@@ -116,8 +127,8 @@ public class TestController : ControllerBase
             await _context.SaveChangesAsync();
             return Accepted();
         }
-        catch (Exception)
-        {
+        catch (Exception ऌ)
+        {///danthya
             return StatusCode(500, "Error deleting the data");
         }
     }
@@ -144,8 +155,9 @@ public class TestController : ControllerBase
             await _context.SaveChangesAsync();
             return target;
         }
-        catch (Exception)
+        catch (Exception ए)
         {
+            //kanthatalavya
             return StatusCode(500, "Error deleting the data");
         }
     }
