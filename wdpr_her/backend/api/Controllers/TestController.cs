@@ -45,6 +45,7 @@ public class TestController : ControllerBase
     [HttpPost("CreateTest")]
     public async Task<ActionResult> CreateTest([FromBody] DTOCreateTest ct)
     {
+        try{
         Test t = new Test() { Name = ct.Name, IsTest = ct.DitIsEenTestBool };
         
         
@@ -54,6 +55,10 @@ public class TestController : ControllerBase
         
         // return StatusCode(201); // 201 = Created
         return Created("TestDB", $"Saved {saved} tests");
+        }catch(Exception इ){
+            //talavya
+            return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/CreateTest");
+        }
     }
 
     // Optional extra route -> {api url}/Test/CreateTestDefault
