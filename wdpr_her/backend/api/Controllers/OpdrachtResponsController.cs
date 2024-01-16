@@ -54,7 +54,7 @@ public class OpdrachtResponsController : ControllerBase{
         {
             // Log the exception for debugging purposes
             // Log.Error(ex, $"Error retrieving OpdrachtRespons with ID {opdrachtResponsId}");
-            return StatusCode(500, "Internal server error");
+            return StatusCode(500, "Internal server error: er gaat iets mis in OpdrachtResponsController/opdrachtResponsID");
         }
     }
 }
