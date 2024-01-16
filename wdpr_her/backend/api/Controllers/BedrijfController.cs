@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
  using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing.Printing;
 
 namespace api.Controllers;
 [ApiController]
@@ -38,7 +39,7 @@ public class BedrijfController : ControllerBase
         try
         {
 
-            var bedrijven = await _context.Bedrijven.Select(b => new DTOLogin()
+            var bedrijven = await _context.Bedrijven.Select(b => new DTOGetBedrijf()
             {
                 Bedrijfsnaam = b.Naam,
                 Email = b.Email,
@@ -48,7 +49,8 @@ public class BedrijfController : ControllerBase
                 Website = b.Website
             }).ToListAsync();
             return Ok(bedrijven);
-        }catch{
+        }catch(Exception ex){
+            Console.Write(ex);
             return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven");
         }
 
