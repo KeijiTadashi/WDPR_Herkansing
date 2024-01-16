@@ -28,7 +28,7 @@ public class OpdrachtResponsController : ControllerBase{
 
             return Ok(new{message = "OpdrachtRespons created successfully :D", opdrachtRespons.ResponsID});
         }
-        catch(Exception e){
+        catch{
             return StatusCode(500, "Internal server error: er gaat iets mis in CreateOpdrachtRespons");
         }
     }
@@ -50,10 +50,8 @@ public class OpdrachtResponsController : ControllerBase{
 
             return Ok(opdrachtRespons);
         }
-        catch (Exception uitzondering)
+        catch
         {
-            // Log the exception for debugging purposes
-            // Log.Error(ex, $"Error retrieving OpdrachtRespons with ID {opdrachtResponsId}");
             return StatusCode(500, "Internal server error: er gaat iets mis in OpdrachtResponsController/opdrachtResponsID");
         }
     }

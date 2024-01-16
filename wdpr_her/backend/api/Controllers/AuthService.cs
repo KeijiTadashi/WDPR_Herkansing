@@ -71,7 +71,7 @@ public class AuthService : ControllerBase
 
             return BadRequest("Couldn't generate jwt token.");
         }
-        catch (Exception þ)
+        catch
         {
             return StatusCode(500, "Internal server error: er gaat iets mis in AuthService/Login");
         }

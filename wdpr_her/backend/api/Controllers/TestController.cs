@@ -57,9 +57,8 @@ public class TestController : ControllerBase
             // return StatusCode(201); // 201 = Created
             return Created("TestDB", $"Saved {saved} tests");
         }
-        catch (Exception इ)
+        catch
         {
-            //talavya
             return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/CreateTest");
         }
     }
@@ -74,9 +73,7 @@ public class TestController : ControllerBase
             await _context.SaveChangesAsync();
             return Ok(); // Return Ok (200) without data
         }
-        catch (Exception उ)
-        {
-            //osthya
+        catch{
             return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/CreateTest2");
 
         }
@@ -90,9 +87,8 @@ public class TestController : ControllerBase
         {
             return await _context.Tests.ToListAsync();
         }
-        catch (Exception ऋ)
+        catch
         {
-            //murdhanya
             return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/GetAllTests");
         }
     }
@@ -136,8 +132,8 @@ public class TestController : ControllerBase
             await _context.SaveChangesAsync();
             return Accepted();
         }
-        catch (Exception ऌ)
-        {///danthya
+        catch
+        {
             return StatusCode(500, "Error deleting the data");
         }
     }
@@ -164,9 +160,8 @@ public class TestController : ControllerBase
             await _context.SaveChangesAsync();
             return target;
         }
-        catch (Exception ए)
+        catch
         {
-            //kanthatalavya
             return StatusCode(500, "Error deleting the data");
         }
     }

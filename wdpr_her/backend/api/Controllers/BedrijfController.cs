@@ -48,8 +48,7 @@ public class BedrijfController : ControllerBase
                 Website = b.Website
             }).ToListAsync();
             return Ok(bedrijven);
-        }catch(Exception Þ){
-            //hoofdletter þ (thorn)
+        }catch{
             return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven");
         }
 

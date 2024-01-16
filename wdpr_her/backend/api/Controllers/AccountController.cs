@@ -51,7 +51,7 @@ public class AccountController : ControllerBase
 
             return BadRequest(result.Errors);
         }
-        catch (Exception ex)
+        catch
         {
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/Registreer");
         }
@@ -86,7 +86,7 @@ public class AccountController : ControllerBase
 
             return BadRequest(result.Errors);
         }
-        catch (Exception Å)
+        catch
         {
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBeheerder");
         }
@@ -123,7 +123,7 @@ public class AccountController : ControllerBase
 
             return BadRequest(result.Errors);
         }
-        catch (Exception ß)
+        catch
         {
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBedrijf");
         }
@@ -180,7 +180,7 @@ public class AccountController : ControllerBase
             await _userManager.UpdateAsync(deskundige);
             return Ok("De gebuikers informatie is geupdate.");
         }
-        catch (Exception αλφαβητο)
+        catch
         {
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateErvaringsDeskundige");
         }
@@ -192,49 +192,51 @@ public class AccountController : ControllerBase
     public async Task<ActionResult> UpdateBedrijf([FromBody] DTOUpdateBedrijf dtoUpdate)
     {
         try{
-        string userName;
-        if (User.FindFirstValue(ClaimTypes.Role) == Roles.Beheerder)
-        {
-            if (dtoUpdate.UserName == null)
-                return BadRequest("Er is niet bekend welk bedrijf moet worden aamgepast.");
-            userName = dtoUpdate.UserName;
-        }
-        else
-        {
-            userName = User.FindFirstValue(ClaimTypes.Name);
-        }
-        var bedrijf = (Bedrijf)await _userManager.FindByNameAsync(userName);
-        if (bedrijf == null)
-            return BadRequest("Ervaringsdeskundige is niet gevonden");
+            string userName;
+            if (User.FindFirstValue(ClaimTypes.Role) == Roles.Beheerder)
+            {
+                if (dtoUpdate.UserName == null)
+                    return BadRequest("Er is niet bekend welk bedrijf moet worden aamgepast.");
+                userName = dtoUpdate.UserName;
+            }
+            else
+            {
+                userName = User.FindFirstValue(ClaimTypes.Name);
+            }
+            var bedrijf = (Bedrijf)await _userManager.FindByNameAsync(userName);
+            if (bedrijf == null)
+                return BadRequest("Ervaringsdeskundige is niet gevonden");
 
-        bedrijf.Kvk = dtoUpdate.Kvk ?? bedrijf.Kvk;
-        bedrijf.Email = dtoUpdate.Email ?? bedrijf.Email;
-        bedrijf.Naam = dtoUpdate.Naam ?? bedrijf.Naam;
-        bedrijf.Locatie = dtoUpdate.Locatie ?? bedrijf.Locatie;
-        bedrijf.PhoneNumber = dtoUpdate.TelefoonNummer ?? bedrijf.PhoneNumber;
-        bedrijf.Website = dtoUpdate.Website ?? bedrijf.Website;
+            bedrijf.Kvk = dtoUpdate.Kvk ?? bedrijf.Kvk;
+            bedrijf.Email = dtoUpdate.Email ?? bedrijf.Email;
+            bedrijf.Naam = dtoUpdate.Naam ?? bedrijf.Naam;
+            bedrijf.Locatie = dtoUpdate.Locatie ?? bedrijf.Locatie;
+            bedrijf.PhoneNumber = dtoUpdate.TelefoonNummer ?? bedrijf.PhoneNumber;
+            bedrijf.Website = dtoUpdate.Website ?? bedrijf.Website;
 
-        // Change password
-        if (dtoUpdate.NieuwWachtwoord != null)
-        {
-            var result = await _userManager.ChangePasswordAsync(bedrijf, dtoUpdate.HuidigWachtwoord, dtoUpdate.NieuwWachtwoord);
-            if (!result.Succeeded)
-                return BadRequest(result.Errors);
+            // Change password
+            if (dtoUpdate.NieuwWachtwoord != null)
+            {
+                var result = await _userManager.ChangePasswordAsync(bedrijf, dtoUpdate.HuidigWachtwoord, dtoUpdate.NieuwWachtwoord);
+                if (!result.Succeeded)
+                    return BadRequest(result.Errors);
+            }
+
+            // Change username
+            if (dtoUpdate.NewUserName != null)
+            {
+                var userExists = await _userManager.FindByNameAsync(dtoUpdate.NewUserName);
+                if (userExists != null)
+                    return Conflict("De gebruikersnaam bestaat al.");
+                bedrijf.UserName = dtoUpdate.NewUserName;
+                await _userManager.UpdateNormalizedUserNameAsync(bedrijf);
+            }
+
+            await _userManager.UpdateAsync(bedrijf);
+            return Ok("De gebuikers informatie is geupdate.");
         }
-
-        // Change username
-        if (dtoUpdate.NewUserName != null)
+        catch
         {
-            var userExists = await _userManager.FindByNameAsync(dtoUpdate.NewUserName);
-            if (userExists != null)
-                return Conflict("De gebruikersnaam bestaat al.");
-            bedrijf.UserName = dtoUpdate.NewUserName;
-            await _userManager.UpdateNormalizedUserNameAsync(bedrijf);
-        }
-
-        await _userManager.UpdateAsync(bedrijf);
-        return Ok("De gebuikers informatie is geupdate.");
-        }catch(Exception Æ){
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBedrijf");
         }
     }
@@ -244,39 +246,42 @@ public class AccountController : ControllerBase
     public async Task<ActionResult> UpdateBeheerder([FromBody] DTOUpdateBeheerder dtoUpdate)
     {
         try{
-        string userName;
-        userName = User.FindFirstValue(ClaimTypes.Name);
+                
+            string userName;
+            userName = User.FindFirstValue(ClaimTypes.Name);
 
-        var beheerder = (Beheerder)await _userManager.FindByNameAsync(userName);
-        if (beheerder == null)
-            return BadRequest("Beheerder is niet gevonden");
+            var beheerder = (Beheerder)await _userManager.FindByNameAsync(userName);
+            if (beheerder == null)
+                return BadRequest("Beheerder is niet gevonden");
 
-        beheerder.Achternaam = dtoUpdate.Achternaam ?? beheerder.Achternaam;
-        beheerder.Voornaam = dtoUpdate.Voornaam ?? beheerder.Voornaam;
-        beheerder.Email = dtoUpdate.Email ?? beheerder.Email;
-        beheerder.PhoneNumber = dtoUpdate.TelefoonNummer ?? beheerder.PhoneNumber;
+            beheerder.Achternaam = dtoUpdate.Achternaam ?? beheerder.Achternaam;
+            beheerder.Voornaam = dtoUpdate.Voornaam ?? beheerder.Voornaam;
+            beheerder.Email = dtoUpdate.Email ?? beheerder.Email;
+            beheerder.PhoneNumber = dtoUpdate.TelefoonNummer ?? beheerder.PhoneNumber;
 
-        // Change password
-        if (dtoUpdate.NieuwWachtwoord != null)
-        {
-            var result = await _userManager.ChangePasswordAsync(beheerder, dtoUpdate.HuidigWachtwoord, dtoUpdate.NieuwWachtwoord);
-            if (!result.Succeeded)
-                return BadRequest(result.Errors);
+            // Change password
+            if (dtoUpdate.NieuwWachtwoord != null)
+            {
+                var result = await _userManager.ChangePasswordAsync(beheerder, dtoUpdate.HuidigWachtwoord, dtoUpdate.NieuwWachtwoord);
+                if (!result.Succeeded)
+                    return BadRequest(result.Errors);
+            }
+
+            // Change username
+            if (dtoUpdate.NewUserName != null)
+            {
+                var userExists = await _userManager.FindByNameAsync(dtoUpdate.NewUserName);
+                if (userExists != null)
+                    return Conflict("De gebruikersnaam bestaat al.");
+                beheerder.UserName = dtoUpdate.NewUserName;
+                await _userManager.UpdateNormalizedUserNameAsync(beheerder);
+            }
+
+            await _userManager.UpdateAsync(beheerder);
+            return Ok("De gebuikers informatie is geupdate.");
         }
-
-        // Change username
-        if (dtoUpdate.NewUserName != null)
+        catch
         {
-            var userExists = await _userManager.FindByNameAsync(dtoUpdate.NewUserName);
-            if (userExists != null)
-                return Conflict("De gebruikersnaam bestaat al.");
-            beheerder.UserName = dtoUpdate.NewUserName;
-            await _userManager.UpdateNormalizedUserNameAsync(beheerder);
-        }
-
-        await _userManager.UpdateAsync(beheerder);
-        return Ok("De gebuikers informatie is geupdate.");
-        }catch(Exception ð){
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBeheerder");
         }
     }
