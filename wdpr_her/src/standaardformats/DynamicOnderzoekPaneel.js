@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import OnderzoekItem from '../standaardformats/OnderzoekItem';
 import '../CSS/Onderzoeken.css';
 import SurveyFeedbackForm from './SurveyFeedbackForm';
+import axios from "axios";
+import useLocalStorage from 'use-local-storage';
 
 const DynamicOnderzoekPaneel = ({ onderzoekArray }) => {
     const [answers, setAnswers] = useState([]);
@@ -17,10 +19,34 @@ const DynamicOnderzoekPaneel = ({ onderzoekArray }) => {
         setFeedback(feedbackData);
     };
     
-    const exportData = () => {
+    const exportData = async () => {
         console.log('Exported data:', answers);
         console.log('Export Feedback data:', feedback);
+
         // TODO: Export data to the database via API
+        try{
+            const opdrachtResponsData = {
+
+                //TODO: fix dat hier de echte UserID en OnderzoekID in komen te staan
+                UserID: 1, //vervang dit
+                OnderzoekID: 1, //vervang ook dit
+                VraagMetAntwoordenJSON: JSON.stringify(answers)
+            };
+
+            const accesToken = localStorage.getItem("token");
+
+            const response = await axios.post(apiPath + "opdrachtrespons", opdrachtResponsData, {
+                headers: {
+                    Authorization:`Bearer ${accesToken}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            console.log('OpdrachtRespons created successfully:', response.data);
+        }catch(error){
+            console.error('Fout in \nDynamicOnderzoekPaneel -> exportData\n bij het maken van een OpdrachtRespons')
+        }
+
     };
 
     return (
