@@ -145,6 +145,7 @@ public class InitDatabaseData : ControllerBase
         catch (Exception अ)
         {
             //Kanthya
+            Console.Write(अ);
             return StatusCode(500, "Internal server error: er gaat iets mis in InitDatabaseData/InitData");
         }
     }
