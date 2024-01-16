@@ -4,6 +4,7 @@ import '../CSS/Onderzoeken.css';
 import SurveyFeedbackForm from './SurveyFeedbackForm';
 import axios from "axios";
 import useLocalStorage from 'use-local-storage';
+import { apiPath } from '../Helper/Api';
 
 const DynamicOnderzoekPaneel = ({ onderzoekArray }) => {
     const [answers, setAnswers] = useState([]);
