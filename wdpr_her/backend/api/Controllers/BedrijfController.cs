@@ -1,9 +1,7 @@
 using api.DataTemplate;
 using Microsoft.AspNetCore.Identity;
-﻿using api.DataTemplate;
  using api.Helper;
  using Microsoft.AspNetCore.Authorization;
- using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Printing;
