@@ -8,7 +8,7 @@ echo "Frontend is running" &
 
 # Change directory and run dotnet
 cd backend/api 
-dotnet run
+dotnet run &
 echo "Dotnet is running"
 
 wait
