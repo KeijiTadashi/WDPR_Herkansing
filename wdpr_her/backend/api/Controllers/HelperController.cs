@@ -30,6 +30,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception ב)
         {//Bet
+            Console.Write(ב);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddOnderzoeksType");
         }
     }
@@ -47,6 +48,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception ג)
         {//Gimel
+            Console.Write(ג);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddAandoening");
         }
     }
@@ -64,6 +66,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception ד)
         {//Dalet
+            Console.Write( ד);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBenadering");
         }
     }
@@ -81,6 +84,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception ה)
         {//Hee
+            Console.Write(ה);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
     }
@@ -97,7 +101,8 @@ public class HelperController : ControllerBase
             return StatusCode(201, hulpmiddel); // Created
         }
         catch (Exception ו)
-        {//Waw
+        {//Waw'
+            Console.Write(ו);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
     }
@@ -189,6 +194,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception ז)
         {//Zajien
+            Console.Write(ז);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
     }
@@ -202,6 +208,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception ח)
         {//Chet
+            Console.Write(ח);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
     }
@@ -215,6 +222,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception ט)
         {//Tet
+            Console.Write(ט);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
     }
@@ -228,6 +236,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception י)
         {//Jod
+            Console.Write(י);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
     }
@@ -241,6 +250,7 @@ public class HelperController : ControllerBase
         }
         catch (Exception כ)
         {//Kaf
+            Console.Write(כ);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
     }
