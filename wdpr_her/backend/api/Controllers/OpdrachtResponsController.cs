@@ -15,7 +15,6 @@ public class OpdrachtResponsController : ControllerBase{
         _context = context;
     }
 
-    [Authorize(Roles = $"Roles.Ervaringsdeskundige")]
     [HttpPost]
     public async Task<IActionResult> CreateOpdrachtRespons([FromBody] OpdrachtRespons opdrachtRespons){
         try{
