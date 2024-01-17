@@ -92,7 +92,7 @@ const Header = () => {
                         <li>
                             <Link to={"/Login"}><button className={"Button-navigation"} aria-label="Login pagina">Login</button></Link>
                         </li>
-                        <li>'
+                        <li>
                             <Link to={"/Scam"}><button className={"Button-navigation"} aria-label="Testing Playground Scam pagina">Scam</button></Link>
                         </li>
                         <li>
