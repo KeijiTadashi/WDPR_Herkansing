@@ -3,9 +3,9 @@ import Header from "../standaardformats/Header";
 import axios from "axios";
 import {apiPath} from "../Helper/Api";
 import {useEffect, useRef, useState} from "react";
-import {Dropdown} from "react-bootstrap";
 import useLocalStorage from "use-local-storage";
 import {useNavigate} from "react-router-dom";
+import '../CSS/StichtingTheme.css';
 
 
 export function Registreer() {
@@ -23,57 +23,72 @@ export function Registreer() {
     const emailRef = useRef(null);
     const telefoonnummerRef = useRef(null);
     const postcodeRef = useRef(null);
+    const websiteRef = useRef(null);
+    const bedrijfsnaamRef = useRef(null);
+    const locatieRef = useRef(null);
 
     const nav = useNavigate();
-
+    
+    const changeAccountType = (e) => {
+        setAccountType(e.target.value);
+    }
 
     useEffect(() => {
         
     }, [accountType]);
     
-    const registreerErvaringsdeskundige = () => {
-        const info = {
-            Gebruikersnaam: usernameRef.current.value,
-            Wachtwoord: passwordRef.current.value,
-            Email: emailRef.current.value,
-            Voornaam: voornaamRef.current.value,
-            Achternaam: achternaamRef.current.value,
-            Telefoonnummer: telefoonnummerRef.current.value,
-            Postcode: postcodeRef.current.value
-        };
+    const registreerAccount = () => {
+        let path = "";
+        let info = {};
+        if (accountType === "Ervaringsdeskundige") {
+            info = {
+                Gebruikersnaam: usernameRef.current.value,
+                Wachtwoord: passwordRef.current.value,
+                Email: emailRef.current.value,
+                Voornaam: voornaamRef.current.value,
+                Achternaam: achternaamRef.current.value,
+                Telefoonnummer: telefoonnummerRef.current.value,
+                Postcode: postcodeRef.current.value
+            };
+
+            path = apiPath + "RegistreerErvaringsdeskundige";
+        }
+        else if (accountType === "Bedrijf") {
+            info = {
+                Gebruikersnaam: usernameRef.current.value,
+                Wachtwoord: passwordRef.current.value,
+                Email: emailRef.current.value,
+                Telefoonnummer: telefoonnummerRef.current.value,
+                Naam: bedrijfsnaamRef.current.value,
+                Website: websiteRef.current.value,
+                Locatie: locatieRef.current.value
+            };
+
+            path = apiPath + "RegistreerBedrijf";
+        }
 
         axios
-            .post(apiPath + "RegistreerErvaringsdeskundige", info)
+            .post(path, info)
             .then(() => {
                 nav("/Login");
-        }).catch((err) => {
+            }).catch((err) => {
             console.log(err.toJSON());
-        });}
+        });
+    }
     
     
 
     return (
-        // <Layout>
         <>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                <Header Title={"Login"}/>
+                <Header Title={"Registreer"}/>
                 <div className={"Body"}>
-                    <Dropdown 
-                        id={"account-type"} 
-                        title={accountType} 
-                        onSelect={(e => {
-                            setAccountType(e);
-                        })}
-                        autoClose={true}
-                    >
-                        <Dropdown.Toggle id={"account-type-toggle"} >{accountType}</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item eventKey={"Ervaringsdeskundige"}>Ervaringsdeskundige</Dropdown.Item>
-                            <Dropdown.Item eventKey={"Bedrijf"}>Bedrijf</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-
                     <form>
+                        <div className={"radio"}>
+                            <label><input type={"radio"} value={"Ervaringsdeskundige"} checked={accountType === "Ervaringsdeskundige"} onChange={changeAccountType}/>Ervaringsdeskundige</label>
+                            <br/>
+                            <label><input type={"radio"} value={"Bedrijf"} checked={accountType === "Bedrijf"} onChange={changeAccountType}/>Bedrijf</label>
+                        </div>
                         <label htmlFor="username">Gebruikersnaam</label>
                         <br />
                         <input
@@ -155,73 +170,52 @@ export function Registreer() {
                                 >
                                 </input>
                                 <br />
-                                <button
-                                    aria-label="Registreer knop"
-                                    type="button"
-                                    onClick={registreerErvaringsdeskundige}
-                                >
-                                    Registreer {accountType}
-                                </button>
                             </> :
                             // Else bedrijf
-                            <></>
+                            <>
+                                <label htmlFor={"bedrijfsnaam"}>Bedrijfsnaam</label>
+                                <br/>
+                                <input
+                                    type={"text"}
+                                    id={"bedrijfsnaam"}
+                                    ref={bedrijfsnaamRef}
+                                    aria-label="Invoerveld bedrijfsnaam"
+                                    className="inputFontSize"
+                                >
+                                </input>
+                                <br /><label htmlFor={"website"}>Website</label>
+                                <br/>
+                                <input
+                                    type={"url"}
+                                    id={"website"}
+                                    ref={websiteRef}
+                                    aria-label="Invoerveld website"
+                                    className="inputFontSize"
+                                >
+                                </input>
+                                <br />
+                                <label htmlFor={"locatie"}>Locatie</label>
+                                <br/>
+                                <input
+                                    type={"text"}
+                                    id={"locatie"}
+                                    ref={locatieRef}
+                                    aria-label="Invoerveld locatie"
+                                    className="inputFontSize"
+                                >
+                                </input>
+                                <br />
+                            </>
                         }
+                        <button
+                            className={"Button-body"}
+                            aria-label="Registreer knop"
+                            type="button"
+                            onClick={registreerAccount}
+                        >
+                            Registreer {accountType}
+                        </button>
                     </form>
-                    
-                   
-                    {/*<form>*/}
-                    {/*    <label htmlFor="username">Gebruikersnaam</label>*/}
-                    {/*    <br />*/}
-                    {/*    <input*/}
-                    {/*        type={"text"}*/}
-                    {/*        id={"username"}*/}
-                    {/*        ref={usernameRef}*/}
-                    {/*        aria-label="Invoerveld gebruikersnaam"*/}
-                    {/*        className="inputFontSize"*/}
-                    {/*    >*/}
-                    {/*    </input>*/}
-                    
-                    {/*    <br />*/}
-                    
-                    {/*    <label htmlFor="password">Wachtwoord</label>*/}
-                    {/*    <br />*/}
-                    {/*    <input*/}
-                    {/*        type={"password"}*/}
-                    {/*        id={"password"}*/}
-                    {/*        ref={passwordRef}*/}
-                    {/*        aria-label="Invoerveld wachtwoord"*/}
-                    {/*        className="inputFontSize"*/}
-                    {/*    >*/}
-                    {/*    </input>*/}
-                    {/*    <br />*/}
-                    
-                    {/*    <button*/}
-                    {/*        aria-label="Log in"*/}
-                    {/*        type="button"*/}
-                    {/*        onClick={() =>*/}
-                    {/*        {*/}
-                    {/*            const info = {*/}
-                    {/*                Gebruikersnaam: usernameRef.current.value,*/}
-                    {/*                Wachtwoord: passwordRef.current.value*/}
-                    {/*            };*/}
-                    
-                    {/*            axios*/}
-                    {/*                .post(apiPath + "Login", info)*/}
-                    {/*                .then(response => {*/}
-                    {/*                    // const token = response.data.api_key;*/}
-                    {/*                    SetAuthToken(response.data);*/}
-                    
-                    {/*                }).then(() => {*/}
-                    {/*                setRole(localStorage.getItem('role'));*/}
-                    {/*            }).catch((err) => {*/}
-                    {/*                console.log(err.toJSON());*/}
-                    {/*                setRole(false);*/}
-                    {/*            });}*/}
-                    {/*        }*/}
-                    {/*    >*/}
-                    {/*        Log in*/}
-                    {/*    </button>*/}
-                    {/*</form>*/}
                 </div>
             </div>
         </>
