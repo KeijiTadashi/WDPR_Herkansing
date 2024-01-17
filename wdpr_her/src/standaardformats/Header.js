@@ -23,7 +23,7 @@ const Header = ({Title}) => {
     
     useEffect(() => {
         setRole(GetAuthRole);
-    }, [localStorage.getItem('role')]);
+    }, []);
     
     const switchTheme = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
