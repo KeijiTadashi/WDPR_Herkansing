@@ -110,7 +110,7 @@ header {
     align-items: center;
     align-self: stretch;
     display: flex;
-    flex: 0 0 auto;
+    /*flex: 0 0 auto;*/
     column-gap: var(--header-column-gap);
     padding: 0px var(--header-padding-side);
 }
@@ -123,8 +123,8 @@ header {
 .Info-header {
     align-items: center;
     display: flex;
+    
     flex: 1;
-    flex-grow: 1;
     column-gap: 8px;
     justify-content: flex-end;
     position: relative;
@@ -211,9 +211,21 @@ header {
     color: var(--default);
 }
 
+.Button-navigation-current {
+    background: var(--background);
+    color: var(--default);
+}
+
 .Body {
     font-size: 1em;
     z-index: 100;
+    display: flex;
+    padding-left: 32px;
+    padding-right: 32px;
+    gap: 16px;
+    margin-top: 32px;
+    width: 100%;
+    justify-content: center;
 }
 
 header ul {
@@ -230,3 +242,20 @@ header ul li {
 .inputFontSize {
     font-size: var(--font-size); /*Voornamelijk voor de login-velden in Login.js*/
   }
+
+.dropdown {
+
+}
+
+.dropdown-toggle {
+}
+
+.dropdown-menu {
+
+    flex: 1;
+    flex-direction: column;
+}
+
+.dropdown-item {
+    background: var(--accent-4);
+}

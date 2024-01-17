@@ -11,9 +11,9 @@ import Homepage from './Pages/Homepage';
 import Beheerder from './Pages/Beheerder';
 //import Ervaringdeskundige from './Pages/Ervaringdeskundige';
 import Bedrijven from './Pages/Bedrijven';
-
 import Ervaringdeskundige from './Pages/Ervaringdeskundige';
 import Scam from './Pages/Scam';
+import {Registreer} from "./Pages/Registreer";
 
 const router = createBrowserRouter([
     {
@@ -51,6 +51,10 @@ const router = createBrowserRouter([
     {
         path: "Scam",
         element: <Scam/>
+    },
+    {
+        path: "/Registreer",
+        element: <Registreer/>
     }
 ]);
 

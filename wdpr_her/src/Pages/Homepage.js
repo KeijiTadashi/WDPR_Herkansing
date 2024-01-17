@@ -12,7 +12,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <Header />
+      <Header Title={"Stichting Accessibility"} />
       <div className="Main" data-theme={theme} data-font-size={fontSize}>
         <div className={"Body"}>
 
