@@ -38,8 +38,8 @@ public class OpdrachtResponsController : ControllerBase{
         try
         {
             var opdrachtRespons = _context.OpdrachtResponsEntries
-                                    .Include(o => o.UserId)
-                                    .Include(o => o.OnderzoekId)
+                                    .Include(o => o.Gebruiker)
+                                    .Include(o => o.Onderzoek)
                                     .FirstOrDefault(o => o.ResponsId == opdrachtResponsId);
 
             if (opdrachtRespons == null)
