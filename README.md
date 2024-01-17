@@ -23,3 +23,10 @@ https://calm-rock-078c14b03.4.azurestaticapps.net/
 cd wdpr_her
 npm run start
 </code>
+
+<h2>script.sh</ht>
+<p>Voor het runnen van zowel de front-end als de back-end met 1 command moet je vanuit de bovenstaande map, waar dus het project in staat, het volgende runnen in Git Bash:</p></br>
+<code> ./script.sh</code>
+
+<h2>Cypress</h2>
+<code>npx run cypress</code>
