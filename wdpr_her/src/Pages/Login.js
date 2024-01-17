@@ -7,7 +7,7 @@ import {GetAuthRole, SetAuthToken} from "../Helper/AuthToken";
 
 import "../CSS/StichtingTheme.css"
 import useLocalStorage from "use-local-storage";
-import {redirect, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 export function Login() {
@@ -26,7 +26,7 @@ export function Login() {
         if (role === 'Beheerder') nav("/Beheerder");
         if (role === 'Ervaringsdeskundige') nav("/Ervaringsdeskundige");
         if (role === 'Bedrijf') nav("/Bedrijf");
-    }, [role])
+    }, [role, nav])
     
     return (
         // <Layout>
@@ -97,22 +97,22 @@ export function Login() {
         // </Layout>
     )
 }
-
-function LoginJWT(userName, password) {
-    const info = {
-        Gebruikersnaam: userName,
-        Wachtwoord: password
-    };
-
-    axios
-        .post(apiPath + "Login", info)
-        .then(response => {
-            // const token = response.data.api_key;
-            SetAuthToken(response.data);
-            // GetAuthRole();
-        })
-        .catch((err) => {
-            console.log(err.toJSON());
-            return false;
-        });
-}
+//
+// function LoginJWT(userName, password) {
+//     const info = {
+//         Gebruikersnaam: userName,
+//         Wachtwoord: password
+//     };
+//
+//     axios
+//         .post(apiPath + "Login", info)
+//         .then(response => {
+//             // const token = response.data.api_key;
+//             SetAuthToken(response.data);
+//             // GetAuthRole();
+//         })
+//         .catch((err) => {
+//             console.log(err.toJSON());
+//             return false;
+//         });
+// }
