@@ -63,7 +63,7 @@ export const Homepage = () => {
 
         </div>
       </main>
-    </div>
+      </>
   );
 };
 
