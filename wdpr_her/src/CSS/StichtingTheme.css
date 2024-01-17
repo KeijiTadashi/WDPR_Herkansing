@@ -245,6 +245,8 @@ header {
     /*padding-right: 32px;*/
     gap: 16px;
     /*margin: 2em;*/
+    margin-top: 2em;
+    margin-bottom: 2em;
     width: 100%;
     justify-content: center;
     flex: 1;
