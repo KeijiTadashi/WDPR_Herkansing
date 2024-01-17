@@ -25,7 +25,7 @@ public class OpdrachtResponsController : ControllerBase{
             _context.OpdrachtResponsEntries.Add(opdrachtRespons);
             await _context.SaveChangesAsync();
 
-            return Ok(new{message = "OpdrachtRespons created successfully :D", opdrachtRespons.ResponsID});
+            return Ok(new{message = "OpdrachtRespons created successfully :D", ResponsID = opdrachtRespons.ResponsId});
         }
         catch{
             return StatusCode(500, "Internal server error: er gaat iets mis in CreateOpdrachtRespons");
@@ -38,9 +38,9 @@ public class OpdrachtResponsController : ControllerBase{
         try
         {
             var opdrachtRespons = _context.OpdrachtResponsEntries
-                                    .Include(o => o.UserID)
-                                    .Include(o => o.OnderzoekID)
-                                    .FirstOrDefault(o => o.ResponsID == opdrachtResponsId);
+                                    .Include(o => o.Gebruiker)
+                                    .Include(o => o.Onderzoek)
+                                    .FirstOrDefault(o => o.ResponsId == opdrachtResponsId);
 
             if (opdrachtRespons == null)
             {

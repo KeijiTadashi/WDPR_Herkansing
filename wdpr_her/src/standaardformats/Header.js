@@ -2,7 +2,6 @@ import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_t
 import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import {Link, useLocation} from "react-router-dom";
-// import {getRoles} from "@testing-library/react";
 import {GetAuthRole} from "../Helper/AuthToken";
 import {useEffect, useState} from "react";
 
@@ -77,7 +76,7 @@ const Header = ({Title}) => {
                 <div className={"Header-top"}>
                     <img src={logo} className={"Logo-header"}
                         alt={"logo stichting accessibility. Klik om naar de homepage te gaan"} />
-                    <h1>{Title ?? "NO TITLE"}</h1>
+                    <h1 className={"Title"}>{Title ?? "NO TITLE"}</h1>
                     <div className={"Info-header"}>
                         <ul aria-label="Toegankelijkheid menu">
                             <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>

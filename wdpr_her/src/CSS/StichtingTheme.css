@@ -39,7 +39,7 @@ and wrap so stuff automatically moves down if it gets to small */
 }
 
 [data-font-size='biggest'] {
-    --font-size: 30px;
+    --font-size: 28px;
 }
 
 .Main {
@@ -50,6 +50,7 @@ and wrap so stuff automatically moves down if it gets to small */
     display: flex;
     flex-direction: column;
     width: 100%;
+    
 }
 
 p {
@@ -57,18 +58,24 @@ p {
 }
 
 h1 {
-    font-size: 4em;
+    font-size: 2em;
     margin: 0;
 }
 
 h2 {
-    font-size: 2.5em;
+    font-size: 1.5em;
     margin: 0;
 }
 
 h3 {
-    font-size: 1.75em;
+    font-size: 1.25em;
     margin: 0;
+}
+
+.Button-body {
+    margin: 1.5em;
+    text-align: center;
+    align-items: center;
 }
 
 /* Todo Button stuff here */
@@ -81,9 +88,9 @@ button {
     box-sizing: border-box;
     display: flex;
     gap: 8px;
-    height: 2em;
+    min-height: 2em;
     justify-content: center;
-    padding: 8px 16px;
+    padding: 8px 0.5em;
     position: relative;
     width: 10em;
 }
@@ -99,11 +106,23 @@ header {
     background: var(--accent-1);
     color: var(--header-text-2);
     align-items: flex-start;
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     width: 100%;
     padding-top: 16px;
     z-index: 200;
+    
+}
+
+.header-text {
+    text-align: center;
+    width: fit-content;
+}
+
+.Header {
+    flex:1;  
+    display: flex;
+    flex-direction: column;
 }
 
 .Header-top {
@@ -113,6 +132,7 @@ header {
     /*flex: 0 0 auto;*/
     column-gap: var(--header-column-gap);
     padding: 0px var(--header-padding-side);
+    flex: 1;
 }
 
 .Logo-header {
@@ -122,9 +142,9 @@ header {
 
 .Info-header {
     align-items: center;
-    display: flex;
+    /*display: flex;*/
     
-    flex: 1;
+    /*flex: 1;*/
     column-gap: 8px;
     justify-content: flex-end;
     position: relative;
@@ -152,6 +172,7 @@ header {
     font-size: 1.25em;
     width: 1.5em;
     height: 1.5em;
+    margin: 1em;
 }
 
 .Button-header-small:hover {
@@ -220,12 +241,19 @@ header {
     font-size: 1em;
     z-index: 100;
     display: flex;
-    padding-left: 32px;
-    padding-right: 32px;
+    /*padding-left: 32px;*/
+    /*padding-right: 32px;*/
     gap: 16px;
-    margin-top: 32px;
+    /*margin: 2em;*/
+    margin-top: 2em;
+    margin-bottom: 2em;
     width: 100%;
     justify-content: center;
+    flex: 1;
+}
+
+.Title {
+    flex: 1;
 }
 
 header ul {
@@ -242,20 +270,3 @@ header ul li {
 .inputFontSize {
     font-size: var(--font-size); /*Voornamelijk voor de login-velden in Login.js*/
   }
-
-.dropdown {
-
-}
-
-.dropdown-toggle {
-}
-
-.dropdown-menu {
-
-    flex: 1;
-    flex-direction: column;
-}
-
-.dropdown-item {
-    background: var(--accent-4);
-}

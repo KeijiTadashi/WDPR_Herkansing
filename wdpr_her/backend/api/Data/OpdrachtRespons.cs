@@ -4,9 +4,10 @@ namespace api;
 
 public class OpdrachtRespons
 {
-    public int ResponsID { get; set; }
-    public int UserID { get; set; }
-    public int OnderzoekID { get; set; }
+    [Key]
+    public int ResponsId { get; set; }
+    // public int UserId { get; set; }
+    // public int OnderzoekId { get; set; }
     public string VraagMetAntwoordenJSON { get; set; }
 
     public Gebruiker Gebruiker { get; set; }
