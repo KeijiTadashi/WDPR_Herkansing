@@ -259,7 +259,7 @@ public class InitDatabaseData : ControllerBase
             new()
             {
                 Voornaam = "Steven",
-                Acternaam = "Wilson",
+                Achternaam = "Wilson",
                 Gebruikersnaam = "Voyage34",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
@@ -269,7 +269,7 @@ public class InitDatabaseData : ControllerBase
             new()
             {
                 Voornaam = "Jack",
-                Acternaam = "White",
+                Achternaam = "White",
                 Gebruikersnaam = "Raconteurs",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
@@ -279,7 +279,7 @@ public class InitDatabaseData : ControllerBase
             new()
             {
                 Voornaam = "Maynard",
-                Acternaam = "Keenan",
+                Achternaam = "Keenan",
                 Gebruikersnaam = "A_Perfect_Circle",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
@@ -289,7 +289,7 @@ public class InitDatabaseData : ControllerBase
             new()
             {
                 Voornaam = "John",
-                Acternaam = "Entwistle",
+                Achternaam = "Entwistle",
                 Gebruikersnaam = "ThunderFingers",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
@@ -299,7 +299,7 @@ public class InitDatabaseData : ControllerBase
             new()
             {
                 Voornaam = "Cliff",
-                Acternaam = "Burton",
+                Achternaam = "Burton",
                 Gebruikersnaam = "RIP",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
@@ -309,7 +309,7 @@ public class InitDatabaseData : ControllerBase
             new()
             {
                 Voornaam = "Jeff",
-                Acternaam = "Wayne",
+                Achternaam = "Wayne",
                 Gebruikersnaam = "War_of_the_worlds",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
@@ -319,7 +319,7 @@ public class InitDatabaseData : ControllerBase
             new()
             {
                 Voornaam = "Till",
-                Acternaam = "Lindemann",
+                Achternaam = "Lindemann",
                 Gebruikersnaam = "Rammstein",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
@@ -329,7 +329,7 @@ public class InitDatabaseData : ControllerBase
             new()
             {
                 Voornaam = "Franck",
-                Acternaam = "Hueso",
+                Achternaam = "Hueso",
                 Gebruikersnaam = "Carpenter_Brut",
                 Wachtwoord = ww,
                 Telefoonnummer = $"+{rnd.NextInt64(99)}-{telefoonnummer + rnd.NextInt64(999999999)}",
