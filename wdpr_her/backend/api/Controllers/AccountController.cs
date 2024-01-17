@@ -32,7 +32,7 @@ public class AccountController : ControllerBase
             {
                 Email = dto.Email,
                 Voornaam = dto.Voornaam,
-                Achternaam = dto.Acternaam,
+                Achternaam = dto.Achternaam,
                 Postcode = dto.Postcode,
                 UserName = dto.Gebruikersnaam,
                 PhoneNumber = dto.Telefoonnummer,
@@ -70,7 +70,7 @@ public class AccountController : ControllerBase
             {
                 Email = dto.Email,
                 Voornaam = dto.Voornaam,
-                Achternaam = dto.Acternaam,
+                Achternaam = dto.Achternaam,
                 UserName = dto.Gebruikersnaam,
                 PhoneNumber = dto.Telefoonnummer,
                 AccountType = Roles.Beheerder

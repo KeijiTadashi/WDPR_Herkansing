@@ -12,9 +12,10 @@ export const Homepage = () => {
   const [fontSize] = useLocalStorage("font-size", "normal");
 
   return (
-    <div className="Main" data-theme={theme} data-font-size={fontSize}>
-      <Header />
+    <>
+      
       <main className="Main" data-theme={theme} data-font-size={fontSize}>
+        <Header Title={"Stichting Accessibility"} />
         <div class="intro">
           <h2>
             Welkom bij Stichting Accessibility - Toegankelijkheid voor Iedereen
@@ -62,7 +63,7 @@ export const Homepage = () => {
 
         </div>
       </main>
-    </div>
+      </>
   );
 };
 
