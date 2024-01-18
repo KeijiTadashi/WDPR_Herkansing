@@ -78,7 +78,7 @@ const Header = ({ Title }) => {
                         alt={"logo stichting accessibility. Klik om naar de homepage te gaan"} />
                     <h1 className={"Title"}>{Title ?? "NO TITLE"}</h1>
                     <div className={"Info-header"}>
-                        <ul aria-label="Toegankelijkheid menu">
+                        <ul aria-label="Toegankelijkheid menu" id="Toegankelijkheid menu">
                             <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>
                             <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
                             <li><h3 className={"header-text"}>Font size</h3></li>
@@ -89,7 +89,7 @@ const Header = ({ Title }) => {
                 </div>
                 <div className={"Navigation"}>
                     <div className={"Navigation-spacer"} />
-                    <ul aria-label="menubalk">
+                    <ul aria-label="menubalk" id="menubalk">
                         <li>
                             <Link to={"/"}><button className={headerMavClassName("/")} aria-label="Home">Home</button></Link>
                         </li>
