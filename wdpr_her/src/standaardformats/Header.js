@@ -78,10 +78,10 @@ const Header = () => {
                             <Link to={"/"}><button className={"Button-navigation"} aria-label="Home">Home</button></Link>
                         </li>
                         <li>
-                            <button className={"Button-navigation"} aria-label="Mijn profiel">Mijn profiel</button>
+                            <Link to={"/Beheerder"}><button className={"Button-navigation"} aria-label="Beheerder portaal">beheerder</button></Link>
                         </li>
                         <li>
-                            <Link to={"/Beheerder"}><button className={"Button-navigation"} aria-label="Beheerder portaal">beheerder</button></Link>
+                            <Link to={"/MijnProfiel"}><button className={"Button-navigation"} aria-label="MijnProfiel portaal">Mijn Profiel</button></Link>
                         </li>
                         <li>
                             <Link to={"/ErvaringsdeskundigeOnderzoek"}><button className={"Button-navigation"} aria-label="Onderzoek">Onderzoeken</button></Link>
