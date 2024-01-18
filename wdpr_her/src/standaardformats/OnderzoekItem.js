@@ -14,7 +14,7 @@ const OnderzoekItem = ({ indexnr, vraag, maxVraagNr, onAnswerChange, type }) => 
         onAnswerChange(value);
     };
 
-    if (TYPE == "Radio") {
+    if (TYPE === "Radio") {
         return (
             <div className="Onderzoek">
                 <h3>{`Vraag ${INDEX} van ${TOTAALAANTALVRAGEN}`}</h3>
