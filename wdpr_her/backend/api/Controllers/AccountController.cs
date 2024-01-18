@@ -114,7 +114,9 @@ public class AccountController : ControllerBase
 
             var result = await _userManager.CreateAsync(bedrijf, dto.Wachtwoord);
             if (!result.Succeeded)
-                return BadRequest("Het aanmaken van een gebruiker is mislukt.");
+            {
+                return BadRequest($"Het aanmaken van een gebruiker is mislukt.\n{result}");
+            }
 
             // Todo Don't give them a role, only after een beheerder het bedrijf heeft goedgekeured
             result = await _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf);
