@@ -16,7 +16,7 @@ export const Homepage = () => {
       
       <div className="Main" data-theme={theme} data-font-size={fontSize}>
         <Header Title={"Stichting Accessibility"} />
-        <div class="intro">
+        <div className="intro">
           <h2>
             Welkom bij Stichting Accessibility - Toegankelijkheid voor Iedereen
           </h2>
@@ -28,10 +28,10 @@ export const Homepage = () => {
           </p>
         </div>
 
-        <div class="header" data-theme={theme} data-font-size={fontSize}>
+        <div className="header">
           <h3>Onze expertises op een rij</h3>
         </div>
-        <div class="container" data-theme={theme} data-font-size={fontSize}>
+        <div className="container">
           <ExpertiseCard
             kop="Toegankelijke digitale omgeving"
             tekst="Onze website is toegewijd aan het ondersteunen van mensen met

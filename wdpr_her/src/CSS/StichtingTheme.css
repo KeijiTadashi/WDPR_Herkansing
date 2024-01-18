@@ -270,3 +270,14 @@ header ul li {
 .inputFontSize {
     font-size: var(--font-size); /*Voornamelijk voor de login-velden in Login.js*/
   }
+
+  /* ... (existing styles remain unchanged) */
+
+[data-theme='dark'] .header h3 {
+    color: #ffffff; /* Set the color for the dark theme */
+}
+  
+[data-theme='light'] .header h3 {
+  color: #111329; /* Set the color for the light theme */
+}
+  
