@@ -270,3 +270,36 @@ header ul li {
 .inputFontSize {
     font-size: var(--font-size); /*Voornamelijk voor de login-velden in Login.js*/
   }
+
+
+.Section-border{
+    border: 2px solid var(--accent-1);
+    border-radius: 32px;
+    padding: 1em;
+    margin: 1em;
+    /*width: 100%;*/
+}
+
+.Button-Left {
+    margin: 1.5em;
+    text-align: center;
+    align-items: flex-start;
+}
+
+.Section-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.Section-list-item {
+
+    display: flex;
+    flex-direction: row;
+}
+
+.Section-list-column-names {
+    
+    display: flex;
+    flex-direction: row;
+}

@@ -66,8 +66,13 @@ const Header = ({Title}) => {
         setFontSize(newFontSize);
     }
     
-    const headerMavClassName = (path) => {
+    const headerNavClassName = (path) => {
         return location.pathname === path ? "Button-navigation Button-navigation-current" : "Button-navigation"
+    }
+    
+    const Logout = () => {
+        localStorage.removeItem('role');
+        localStorage.removeItem('token');
     }
 
     return (
@@ -91,32 +96,37 @@ const Header = ({Title}) => {
                     <div className={"Navigation-spacer"} />
                     <ul aria-label="menubalk">
                         <li>
-                            <Link to={"/"}><button className={headerMavClassName("/")}  aria-label="Home">Home</button></Link>
+                            <Link to={"/"}><button className={headerNavClassName("/")}  aria-label="Home">Home</button></Link>
                         </li>
                         {(role !== false) ?
-                            <li>
-                                <button className={headerMavClassName("/Profiel")} aria-label="Mijn profiel">Mijn profiel</button>
-                            </li> : 
                             <>
                                 <li>
-                                    <Link to={"/Login"}><button className={headerMavClassName("/Login")} aria-label="Login pagina">Login</button></Link>
+                                    <Link to={"/"}><button className={"Button-navigation"} aria-label={"Log uit"} onClick={Logout}>Log uit</button></Link>
                                 </li>
                                 <li>
-                                    <Link to={"/Registreer"}><button className={headerMavClassName("/Registreer")} aria-label="Registeer als nieuwe ervaringsdeskundige of nieuw bedrijf">Registreer</button></Link>
+                                    <button className={headerNavClassName("/Profiel")} aria-label="Mijn profiel">Mijn profiel</button>
+                                </li>
+                            </> : 
+                            <>
+                                <li>
+                                    <Link to={"/Login"}><button className={headerNavClassName("/Login")} aria-label="Login pagina">Login</button></Link>
+                                </li>
+                                <li>
+                                    <Link to={"/Registreer"}><button className={headerNavClassName("/Registreer")} aria-label="Registeer als nieuwe ervaringsdeskundige of nieuw bedrijf">Registreer</button></Link>
                                 </li> 
                             </>
                         }
                         {(role === "Beheerder") ?
                             <li>
-                                <Link to={"/Beheerder"}><button className={headerMavClassName("/Beheerder")} aria-label="Beheerder portaal">beheerder</button></Link>
+                                <Link to={"/Beheerder"}><button className={headerNavClassName("/Beheerder")} aria-label="Beheerder portaal">beheerder</button></Link>
                             </li> : 
                             (role === "Ervaringsdeskundige") ?
                                 <li>
-                                    <Link to={"/Ervaringdeskundige"}><button className={headerMavClassName("/Ervaringsdeskundige")} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button></Link>
+                                    <Link to={"/Ervaringdeskundige"}><button className={headerNavClassName("/Ervaringsdeskundige")} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button></Link>
                                 </li> :
                             (role === "Bedrijf") ?
                                 <li>
-                                    <Link to={"/Bedrijven"}><button className={headerMavClassName("/Bedrijven")} aria-label="Bedrijven portaal">Bedrijven</button></Link>
+                                    <Link to={"/Bedrijf"}><button className={headerNavClassName("/Bedrijf")} aria-label="Bedrijfsportaal">Bedrijf</button></Link>
                                 </li> : ""
                         }
                         

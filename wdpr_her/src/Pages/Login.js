@@ -34,7 +34,7 @@ export function Login() {
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
                 <Header Title={"Login"}/>
                 <div className={"Body"}>
-                <form>
+                <form className={"Section-border"}>
                     <label htmlFor="username">Gebruikersnaam</label>
                     <br />
                     <input
@@ -63,6 +63,7 @@ export function Login() {
                     <button
                         aria-label="Log in"
                         type="button"
+                        className={"Button-body"}
                         onClick={() =>
                         {
                             const info = {
