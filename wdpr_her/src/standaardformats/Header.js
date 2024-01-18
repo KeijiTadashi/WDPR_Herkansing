@@ -130,15 +130,19 @@ const Header = ({ Title }) => {
                             <li>
 
                                 <Link to={"/Beheerder"}><button className={headerNavClassName("/Beheerder")} aria-label="Beheerder portaal">beheerder</button></Link>
-                            </li> :
-                            (role === "Ervaringsdeskundige") ?
-                                <li>
-                                    <Link to={"/Ervaringdeskundige"}><button className={headerNavClassName("/Ervaringsdeskundige")} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button></Link>
-                                </li> :
-                                (role === "Bedrijf") ?
+                            </li>
+                            :
+                                (role === "Ervaringsdeskundige") ?
                                     <li>
-                                        <Link to={"/Bedrijf"}><button className={headerNavClassName("/Bedrijf")} aria-label="Bedrijfsportaal">Bedrijf</button></Link>
-                                    </li> : ""
+                                        <Link to={"/Ervaringdeskundige"}><button className={headerNavClassName("/Ervaringsdeskundige")} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button></Link>
+                                    </li> 
+                                    :
+                                        (role === "Bedrijf") ?
+                                        <li>
+                                            <Link to={"/Bedrijf"}><button className={headerNavClassName("/Bedrijf")} aria-label="Bedrijfsportaal">Bedrijf</button></Link>
+                                        </li>
+                                        : 
+                                        ""
                         }
 
 
