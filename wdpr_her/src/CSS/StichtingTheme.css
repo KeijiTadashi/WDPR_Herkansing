@@ -280,4 +280,36 @@ header ul li {
 [data-theme='light'] .header h3 {
   color: #111329; /* Set the color for the light theme */
 }
-  
+
+
+.Section-border{
+    border: 2px solid var(--accent-1);
+    border-radius: 32px;
+    padding: 1em;
+    margin: 1em;
+    /*width: 100%;*/
+}
+
+.Button-Left {
+    margin: 1.5em;
+    text-align: center;
+    align-items: flex-start;
+}
+
+.Section-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.Section-list-item {
+
+    display: flex;
+    flex-direction: row;
+}
+
+.Section-list-column-names {
+    
+    display: flex;
+    flex-direction: row;
+}

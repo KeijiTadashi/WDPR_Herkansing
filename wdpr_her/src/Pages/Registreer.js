@@ -83,12 +83,14 @@ export function Registreer() {
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
                 <Header Title={"Registreer"}/>
                 <div className={"Body"}>
-                    <form>
+                    <form className={"Section-border"}>
+                        Account type
                         <div className={"radio"}>
                             <label><input type={"radio"} value={"Ervaringsdeskundige"} checked={accountType === "Ervaringsdeskundige"} onChange={changeAccountType}/>Ervaringsdeskundige</label>
                             <br/>
                             <label><input type={"radio"} value={"Bedrijf"} checked={accountType === "Bedrijf"} onChange={changeAccountType}/>Bedrijf</label>
                         </div>
+                        <br/>
                         <label htmlFor="username">Gebruikersnaam</label>
                         <br />
                         <input
