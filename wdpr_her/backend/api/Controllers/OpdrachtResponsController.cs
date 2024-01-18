@@ -39,7 +39,7 @@ public class OpdrachtResponsController : ControllerBase{
         {
             var opdrachtRespons = _context.OpdrachtResponsEntries
                                     .Include(o => o.Gebruiker)
-                                    .Include(o => o.Onderzoek)
+                                    .Include(o => _context.Onderzoeken.Where(onderzoek => o.OnderzoekId == onderzoek.Id))
                                     .FirstOrDefault(o => o.ResponsId == opdrachtResponsId);
 
             if (opdrachtRespons == null)

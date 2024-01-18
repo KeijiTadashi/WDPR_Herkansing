@@ -17,7 +17,7 @@ export const Beheerder = () => {
         <>
 
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                <Header />
+                <Header Title={"Beheerdersportaal"} />
                 <div className={"Body"}>
 
                     <div className="flex-container">

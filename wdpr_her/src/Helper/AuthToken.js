@@ -2,7 +2,8 @@ import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 
 export const SetAuthToken = (data) => {
-    if (data) {
+    console.log(data);
+    if (data && data.api_key) {
         const token = data.api_key;
         localStorage.setItem("token", token);
         localStorage.setItem("role", data.role)

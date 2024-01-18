@@ -11,7 +11,7 @@ export const ExpertiseCard = ({kop, tekst}) => {
     const [fontSize] = useLocalStorage("font-size", "normal");
 
     return (
-        <div class="expertise-card" data-theme={theme} data-fontSize={fontSize}>
+        <div className="expertise-card" data-theme={theme} data-font-size={fontSize}>
             <h3>{kop}</h3>
             <p>
                 {tekst}
