@@ -1,7 +1,8 @@
 import React from 'react';
-import '../CSS/StichtingTheme';
+import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import { PropTypes } from 'prop-types';
+import { useState } from 'react';
 
 function OpenBeoordeling({index, onAnswerChange}){
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -11,22 +12,17 @@ function OpenBeoordeling({index, onAnswerChange}){
 
     const namePrefix = `beoordeling_${index}`;
 
+    const [antwoord, setAntwoord] = useState('');
     const handleInputChange = (value) =>{
+        setAntwoord(value);
         onAnswerChange(value);
-    };
+    }
 
     return (
         <div className="Main" data-theme={theme} data-font-size={fontSize}>
             <div className="Beoordeling">
                 
                 <label htmlFor={`${namePrefix}_invoerveld`}>
-                    <input
-                        type="radio"
-                        value="1"
-                        name={namePrefix}
-                        id={`${namePrefix}_zeer_goed`}
-                        onChange={()=>handleInputChange("Zeer_goed")}
-                    />
                     <textarea
                         type="text"
                         value={antwoord}
@@ -42,7 +38,7 @@ function OpenBeoordeling({index, onAnswerChange}){
 }
 
 
-RadioBeoordeling.propTypes = {
+OpenBeoordeling.propTypes = {
     index: PropTypes.number.isRequired,
     onAnswerChange: PropTypes.func.isRequired,
 };
