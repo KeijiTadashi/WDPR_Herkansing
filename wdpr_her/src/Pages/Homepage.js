@@ -14,7 +14,7 @@ export const Homepage = () => {
   return (
     <>
       
-      <main className="Main" data-theme={theme} data-font-size={fontSize}>
+      <div className="Main" data-theme={theme} data-font-size={fontSize}>
         <Header Title={"Stichting Accessibility"} />
         <div className="intro">
           <h2>
@@ -62,7 +62,7 @@ export const Homepage = () => {
           />
 
         </div>
-      </main>
+      </div>
       </>
   );
 };

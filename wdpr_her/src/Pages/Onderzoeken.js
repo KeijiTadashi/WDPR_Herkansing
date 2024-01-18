@@ -17,7 +17,8 @@ function Onderzoeken() {
     */
    //TODO laad hier dus die arrays in
     const onderzoekArray = [
-        {vraag: 'Hoe gaat het met je?'},
+        {vraag: "Hoe gaat het met je?", type: "Radio"},
+        {vraag: "Wie is Prins Bernhard, en zo niet, waarom?", type: "Open"}
     ]
 
     return (

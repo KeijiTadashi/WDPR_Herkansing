@@ -155,8 +155,18 @@
   justify-content: space-between;
   margin: 20px;
 }
-.expertise-card {
+
+
+[data-theme='light'].expertise-card {
   background: #d9ebf7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 30%;
+  box-sizing: border-box;
+}
+[data-theme='dark'].expertise-card {
+  background:#108670;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -166,9 +176,15 @@
 .expertise-card h3 {
   margin-top: 0;
 }
-.expertise-card p {
-  color: #666;
+
+[data-theme='dark'] .expertise-card p {
+  color: #ffffff;
 }
+
+[data-theme='light'] .expertise-card p{
+  color:#000000;
+}
+
 .header {
   font-size: 18pt;
   color: #000;

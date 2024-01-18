@@ -2,12 +2,12 @@ import Header from "../standaardformats/Header";
 import { apiPath } from "../Helper/Api";
 import axios from "axios";
 // import {Layout} from "../standaardformats/Layout";
-import {useEffect, useRef, useState} from "react";
-import {GetAuthRole, SetAuthToken} from "../Helper/AuthToken";
+import { useEffect, useRef, useState } from "react";
+import { GetAuthRole, SetAuthToken } from "../Helper/AuthToken";
 
 import "../CSS/StichtingTheme.css"
 import useLocalStorage from "use-local-storage";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export function Login() {
@@ -18,7 +18,7 @@ export function Login() {
 
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
-    
+
     let [role, setRole] = useState(GetAuthRole());
     const nav = useNavigate();
 
@@ -27,13 +27,15 @@ export function Login() {
         if (role === 'Ervaringsdeskundige') nav("/Ervaringsdeskundige");
         if (role === 'Bedrijf') nav("/Bedrijf");
     }, [role, nav])
-    
+
     return (
         // <Layout>
         <>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                <Header Title={"Login"}/>
+                <Header Title={"Login"} />
                 <div className={"Body"}>
+
+
                 <form className={"Section-border"}>
                     <label htmlFor="username">Gebruikersnaam</label>
                     <br />
@@ -45,20 +47,17 @@ export function Login() {
                         className="inputFontSize"
                     >
                     </input>
-
-                    <br />
-
                     <label htmlFor="password">Wachtwoord</label>
-                    <br />
-                    <input
-                        type={"password"}
-                        id={"password"}
-                        ref={passwordRef}
-                        aria-label="Invoerveld wachtwoord"
-                        className="inputFontSize"
-                    >
-                    </input>
-                    <br />
+                        <br />
+                        <input
+                            type={"password"}
+                            id={"password"}
+                            ref={passwordRef}
+                            aria-label="Invoerveld wachtwoord"
+                            className="inputFontSize"
+                        >
+                        </input>
+                        <br />
 
                     <button
                         aria-label="Log in"

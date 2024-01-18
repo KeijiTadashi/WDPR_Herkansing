@@ -1,0 +1,18 @@
+{
+    "Onderzoek_id": 9,
+    "Vragen": {
+        "vraag1": {
+            "vraagnummer": 1,
+            "vraag": "Hoe goed vind je de HHs",
+            "type": "Radio"
+            },
+            
+        "vraag2": {
+            "vraagnummer": 2,
+            "vraag": "Wie is prins Bernhard",
+            "type": "Open"
+            }
+    },
+
+    "Comment":"DEZE REGEL WORD GEBRUIKT ALS COMMENT. Deze JSON is een voorbeeld van hoe een vraag opgeslagen staat in de database."
+}

@@ -29,4 +29,5 @@ npm run start
 <code> ./script.sh</code>
 
 <h2>Cypress</h2>
-<code>npx run cypress</code>
+<code>cd wdpr_her
+npx cypress open</code>
