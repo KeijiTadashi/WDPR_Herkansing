@@ -26,6 +26,7 @@ export function Registreer() {
     const websiteRef = useRef(null);
     const bedrijfsnaamRef = useRef(null);
     const locatieRef = useRef(null);
+    const kvkRef = useRef(null);
 
     const nav = useNavigate();
     
@@ -59,9 +60,10 @@ export function Registreer() {
                 Wachtwoord: passwordRef.current.value,
                 Email: emailRef.current.value,
                 Telefoonnummer: telefoonnummerRef.current.value,
-                Naam: bedrijfsnaamRef.current.value,
+                Bedrijfsnaam: bedrijfsnaamRef.current.value,
                 Website: websiteRef.current.value,
-                Locatie: locatieRef.current.value
+                Locatie: locatieRef.current.value,
+                Kvk: kvkRef.current.value
             };
 
             path = apiPath + "RegistreerBedrijf";
@@ -192,6 +194,17 @@ export function Registreer() {
                                     id={"website"}
                                     ref={websiteRef}
                                     aria-label="Invoerveld website"
+                                    className="inputFontSize"
+                                >
+                                </input>
+                                <br />
+                                <label htmlFor={"kvk"}>Kvk</label>
+                                <br/>
+                                <input
+                                    type={"text"}
+                                    id={"kvk"}
+                                    ref={kvkRef}
+                                    aria-label="Invoerveld kvk nummer"
                                     className="inputFontSize"
                                 >
                                 </input>
