@@ -32,32 +32,53 @@ public class AuthService : ControllerBase
     [HttpPost("Login")]
     public async Task<ActionResult> Login([FromBody] DTOLogin dto)
     {
+        String ErrorMessage = "";
         try
         {
+            ErrorMessage = "Fail to find user";
             var gebruiker = await _userManager.FindByNameAsync(dto.Gebruikersnaam);
             Console.WriteLine($"Gebruiker {gebruiker}");
 
             if (gebruiker == null)
+            {
                 return NotFound("De gebruikersnaam bestaat niet.");
+            }
 
+
+            ErrorMessage = "Er gaat iets mis met wachtwoorden checken";
             if (!await _userManager.CheckPasswordAsync(gebruiker, dto.Wachtwoord))
+            {
                 return BadRequest("Het wachtwoord is incorrect.");
+            }
 
+
+            ErrorMessage = "Er gaat iets mis met het ophalen van de roles";
             var userRoles = await _userManager.GetRolesAsync(gebruiker);
-            var authClaims = new List<Claim>
-        {
-            new(ClaimTypes.Name, gebruiker.UserName),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
-            foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
 
+
+            ErrorMessage = "er gaat iets mis met het maken van een nieuw Object voor authClaims";
+            var authClaims = new List<Claim>{
+                new(ClaimTypes.Name, gebruiker.UserName),
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+
+
+            ErrorMessage = "Er gaat iets mis met userRoles en authClaims toevoegen";
+            foreach (var userRole in userRoles)
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
+
+            ErrorMessage="Er gaat iets mis bij het maken van de JWT Tokens";
             (string token, DateTime validTo) token = ("", DateTime.Now);
-            if (userRoles.Contains(Roles.Beheerder))
+            if (userRoles.Contains(Roles.Beheerder)){
                 token = GenerateToken(authClaims, _configuration["JWT:BeheerderExpirationTime"]);
-            else if (userRoles.Contains(Roles.Bedrijf))
+            }else if (userRoles.Contains(Roles.Bedrijf)){
                 token = GenerateToken(authClaims, _configuration["JWT:BedrijfExpirationTime"]);
-            else if (userRoles.Contains(Roles.Ervaringsdeskundige))
+            }else if (userRoles.Contains(Roles.Ervaringsdeskundige)){
                 token = GenerateToken(authClaims, _configuration["JWT:ErvaringsdeskundigeExpirationTime"]);
+            }
 
             if (token.token != "")
                 return Ok(new
@@ -71,14 +92,17 @@ public class AuthService : ControllerBase
 
             return BadRequest("Couldn't generate jwt token.");
         }
-        catch
+        catch(Exception ð)
         {
+            print(ð);
+            print(ErrorMessage);
             return StatusCode(500, "Internal server error: er gaat iets mis in AuthService/Login");
         }
     }
 
     private (string, DateTime) GenerateToken(IEnumerable<Claim> claims, string expirationInHours)
     {
+        try{
         var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var token = new JwtSecurityToken(
             expires: DateTime.Now.AddHours(Convert.ToInt64(expirationInHours)),
@@ -88,7 +112,14 @@ public class AuthService : ControllerBase
                 SecurityAlgorithms.HmacSha256
             )
         );
-        return (new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);
+        return (new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);}
+        catch(Exception e){
+            throw new Exception("Er gaat iets mis in GenerateToken");
+        }
     }
 
+    private void print<T>(T t)
+    {
+        Console.WriteLine(t);
+    }
 }
