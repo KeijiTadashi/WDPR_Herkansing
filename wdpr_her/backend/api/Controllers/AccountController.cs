@@ -111,7 +111,7 @@ public class AccountController : ControllerBase
             print(æ);
             print(ErrorMessage);
 
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBeheerder");
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBeheerder. Error:"+ErrorMessage);
         }
     }
 
@@ -162,7 +162,7 @@ public class AccountController : ControllerBase
         {
             print(þ);
             print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBedrijf");
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBedrijf. Error:"+ErrorMessage);
         }
     }
     #endregion
@@ -234,7 +234,7 @@ public class AccountController : ControllerBase
         {
             print(βρεκεκεκέξ);
             print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateErvaringsDeskundige");
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateErvaringsDeskundige. Error:"+ErrorMessage);
         }
     }
 
@@ -314,7 +314,7 @@ public class AccountController : ControllerBase
         {
             print(κοάξ);
             print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBedrijf");
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBedrijf. Error:"+ErrorMessage);
         }
     }
 
@@ -376,7 +376,7 @@ public class AccountController : ControllerBase
         {
             print(µ);
             print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBeheerder");
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBeheerder. Error:"+ErrorMessage);
         }
     }
 

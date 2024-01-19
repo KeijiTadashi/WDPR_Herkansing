@@ -96,7 +96,7 @@ public class AuthService : ControllerBase
         {
             print(ð);
             print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AuthService/Login");
+            return StatusCode(500, "Internal server error: er gaat iets mis in AuthService/Login. Error:"+ErrorMessage);
         }
     }
 

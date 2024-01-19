@@ -51,7 +51,7 @@ public class BedrijfController : ControllerBase
         }catch(Exception ex){
             Console.Write(ex);
             Console.Write(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven");
+            return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven. Error:"+ErrorMessage);
         }
 
     }
