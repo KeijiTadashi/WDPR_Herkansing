@@ -1,21 +1,23 @@
 using api.DataTemplate;
 using Microsoft.AspNetCore.Identity;
- using api.Helper;
- using Microsoft.AspNetCore.Authorization;
+using api.Helper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Printing;
 
 namespace api.Controllers;
+
 [ApiController]
 [Route("[controller]")]
 public class BedrijfController : ControllerBase
 {
-
     private readonly StichtingContext _context;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<Gebruiker> _userManager;
-    public BedrijfController(UserManager<Gebruiker> userManager, RoleManager<IdentityRole> roleManager, StichtingContext context)
+
+    public BedrijfController(UserManager<Gebruiker> userManager, RoleManager<IdentityRole> roleManager,
+        StichtingContext context)
     {
         _userManager = userManager;
         _roleManager = roleManager;
@@ -23,11 +25,9 @@ public class BedrijfController : ControllerBase
     }
 
 
-
-
     // TODO CHANGE TO USEFULL INFO AND NEW DTO
 
-    
+
     // Commented out for easier testing
     // [Authorize(Roles = Roles.Beheerder)]
 
@@ -36,21 +36,21 @@ public class BedrijfController : ControllerBase
     {
         try
         {
-
             var bedrijven = await _context.Bedrijven.Select(b => new DTOGetBedrijf()
             {
                 Bedrijfsnaam = b.Naam,
                 Email = b.Email,
                 Kvk = b.Kvk,
                 Telefoonnummer = b.PhoneNumber,
-                Locatie = b.Locatie, 
+                Locatie = b.Locatie,
                 Website = b.Website
             }).ToListAsync();
             return Ok(bedrijven);
-        }catch(Exception ex){
+        }
+        catch (Exception ex)
+        {
             Console.Write(ex);
             return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven");
         }
-
     }
 }

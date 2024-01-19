@@ -13,8 +13,8 @@ export function Registreer() {
 
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
-    
-    
+
+
     const [accountType, setAccountType] = useState("Ervaringsdeskundige");
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
@@ -29,15 +29,15 @@ export function Registreer() {
     const kvkRef = useRef(null);
 
     const nav = useNavigate();
-    
+
     const changeAccountType = (e) => {
         setAccountType(e.target.value);
     }
 
     useEffect(() => {
-        
+
     }, [accountType]);
-    
+
     const registreerAccount = () => {
         let path = "";
         let info = {};
@@ -53,8 +53,7 @@ export function Registreer() {
             };
 
             path = apiPath + "RegistreerErvaringsdeskundige";
-        }
-        else if (accountType === "Bedrijf") {
+        } else if (accountType === "Bedrijf") {
             info = {
                 Gebruikersnaam: usernameRef.current.value,
                 Wachtwoord: passwordRef.current.value,
@@ -77,8 +76,7 @@ export function Registreer() {
             console.log(err.toJSON());
         });
     }
-    
-    
+
 
     return (
         <>
@@ -88,13 +86,15 @@ export function Registreer() {
                     <form className={"Section-border"}>
                         Account type
                         <div className={"radio"}>
-                            <label><input type={"radio"} value={"Ervaringsdeskundige"} checked={accountType === "Ervaringsdeskundige"} onChange={changeAccountType}/>Ervaringsdeskundige</label>
+                            <label><input type={"radio"} value={"Ervaringsdeskundige"}
+                                          checked={accountType === "Ervaringsdeskundige"} onChange={changeAccountType}/>Ervaringsdeskundige</label>
                             <br/>
-                            <label><input type={"radio"} value={"Bedrijf"} checked={accountType === "Bedrijf"} onChange={changeAccountType}/>Bedrijf</label>
+                            <label><input type={"radio"} value={"Bedrijf"} checked={accountType === "Bedrijf"}
+                                          onChange={changeAccountType}/>Bedrijf</label>
                         </div>
                         <br/>
                         <label htmlFor="username">Gebruikersnaam</label>
-                        <br />
+                        <br/>
                         <input
                             type={"text"}
                             id={"username"}
@@ -103,11 +103,11 @@ export function Registreer() {
                             className="inputFontSize"
                         >
                         </input>
-                    
-                        <br />
-                    
+
+                        <br/>
+
                         <label htmlFor="password">Wachtwoord</label>
-                        <br />
+                        <br/>
                         <input
                             type={"password"}
                             id={"password"}
@@ -116,7 +116,7 @@ export function Registreer() {
                             className="inputFontSize"
                         >
                         </input>
-                        <br /><label htmlFor={"email"}>E-mail</label>
+                        <br/><label htmlFor={"email"}>E-mail</label>
                         <br/>
                         <input
                             type={"email"}
@@ -126,7 +126,7 @@ export function Registreer() {
                             className="inputFontSize"
                         >
                         </input>
-                        <br />
+                        <br/>
                         <label htmlFor={"telefoonnummer"}>Telefoonnummer</label>
                         <br/>
                         <input
@@ -138,7 +138,7 @@ export function Registreer() {
                         >
                         </input>
 
-                        <br />
+                        <br/>
                         {accountType === "Ervaringsdeskundige" ?
                             <>
                                 <label htmlFor={"voornaam"}>Voornaam</label>
@@ -151,7 +151,7 @@ export function Registreer() {
                                     className="inputFontSize"
                                 >
                                 </input>
-                                <br />
+                                <br/>
                                 <label htmlFor={"achternaam"}>Achternaam</label>
                                 <br/>
                                 <input
@@ -162,7 +162,7 @@ export function Registreer() {
                                     className="inputFontSize"
                                 >
                                 </input>
-                                <br />
+                                <br/>
                                 <label htmlFor={"postcode"}>Postcode</label>
                                 <br/>
                                 <input
@@ -173,7 +173,7 @@ export function Registreer() {
                                     className="inputFontSize"
                                 >
                                 </input>
-                                <br />
+                                <br/>
                             </> :
                             // Else bedrijf
                             <>
@@ -187,7 +187,7 @@ export function Registreer() {
                                     className="inputFontSize"
                                 >
                                 </input>
-                                <br /><label htmlFor={"website"}>Website</label>
+                                <br/><label htmlFor={"website"}>Website</label>
                                 <br/>
                                 <input
                                     type={"url"}
@@ -197,7 +197,7 @@ export function Registreer() {
                                     className="inputFontSize"
                                 >
                                 </input>
-                                <br />
+                                <br/>
                                 <label htmlFor={"kvk"}>Kvk</label>
                                 <br/>
                                 <input
@@ -208,7 +208,7 @@ export function Registreer() {
                                     className="inputFontSize"
                                 >
                                 </input>
-                                <br />
+                                <br/>
                                 <label htmlFor={"locatie"}>Locatie</label>
                                 <br/>
                                 <input
@@ -219,7 +219,7 @@ export function Registreer() {
                                     className="inputFontSize"
                                 >
                                 </input>
-                                <br />
+                                <br/>
                             </>
                         }
                         <button

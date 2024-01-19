@@ -7,6 +7,6 @@ public class DTOGetBedrijf
     public string? Website { get; set; }
     public string? Locatie { get; set; }
     public string? Email { get; set; }
-    
+
     public string? Telefoonnummer { get; set; }
 }

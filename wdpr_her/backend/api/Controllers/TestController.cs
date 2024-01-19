@@ -23,7 +23,6 @@ namespace api;
  * REACT EXAMPLES: see Components/ApiExample (url/test)
  */
 
-
 /*
  * De route van de api die nodig is om deze endpoints te bereiken.
  * [controller] = de naam van de controllerclass zonder controller => TestController -> Test
@@ -73,9 +72,9 @@ public class TestController : ControllerBase
             await _context.SaveChangesAsync();
             return Ok(); // Return Ok (200) without data
         }
-        catch{
+        catch
+        {
             return StatusCode(500, "Internal server error: er gaat iets mis in TestControler/CreateTest2");
-
         }
     }
 
@@ -100,13 +99,15 @@ public class TestController : ControllerBase
         Console.WriteLine("Get test"); //Don't have to put this in production 
         try
         {
-            var t = await _context.Tests.FirstAsync(t => t.Id == id); // If it isn't found, it will fail here and go to catch
+            var t = await _context.Tests.FirstAsync(t =>
+                t.Id == id); // If it isn't found, it will fail here and go to catch
 
             return Ok(t); // return Ok (200) with the Test that was found
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Error: \n{e}"); // Not necessary but helps with understanding what happens during development
+            Console.WriteLine(
+                $"Error: \n{e}"); // Not necessary but helps with understanding what happens during development
 
             //Either return a default/faulty data or a BadRequest/other error (with or without data)
             //return new Test() { IsTest = null, Id = -1, Name = "NOT FOUND" }; // This will give a code 200 OK (which in most cases is not OK)

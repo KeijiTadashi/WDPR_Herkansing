@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import '../CSS/EnqueteFeedback.css';
 import PropTypes from 'prop-types';
 
-const SurveyFeedbackForm = ({ onFeedback, onSubmit }) => {
+const SurveyFeedbackForm = ({onFeedback, onSubmit}) => {
     const [satisfaction, setSatisfaction] = useState('');
     const [easeOfUnderstanding, setEaseOfUnderstanding] = useState('');
     const [suggestions, setSuggestions] = useState('');
 
     const handleSubmit = () => {
         const feedbackData = [
-            { naam: '1: tevredenheid', value: satisfaction },
-            { naam: '2: gebruikersgemak', value: easeOfUnderstanding },
-            { naam: '3: tips en tops', value: suggestions }
+            {naam: '1: tevredenheid', value: satisfaction},
+            {naam: '2: gebruikersgemak', value: easeOfUnderstanding},
+            {naam: '3: tips en tops', value: suggestions}
         ];
         onFeedback(feedbackData);
         if (onSubmit) {

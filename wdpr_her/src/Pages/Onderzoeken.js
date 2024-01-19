@@ -15,7 +15,7 @@ function Onderzoeken() {
     *Laad de volgende array in met de vragen uit de database.
     *Er wordt automatisch een nummer aan gegeven, en de vragen worden automatisch ingeladen.
     */
-   //TODO laad hier dus die arrays in
+    //TODO laad hier dus die arrays in
     const onderzoekArray = [
         {vraag: "Hoe gaat het met je?", type: "Radio"},
         {vraag: "Wie is Prins Bernhard, en zo niet, waarom?", type: "Open"}
@@ -28,7 +28,8 @@ function Onderzoeken() {
                 <div className={"Body"}>
                     <div className="Onderzoek">
                         <h2>Doel van het onderzoek</h2>
-                        <p>Het doel van dit onderzoek is om te kijken wat jouw gebruikers ervaring is bij het gebruik van de website.
+                        <p>Het doel van dit onderzoek is om te kijken wat jouw gebruikers ervaring is bij het gebruik
+                            van de website.
                             etc.
                             and some more info.
                         </p>
@@ -36,12 +37,11 @@ function Onderzoeken() {
 
                     <DynamicOnderzoekPaneel onderzoekArray={onderzoekArray}/>
 
+                </div>
             </div>
-        </div>
         </>
     )
 }
-
 
 
 export default Onderzoeken;

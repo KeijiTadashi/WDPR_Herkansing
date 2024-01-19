@@ -50,7 +50,7 @@ and wrap so stuff automatically moves down if it gets to small */
     display: flex;
     flex-direction: column;
     width: 100%;
-    
+
 }
 
 p {
@@ -111,7 +111,7 @@ header {
     width: 100%;
     padding-top: 16px;
     z-index: 200;
-    
+
 }
 
 .header-text {
@@ -120,7 +120,7 @@ header {
 }
 
 .Header {
-    flex:1;  
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -143,7 +143,7 @@ header {
 .Info-header {
     align-items: center;
     /*display: flex;*/
-    
+
     /*flex: 1;*/
     column-gap: 8px;
     justify-content: flex-end;
@@ -269,7 +269,7 @@ header ul li {
 
 .inputFontSize {
     font-size: var(--font-size); /*Voornamelijk voor de login-velden in Login.js*/
-  }
+}
 
   /* ... (existing styles remain unchanged) */
 
@@ -282,7 +282,7 @@ header ul li {
 }
 
 
-.Section-border{
+.Section-border {
     border: 2px solid var(--accent-1);
     border-radius: 32px;
     padding: 1em;
@@ -309,7 +309,7 @@ header ul li {
 }
 
 .Section-list-column-names {
-    
+
     display: flex;
     flex-direction: row;
 }

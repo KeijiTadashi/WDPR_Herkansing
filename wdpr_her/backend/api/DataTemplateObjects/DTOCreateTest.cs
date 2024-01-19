@@ -8,5 +8,5 @@ public class DTOCreateTest
     public string Name { get; init; }
 
     [Required(ErrorMessage = "is required")]
-    public bool DitIsEenTestBool { get; init; } 
+    public bool DitIsEenTestBool { get; init; }
 }

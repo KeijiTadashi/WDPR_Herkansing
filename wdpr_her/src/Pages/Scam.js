@@ -25,12 +25,12 @@ function Scam() {
     }
 
     const opdrachtArray = [
-        { naam: "If it hadn't been for", aantaldeelnemers: 69 },
-        { naam: 'Cotton-Eyed Joe', status: "Completed"},
-        { status: "Completed", aantaldeelnemers:420},
-        {naam:"I'd been married long time ago", aantaldeelnemers:314,status:"Beschikbaar"}
+        {naam: "If it hadn't been for", aantaldeelnemers: 69},
+        {naam: 'Cotton-Eyed Joe', status: "Completed"},
+        {status: "Completed", aantaldeelnemers: 420},
+        {naam: "I'd been married long time ago", aantaldeelnemers: 314, status: "Beschikbaar"}
         // Add more opdracht objects as needed
-      ];
+    ];
 
     // const LoginButton = () => {
     //   const { loginWithRedirect } = useAuth0();
@@ -65,7 +65,7 @@ function Scam() {
 
                 <p className={"text-sec"}>Secondary text</p>
                 <p className={"text-accent"}>Text accent</p>
-                <DynamicOpdrachtPaneel opdrachtArray={opdrachtArray} />
+                <DynamicOpdrachtPaneel opdrachtArray={opdrachtArray}/>
             </header>
         </div>
     );

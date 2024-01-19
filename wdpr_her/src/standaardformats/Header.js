@@ -66,7 +66,6 @@ const Header = ({ Title }) => {
         setFontSize(newFontSize);
     }
 
-
     const headerNavClassName = (path) => {
         return location.pathname === path ? "Button-navigation Button-navigation-current" : "Button-navigation"
     }
@@ -81,71 +80,95 @@ const Header = ({ Title }) => {
             <div className={"Header"}>
                 <div className={"Header-top"}>
                     <img src={logo} className={"Logo-header"}
-                        alt={"logo stichting accessibility. Klik om naar de homepage te gaan"} />
+                         alt={"logo stichting accessibility. Klik om naar de homepage te gaan"}/>
                     <h1 className={"Title"}>{Title ?? "NO TITLE"}</h1>
                     <div className={"Info-header"}>
-                        <ul aria-label="Toegankelijkheid menu" id="Toegankelijkheid menu">
-                            <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>
-                            <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
+                        <ul aria-label="Toegankelijkheid menu">
+                            <li>
+                                <button className={"Button-header"} onClick={switchTheme}
+                                        aria-label="Verander kleurthema">theme
+                                </button>
+                            </li>
+                            <li>
+                                <button className={"Button-header-small"} onClick={decreaseFont}
+                                        aria-label="Verklein tekst">-
+                                </button>
+                            </li>
                             <li><h3 className={"header-text"}>Font size</h3></li>
-                            <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
+                            <li>
+                                <button className={"Button-header-small"} onClick={increaseFont}
+                                        aria-label="Vergroot tekst">+
+                                </button>
+                            </li>
 
                         </ul>
                     </div>
                 </div>
                 <div className={"Navigation"}>
-                    <div className={"Navigation-spacer"} />
-
+                    <div className={"Navigation-spacer"}/>
                     <ul aria-label="menubalk" id="menubalk">
                         <li>
-                            <Link to={"/"}><button className={headerNavClassName("/")} aria-label="Home">Home</button></Link>
+                            <Link to={"/"}>
+                                <button className={headerNavClassName("/")} aria-label="Home">Home</button>
+                            </Link>
                         </li>
                         {(role !== false) ?
                             <>
                                 <li>
-                                    <button className={headerNavClassName("/Profiel")} aria-label="Mijn profiel">Mijn profiel</button>
-                                </li>
-
-
-
-                                <li>
-                                    <Link to={"/"}><button className={"Button-navigation"} aria-label={"Log uit"} onClick={Logout}>Log uit</button></Link>
+                                    <Link to={"/"}>
+                                        <button className={"Button-navigation"} aria-label={"Log uit"}
+                                                onClick={Logout}>Log uit
+                                        </button>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <button className={headerNavClassName("/Profiel")} aria-label="Mijn profiel">Mijn profiel</button>
+                                    <button className={headerNavClassName("/Profiel")} aria-label="Mijn profiel">Mijn
+                                        profiel
+                                    </button>
                                 </li>
-                            </>
-                            : 
+                            </> :
                             <>
                                 <li>
-                                <Link to={"/Login"}><button className={headerNavClassName("/Login")} aria-label="Login pagina">Login</button></Link>
+                                    <Link to={"/Login"}>
+                                        <button className={headerNavClassName("/Login")}
+                                                aria-label="Login pagina">Login
+                                        </button>
+                                    </Link>
                                 </li>
                                 <li>
-
-                                    <Link to={"/Registreer"}><button className={headerNavClassName("/Registreer")} aria-label="Registeer als nieuwe ervaringsdeskundige of nieuw bedrijf">Registreer</button></Link>
+                                    <Link to={"/Registreer"}>
+                                        <button className={headerNavClassName("/Registreer")}
+                                                aria-label="Registeer als nieuwe ervaringsdeskundige of nieuw bedrijf">Registreer
+                                        </button>
+                                    </Link>
                                 </li>
                             </>
-
                         }
                         {(role === "Beheerder") ?
                             <li>
-
-                                <Link to={"/Beheerder"}><button className={headerNavClassName("/Beheerder")} aria-label="Beheerder portaal">beheerder</button></Link>
-                            </li>
-                            :
-                                (role === "Ervaringsdeskundige") ?
+                                <Link to={"/Beheerder"}>
+                                    <button className={headerNavClassName("/Beheerder")}
+                                            aria-label="Beheerder portaal">beheerder
+                                    </button>
+                                </Link>
+                            </li> :
+                            (role === "Ervaringsdeskundige") ?
+                                <li>
+                                    <Link to={"/Ervaringdeskundige"}>
+                                        <button className={headerNavClassName("/Ervaringsdeskundige")}
+                                                aria-label="Ervaringdeskundige portaal">Ervaringdeskundige
+                                        </button>
+                                    </Link>
+                                </li> :
+                                (role === "Bedrijf") ?
                                     <li>
-                                        <Link to={"/Ervaringdeskundige"}><button className={headerNavClassName("/Ervaringsdeskundige")} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button></Link>
-                                    </li> 
-                                    :
-                                        (role === "Bedrijf") ?
-                                        <li>
-                                            <Link to={"/Bedrijf"}><button className={headerNavClassName("/Bedrijf")} aria-label="Bedrijfsportaal">Bedrijf</button></Link>
-                                        </li>
-                                        : 
-                                        ""
+                                        <Link to={"/Bedrijf"}>
+                                            <button className={headerNavClassName("/Bedrijf")}
+                                                    aria-label="Bedrijfsportaal">Bedrijf
+                                            </button>
+                                        </Link>
+                                    </li> : ""
                         }
-
 
 
                         {/*<li>*/}

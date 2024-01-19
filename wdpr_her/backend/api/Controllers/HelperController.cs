@@ -29,7 +29,8 @@ public class HelperController : ControllerBase
             return StatusCode(201, onderzoeksType); // Created
         }
         catch (Exception ב)
-        {//Bet
+        {
+            //Bet
             Console.Write(ב);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddOnderzoeksType");
         }
@@ -47,7 +48,8 @@ public class HelperController : ControllerBase
             return StatusCode(201, aandoening); // Created
         }
         catch (Exception ג)
-        {//Gimel
+        {
+            //Gimel
             Console.Write(ג);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddAandoening");
         }
@@ -65,8 +67,9 @@ public class HelperController : ControllerBase
             return StatusCode(201, benadering); // Created
         }
         catch (Exception ד)
-        {//Dalet
-            Console.Write( ד);
+        {
+            //Dalet
+            Console.Write(ד);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBenadering");
         }
     }
@@ -80,10 +83,11 @@ public class HelperController : ControllerBase
             var beperking = new Beperking();
             await _context.Beperkingen.AddAsync(new Beperking() { Naam = dto.Naam });
             await _context.SaveChangesAsync();
-            return StatusCode(201, beperking);// Created
+            return StatusCode(201, beperking); // Created
         }
         catch (Exception ה)
-        {//Hee
+        {
+            //Hee
             Console.Write(ה);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
@@ -101,7 +105,8 @@ public class HelperController : ControllerBase
             return StatusCode(201, hulpmiddel); // Created
         }
         catch (Exception ו)
-        {//Waw'
+        {
+            //Waw'
             Console.Write(ו);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
@@ -183,6 +188,7 @@ public class HelperController : ControllerBase
         }
         #endregion
     */
+
     #region Get Enums
 
     [HttpGet("GetOnderzoeksTypes")]
@@ -193,7 +199,8 @@ public class HelperController : ControllerBase
             return await _context.OnderzoeksTypes.ToListAsync();
         }
         catch (Exception ז)
-        {//Zajien
+        {
+            //Zajien
             Console.Write(ז);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
@@ -207,7 +214,8 @@ public class HelperController : ControllerBase
             return await _context.Aandoeningen.ToListAsync();
         }
         catch (Exception ח)
-        {//Chet
+        {
+            //Chet
             Console.Write(ח);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
@@ -221,7 +229,8 @@ public class HelperController : ControllerBase
             return await _context.Benaderingen.ToListAsync();
         }
         catch (Exception ט)
-        {//Tet
+        {
+            //Tet
             Console.Write(ט);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
@@ -235,7 +244,8 @@ public class HelperController : ControllerBase
             return await _context.Beperkingen.ToListAsync();
         }
         catch (Exception י)
-        {//Jod
+        {
+            //Jod
             Console.Write(י);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
@@ -249,12 +259,12 @@ public class HelperController : ControllerBase
             return await _context.Hulpmiddelen.ToListAsync();
         }
         catch (Exception כ)
-        {//Kaf
+        {
+            //Kaf
             Console.Write(כ);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
         }
     }
 
     #endregion
-
 }

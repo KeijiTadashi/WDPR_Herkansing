@@ -36,9 +36,9 @@ export const GetAuthTokenUser = () => {
 export const GetAuthRole = () => {
     const role = localStorage.getItem("role");
     const token = localStorage.getItem("token");
-    
+
     if (role === null || token === null) return false;
-    
+
     const decodedToken = jwtDecode(token);
     const exp = decodedToken.exp * 1000; //token.exp is in seconds from epoch, Date.now() is in milliseconds
 
@@ -47,5 +47,5 @@ export const GetAuthRole = () => {
         SetAuthToken();
         return false;
     }
-    return role;    
+    return role;
 }

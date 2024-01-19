@@ -1,0 +1,10 @@
+﻿{
+  "titel": "Fly me to the...",
+  "locatie": "Moon",
+  "beloning": "A stardust diamond",
+  "onderzoeksTypes": [
+    2,3,4
+  ],
+  "beschrijving": "Look up here, I'm in Heaven\nI've got scars that can't be seen\nI've got drama, can't be stolen\nEverybody knows me now\nLook up here, man, I'm in danger\nI've got nothing left to lose\nI'm so high, it makes my brain whirl\nDropped my cellphone down below\nAin't that just like me?\nBy the time I got to New York\nI was living like a king\nThere I used up all my money\nI was looking for your ass\nThis way or no way\nYou know, I'll be free\nJust like that bluebird\nNow, ain't that just like me?\nOh, I'll be free\nJust like that bluebird\nOh, I'll be free\nAin't that just like me?",
+  "onderzoeksData": "{\"Sectie1\":{\"OpenVraag1\":\"Waarkanikopenvragenbeantwoorden?\",\"MeerkeuzeVraag1\":{\"Vraag\":\"Kies1ofmeerdereantwoorden\",\"Optie1\":\"Paars\",\"Optie2\":\"Therhythmofthecrowd\",\"Optie3\":\"GroundcontroltomajorTom\",\"Optie4\":\"Andthestarslookverydifferenttoday\"}},\"Sectie2\":{\"Text1\":\"Youremindmeofthebabe(whatbabe?)\\nBabewiththepower(whatpower?)\\nPowerofvoodoo(whodo?)\\nYoudo(dowhat?)\\nRemindmeofthebabe\\nIsawmybaby\\nCryinghardasbabecouldcry\\nWhatcouldIdo?\\nMybaby'slovehadgone\\nAndleftmybabyblue\\nNobodyknew\\nWhatkindofmagicspelltouse\\n(Slimeandsnails)orpuppydogtails\\n(Thunderorlightning)thenbabysaid\",\"GeslotenVraag1\":{\"Vraag\":\"Fromwhatmovie,staringDavidBowie,aretheabovelyrics\",\"Optie1\":\"TheSpidersFromMars\",\"Optie2\":\"Labyrinth\",\"Optie3\":\"Tommy\",\"Optie4\":\"ThePickOfDestiny\",\"Optie5\":\"WhoisDavidBowie?Andwhatisamovie?Isanythingevenrealanymore?\"}}}"
+}
