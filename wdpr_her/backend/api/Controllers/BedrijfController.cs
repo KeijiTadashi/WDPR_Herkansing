@@ -34,9 +34,10 @@ public class BedrijfController : ControllerBase
     [HttpGet("GetAllBedrijven")]
     public async Task<ActionResult<IEnumerable<DTOGetBedrijf>>> GetAllBedrijven()
     {
+        String ErrorMessage = "";
         try
         {
-
+            ErrorMessage="Er gaat was mis met het ophalen van alle bedrijven";
             var bedrijven = await _context.Bedrijven.Select(b => new DTOGetBedrijf()
             {
                 Bedrijfsnaam = b.Naam,
@@ -49,6 +50,7 @@ public class BedrijfController : ControllerBase
             return Ok(bedrijven);
         }catch(Exception ex){
             Console.Write(ex);
+            Console.Write(ErrorMessage);
             return StatusCode(500, "Internal server error: er gaat iets mis in BedrijfController/GetAllBedrijven");
         }
 

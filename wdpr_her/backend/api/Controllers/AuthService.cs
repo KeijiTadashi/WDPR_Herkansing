@@ -114,6 +114,7 @@ public class AuthService : ControllerBase
         );
         return (new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);}
         catch(Exception e){
+            print(e);
             throw new Exception("Er gaat iets mis in GenerateToken");
         }
     }
