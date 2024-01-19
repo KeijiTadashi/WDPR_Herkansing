@@ -33,6 +33,7 @@ const MijnProfiel = () => {
     // Alleen het tweede element weergeven
     const secondBedrijf = bedrijven[1];
 
+    //TODO: Postcode, Email, Telefoonnummer, zijn nu nog hardcoded. Dit willen we zo mogelijk ook ophalen uit de database.
     return (
         <div>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
