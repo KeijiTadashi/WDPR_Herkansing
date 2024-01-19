@@ -2,7 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using api.DataTemplate;
+using Microsoft.AspNetCore.Identity;
 
 namespace api.Controllers;
 
@@ -11,27 +14,45 @@ namespace api.Controllers;
 public class OpdrachtResponsController : ControllerBase
 {
     private readonly StichtingContext _context;
+    private readonly UserManager<Gebruiker> _userManager;
 
-    public OpdrachtResponsController(StichtingContext context)
+    public OpdrachtResponsController(StichtingContext context, UserManager<Gebruiker> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateOpdrachtRespons([FromBody] OpdrachtRespons opdrachtRespons)
+    [Authorize]
+    [HttpPost("CreateOpdrachtRespons")]
+    public async Task<IActionResult> CreateOpdrachtRespons([FromBody] DTOCreateOpdrachtRespons dto)
     {
         try
         {
-            if (opdrachtRespons == null)
+            if (dto == null)
             {
-                return BadRequest("Invalid OpdrachtRespons data");
+                return BadRequest("Geen OpdrachtRespons data");
             }
+            
+            string userName;
+            userName = User.FindFirstValue(ClaimTypes.Name);
 
-            _context.OpdrachtResponsEntries.Add(opdrachtRespons);
+            Gebruiker gebruiker = await _userManager.FindByNameAsync(userName);
+            if (gebruiker == null)
+                return BadRequest("Should never get here cause authorize should fail, but no user found...");
+
+            OpdrachtRespons opdrachtRespons = new OpdrachtRespons
+            {
+                OnderzoekId = dto.OnderzoekId,
+                Gebruiker = gebruiker,
+                VraagMetAntwoordenJSON = dto.VraagMetAntwoordenJSON
+            };
+            
+            await _context.OpdrachtResponsEntries.AddAsync(opdrachtRespons);
             await _context.SaveChangesAsync();
 
-            return Ok(new
-                { message = "OpdrachtRespons created successfully :D", ResponsID = opdrachtRespons.ResponsId });
+            return Created("OpdrachtRespons", opdrachtRespons);
+            // return Ok(new
+            //     { message = "OpdrachtRespons created successfully :D", ResponsID = opdrachtRespons.ResponsId });
         }
         catch
         {
@@ -39,6 +60,7 @@ public class OpdrachtResponsController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpGet("{opdrachtResponsId}")]
     public IActionResult GetOpdrachtRespons(int opdrachtResponsId)
     {
