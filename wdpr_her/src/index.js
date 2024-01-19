@@ -14,8 +14,11 @@ import Beheerder from './Pages/Beheerder';
 import Bedrijven from './Pages/Bedrijven';
 import MijnProfiel from './Pages/MijnProfiel';
 
+
 import Ervaringdeskundige from './Pages/Ervaringdeskundige';
 import Scam from './Pages/Scam';
+import {Registreer} from "./Pages/Registreer";
+import {Bedrijf} from "./Pages/Bedrijf";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +64,14 @@ const router = createBrowserRouter([
     {
         path: "Scam",
         element: <Scam/>
+    },
+    {
+        path: "/Registreer",
+        element: <Registreer/>
+    },
+    {
+        path: "/Bedrijf",
+        element: <Bedrijf/>
     }
 ]);
 

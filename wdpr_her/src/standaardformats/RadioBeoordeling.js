@@ -3,7 +3,7 @@ import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import PropTypes from 'prop-types';
 
-function Beoordeling({ index, onAnswerChange }) {
+function RadioBeoordeling({ index, onAnswerChange }) {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
@@ -78,9 +78,9 @@ function Beoordeling({ index, onAnswerChange }) {
     );
 }
 
-Beoordeling.propTypes = {
+RadioBeoordeling.propTypes = {
     index: PropTypes.number.isRequired,
     onAnswerChange: PropTypes.func.isRequired,
 };
 
-export default Beoordeling;
+export default RadioBeoordeling;

@@ -27,47 +27,54 @@ public class AuthService : ControllerBase
         _configuration = configuration;
     }
 
-    
+
 
     [HttpPost("Login")]
     public async Task<ActionResult> Login([FromBody] DTOLogin dto)
     {
-        var gebruiker = await _userManager.FindByNameAsync(dto.Gebruikersnaam);
-        Console.WriteLine($"Gebruiker {gebruiker}");
+        try
+        {
+            var gebruiker = await _userManager.FindByNameAsync(dto.Gebruikersnaam);
+            Console.WriteLine($"Gebruiker {gebruiker}");
 
-        if (gebruiker == null)
-            return NotFound("De gebruikersnaam bestaat niet.");
+            if (gebruiker == null)
+                return NotFound("De gebruikersnaam bestaat niet.");
 
-        if (!await _userManager.CheckPasswordAsync(gebruiker, dto.Wachtwoord))
-            return BadRequest("Het wachtwoord is incorrect.");
+            if (!await _userManager.CheckPasswordAsync(gebruiker, dto.Wachtwoord))
+                return BadRequest("Het wachtwoord is incorrect.");
 
-        var userRoles = await _userManager.GetRolesAsync(gebruiker);
-        var authClaims = new List<Claim>
+            var userRoles = await _userManager.GetRolesAsync(gebruiker);
+            var authClaims = new List<Claim>
         {
             new(ClaimTypes.Name, gebruiker.UserName),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
-        foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
 
-        (string token, DateTime validTo) token = ("", DateTime.Now);
-        if (userRoles.Contains(Roles.Beheerder))
-            token = GenerateToken(authClaims, _configuration["JWT:BeheerderExpirationTime"]);
-        else if (userRoles.Contains(Roles.Bedrijf))
-            token = GenerateToken(authClaims, _configuration["JWT:BedrijfExpirationTime"]);
-        else if (userRoles.Contains(Roles.Ervaringsdeskundige))
-            token = GenerateToken(authClaims, _configuration["JWT:ErvaringsdeskundigeExpirationTime"]);
+            (string token, DateTime validTo) token = ("", DateTime.Now);
+            if (userRoles.Contains(Roles.Beheerder))
+                token = GenerateToken(authClaims, _configuration["JWT:BeheerderExpirationTime"]);
+            else if (userRoles.Contains(Roles.Bedrijf))
+                token = GenerateToken(authClaims, _configuration["JWT:BedrijfExpirationTime"]);
+            else if (userRoles.Contains(Roles.Ervaringsdeskundige))
+                token = GenerateToken(authClaims, _configuration["JWT:ErvaringsdeskundigeExpirationTime"]);
 
-        if (token.token != "")
-            return Ok(new
-            {
-                api_key = token.token,
-                expiration = token.validTo,
-                user = gebruiker.UserName,
-                Role = userRoles,
-                status = "Gebruiker login successful"
-            });
+            if (token.token != "")
+                return Ok(new
+                {
+                    api_key = token.token,
+                    expiration = token.validTo,
+                    user = gebruiker.UserName,
+                    Role = userRoles,
+                    status = "Gebruiker login successful"
+                });
 
-        return BadRequest("Couldn't generate jwt token.");
+            return BadRequest("Couldn't generate jwt token.");
+        }
+        catch
+        {
+            return StatusCode(500, "Internal server error: er gaat iets mis in AuthService/Login");
+        }
     }
 
     private (string, DateTime) GenerateToken(IEnumerable<Claim> claims, string expirationInHours)
@@ -83,5 +90,5 @@ public class AuthService : ControllerBase
         );
         return (new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);
     }
-    
+
 }

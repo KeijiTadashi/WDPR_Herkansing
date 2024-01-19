@@ -1,9 +1,11 @@
 import logo from '../Logo Icon/Op blauw/Transparant/icon_accessibility_on-blue_transp.png';
 import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { GetAuthRole } from "../Helper/AuthToken";
+import { useEffect, useState } from "react";
 
-const Header = () => {
+const Header = ({ Title }) => {
     // Abstact this out
     // Check browser default theme preference
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -12,6 +14,15 @@ const Header = () => {
     // let curThemeLogo = logo;
 
     const [fontSize, setFontSize] = useLocalStorage('font-size', 'normal');
+
+    const [role, setRole] = useState(GetAuthRole);
+
+    let location = useLocation();
+    console.log(location.pathname);
+
+    useEffect(() => {
+        setRole(GetAuthRole);
+    }, []);
 
     const switchTheme = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -55,52 +66,100 @@ const Header = () => {
         setFontSize(newFontSize);
     }
 
+
+    const headerNavClassName = (path) => {
+        return location.pathname === path ? "Button-navigation Button-navigation-current" : "Button-navigation"
+    }
+
+    const Logout = () => {
+        localStorage.removeItem('role');
+        localStorage.removeItem('token');
+    }
+
     return (
         <header>
             <div className={"Header"}>
                 <div className={"Header-top"}>
                     <img src={logo} className={"Logo-header"}
                         alt={"logo stichting accessibility. Klik om naar de homepage te gaan"} />
-                    <h1>Title</h1>
+                    <h1 className={"Title"}>{Title ?? "NO TITLE"}</h1>
                     <div className={"Info-header"}>
-                        <ul aria-label="Toegankelijkheid menu">
-                            <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
-                            <li><h3>Font size</h3></li>
-                            <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
+                        <ul aria-label="Toegankelijkheid menu" id="Toegankelijkheid menu">
                             <li><button className={"Button-header"} onClick={switchTheme} aria-label="Verander kleurthema">theme</button></li>
+                            <li><button className={"Button-header-small"} onClick={decreaseFont} aria-label="Verklein tekst">-</button></li>
+                            <li><h3 className={"header-text"}>Font size</h3></li>
+                            <li><button className={"Button-header-small"} onClick={increaseFont} aria-label="Vergroot tekst">+</button></li>
+
                         </ul>
                     </div>
                 </div>
                 <div className={"Navigation"}>
                     <div className={"Navigation-spacer"} />
-                    <ul aria-label="menubalk">
+
+                    <ul aria-label="menubalk" id="menubalk">
                         <li>
-                            <Link to={"/"}><button className={"Button-navigation"} aria-label="Home">Home</button></Link>
+                            <Link to={"/"}><button className={headerNavClassName("/")} aria-label="Home">Home</button></Link>
                         </li>
-                        <li>
-                            <Link to={"/Beheerder"}><button className={"Button-navigation"} aria-label="Beheerder portaal">beheerder</button></Link>
-                        </li>
-                        <li>
-                            <Link to={"/MijnProfiel"}><button className={"Button-navigation"} aria-label="MijnProfiel portaal">Mijn Profiel</button></Link>
-                        </li>
-                        <li>
-                            <Link to={"/ErvaringsdeskundigeOnderzoek"}><button className={"Button-navigation"} aria-label="Onderzoek">Onderzoeken</button></Link>
-                        </li>
-                        <li>
-                            <Link to={"/Test"}><button className={"Button-navigation"} aria-label="API test pagina">Api Test Page</button></Link>
-                        </li>
-                        <li>
-                            <Link to={"/Login"}><button className={"Button-navigation"} aria-label="Login pagina">Login</button></Link>
-                        </li>
-                        <li>'
-                            <Link to={"/Scam"}><button className={"Button-navigation"} aria-label="Testing Playground Scam pagina">Scam</button></Link>
-                        </li>
-                        <li>
-                            <Link to={"/Ervaringdeskundige"}><button className={"Button-navigation"} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button></Link>
-                        </li>
-                        <li>
-                            <Link to={"/Bedrijven"}><button className={"Button-navigation"} aria-label="Bedrijven portaal">Bedrijven</button></Link>
-                        </li>
+                        {(role !== false) ?
+                            <>
+                                <li>
+                                    <button className={headerNavClassName("/Profiel")} aria-label="Mijn profiel">Mijn profiel</button>
+                                </li>
+
+
+
+                                <li>
+                                    <Link to={"/"}><button className={"Button-navigation"} aria-label={"Log uit"} onClick={Logout}>Log uit</button></Link>
+                                </li>
+                                <li>
+                                    <button className={headerNavClassName("/Profiel")} aria-label="Mijn profiel">Mijn profiel</button>
+                                </li>
+                            </>
+                            : 
+                            <>
+                                <li>
+                                <Link to={"/Login"}><button className={headerNavClassName("/Login")} aria-label="Login pagina">Login</button></Link>
+                                </li>
+                                <li>
+
+                                    <Link to={"/Registreer"}><button className={headerNavClassName("/Registreer")} aria-label="Registeer als nieuwe ervaringsdeskundige of nieuw bedrijf">Registreer</button></Link>
+                                </li>
+                            </>
+
+                        }
+                        {(role === "Beheerder") ?
+                            <li>
+
+                                <Link to={"/Beheerder"}><button className={headerNavClassName("/Beheerder")} aria-label="Beheerder portaal">beheerder</button></Link>
+                            </li>
+                            :
+                                (role === "Ervaringsdeskundige") ?
+                                    <li>
+                                        <Link to={"/Ervaringdeskundige"}><button className={headerNavClassName("/Ervaringsdeskundige")} aria-label="Ervaringdeskundige portaal">Ervaringdeskundige</button></Link>
+                                    </li> 
+                                    :
+                                        (role === "Bedrijf") ?
+                                        <li>
+                                            <Link to={"/Bedrijf"}><button className={headerNavClassName("/Bedrijf")} aria-label="Bedrijfsportaal">Bedrijf</button></Link>
+                                        </li>
+                                        : 
+                                        ""
+                        }
+
+
+
+                        {/*<li>*/}
+                        {/*    <Link to={"/Onderzoeken"}><button className={"Button-navigation"} aria-label="Onderzoeken">Onderzoeken</button></Link>*/}
+                        {/*</li>*/}
+                        {/*<li>*/}
+                        {/*    <Link to={"/Test"}><button className={"Button-navigation"} aria-label="API test pagina">Api Test Page</button></Link>*/}
+                        {/*</li>*/}
+
+                        {/*<li>*/}
+                        {/*    <Link to={"/Scam"}><button className={"Button-navigation"} aria-label="Testing Playground Scam pagina">Scam</button></Link>*/}
+                        {/*</li>*/}
+
+
                     </ul>
                 </div>
             </div>
