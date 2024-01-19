@@ -23,6 +23,7 @@ public class InitDatabaseData : ControllerBase
     [HttpPost("InitData")]
     public async Task<ActionResult> InitData()
     {
+        String em = "";
         try
         {
             #region Roles
@@ -30,6 +31,7 @@ public class InitDatabaseData : ControllerBase
 
             if (!_roleManager.RoleExistsAsync(Roles.Beheerder).Result)
             {
+                em="Er gaat wat mis in de check of rol Beheerder bestaat";
                 var role = new IdentityRole();
                 role.Name = Roles.Beheerder;
                 _roleManager.CreateAsync(role).Wait();
@@ -37,6 +39,7 @@ public class InitDatabaseData : ControllerBase
 
             if (!_roleManager.RoleExistsAsync(Roles.Ervaringsdeskundige).Result)
             {
+                em="er gaat wat mis in de check of de rol Ervaringsdeskundige bestaat";
                 var role = new IdentityRole();
                 role.Name = Roles.Ervaringsdeskundige;
                 _roleManager.CreateAsync(role).Wait();
@@ -44,6 +47,7 @@ public class InitDatabaseData : ControllerBase
 
             if (!_roleManager.RoleExistsAsync(Roles.Bedrijf).Result)
             {
+                em="er gaat wat mis in de check of de rol Bedrijf bestaat";
                 var role = new IdentityRole();
                 role.Name = Roles.Bedrijf;
                 _roleManager.CreateAsync(role).Wait();
@@ -87,7 +91,7 @@ public class InitDatabaseData : ControllerBase
             foreach (var b in setDataBeheerder())
             {
                 await accountController.RegistreerBeheerder(b);
-                // Console.WriteLine(
+                // print(
                 //     $"Start Beheerder\n{b.Voornaam}, {b.Achternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}, \n");
                 // var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
                 // if (userExists == null)
@@ -101,12 +105,12 @@ public class InitDatabaseData : ControllerBase
                 //         PhoneNumber = b.Telefoonnummer,
                 //         AccountType = Roles.Beheerder
                 //     };
-                //     Console.WriteLine(
+                //     print(
                 //         $"Beheerder registreer, gewoon\n{b.Voornaam}, {b.Achternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}\n{beheerder.Voornaam},{beheerder.Achternaam}, {beheerder.UserName},{beheerder.Email},{beheerder.PhoneNumber},\n\n");
                 //
                 //     _userManager.CreateAsync(beheerder, b.Wachtwoord).Wait();
                 //     _userManager.AddToRoleAsync(beheerder, Roles.Beheerder).Wait();
-                //     Console.WriteLine("End Beheerder");
+                //     print("End Beheerder");
                 // }
             }
 
@@ -116,7 +120,7 @@ public class InitDatabaseData : ControllerBase
 
             foreach (var b in setDataBedrijf())
             {
-                Console.WriteLine("Start Bedrijf");
+                print("Start Bedrijf");
                 var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
                 if (userExists == null)
                 {
@@ -134,7 +138,7 @@ public class InitDatabaseData : ControllerBase
                     _userManager.CreateAsync(bedrijf, b.Wachtwoord).Wait();
                     _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf).Wait();
 
-                    Console.WriteLine("End Bedrijf");
+                    print("End Bedrijf");
                 }
             }
 
@@ -145,7 +149,7 @@ public class InitDatabaseData : ControllerBase
         catch (Exception अ)
         {
             //Kanthya
-            Console.Write(अ);
+            print(अ);
             return StatusCode(500, "Internal server error: er gaat iets mis in InitDatabaseData/InitData");
         }
     }
@@ -384,4 +388,8 @@ public class InitDatabaseData : ControllerBase
     }
 
     #endregion
+
+    private void print<T>(T t){
+        Console.WriteLine(t);
+    }
 }

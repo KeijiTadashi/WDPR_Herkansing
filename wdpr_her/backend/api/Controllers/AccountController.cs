@@ -22,15 +22,15 @@ public class AccountController : ControllerBase
     [HttpPost("RegistreerErvaringsdeskundige")]
     public async Task<ActionResult> RegistreerErvaringsdeskundige([FromBody] DTORegistreerErvaringsdeskundige dto)
     {
-        string ErrorMessage = "";
+        string em = "";
         try
         {
-            ErrorMessage = "Locatie 1: await _userManager geeft een error";
+            em = "Locatie 1: await _userManager geeft een error";
             var userExists = await _userManager.FindByNameAsync(dto.Gebruikersnaam);
             if (userExists != null)
                 return Conflict("De gebruikersnaam bestaat al.");
 
-            ErrorMessage = "Locatie 2: Error in het aanmaken van een nieuwe Ervaringsdeskundige";
+            em = "Locatie 2: Error in het aanmaken van een nieuwe Ervaringsdeskundige";
             var deskundige = new Ervaringsdeskundige
             {
                 Email = dto.Email,
@@ -43,13 +43,13 @@ public class AccountController : ControllerBase
                 //Nog meer data over beperkingen en dergelijke, volgt later als dit allemaal werk TODO
             };
 
-            ErrorMessage = "Locatie 3: await van create userManager geeft error";
+            em = "Locatie 3: await van create userManager geeft error";
             var result = await _userManager.CreateAsync(deskundige, dto.Wachtwoord);
             if (!result.Succeeded)
                 return BadRequest("Het aanmaken van een gebruiker is mislukt.");
 
             // Todo verander rol naar account die wacht op goedkeuring van beheerder met andere bevoegdheden, of misschien nog geen rol en update de rol in de gebruikergoedkuren functie (die nog gemaakt moet worden
-            ErrorMessage = "Locatie 4: await van  userManager geeft error";
+            em = "Locatie 4: await van  userManager geeft error";
             result = await _userManager.AddToRoleAsync(deskundige, Roles.Ervaringsdeskundige);
             if (result.Succeeded)
             {
@@ -60,8 +60,8 @@ public class AccountController : ControllerBase
         catch (Exception å)
         {
             print(å);
-            print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/Registreer. Error Message:" + ErrorMessage);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/Registreer. Error Message:" + em);
         }
     }
 
@@ -69,18 +69,18 @@ public class AccountController : ControllerBase
     [HttpPost("RegistreerBeheerder")]
     public async Task<ActionResult> RegistreerBeheerder([FromBody] DTORegistreerBeheerder dto)
     {
-        String ErrorMessage = "";
+        string em = "";
         try
         {
 
-            ErrorMessage = "Fout bij await _userManager FindByNameAsync";
+            em = "Fout bij await _userManager FindByNameAsync";
             var userExists = await _userManager.FindByNameAsync(dto.Gebruikersnaam);
             if (userExists != null)
             {
                 return Conflict("De gebruikersnaam bestaat al.");
             }
 
-            ErrorMessage = "Fout bij aanmaken nieuw Beheerder Object";
+            em = "Fout bij aanmaken nieuw Beheerder Object";
             var beheerder = new Beheerder
             {
                 Email = dto.Email,
@@ -91,14 +91,14 @@ public class AccountController : ControllerBase
                 AccountType = Roles.Beheerder
             };
 
-            ErrorMessage = "Fout bij await _userManager CreateAsync";
+            em = "Fout bij await _userManager CreateAsync";
             var result = await _userManager.CreateAsync(beheerder, dto.Wachtwoord);
             if (!result.Succeeded)
             {
                 return BadRequest("Het aanmaken van een gebruiker is mislukt.");
             }
 
-            ErrorMessage = "Fout bij _userManager AddToRoleAsync";
+            em = "Fout bij _userManager AddToRoleAsync";
             result = await _userManager.AddToRoleAsync(beheerder, Roles.Beheerder);
             if (result.Succeeded)
             {
@@ -109,26 +109,26 @@ public class AccountController : ControllerBase
         catch (Exception æ)
         {
             print(æ);
-            print(ErrorMessage);
+            print(em);
 
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBeheerder. Error:"+ErrorMessage);
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBeheerder. Error:"+em);
         }
     }
 
     [HttpPost("RegistreerBedrijf")]
     public async Task<ActionResult> RegistreerBeheerder([FromBody] DTORegistreerBedrijf dto)
     {
-        String ErrorMessage = "";
+        string em = "";
         try
         {
-            ErrorMessage = "Fout bij await _userManager FindByNameAsync";
+            em = "Fout bij await _userManager FindByNameAsync";
             var userExists = await _userManager.FindByNameAsync(dto.Gebruikersnaam);
             if (userExists != null)
             {
                 return Conflict("De gebruikersnaam bestaat al.");
             }
 
-            ErrorMessage = "Error bij aanmaken Bedrijf object";
+            em = "Error bij aanmaken Bedrijf object";
             var bedrijf = new Bedrijf
             {
                 Email = dto.Email,
@@ -141,7 +141,7 @@ public class AccountController : ControllerBase
                 AccountType = Roles.Bedrijf
             };
 
-            ErrorMessage = "Error bij await _userManager CreateAsync";
+            em = "Error bij await _userManager CreateAsync";
             var result = await _userManager.CreateAsync(bedrijf, dto.Wachtwoord);
             if (!result.Succeeded)
             {
@@ -149,7 +149,7 @@ public class AccountController : ControllerBase
             }
 
             // Todo Don't give them a role, only after een beheerder het bedrijf heeft goedgekeured
-            ErrorMessage = "Error bij await _userManager AddToRoleAsync";
+            em = "Error bij await _userManager AddToRoleAsync";
             result = await _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf);
             if (result.Succeeded)
             {
@@ -161,8 +161,8 @@ public class AccountController : ControllerBase
         catch (Exception þ)
         {
             print(þ);
-            print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBedrijf. Error:"+ErrorMessage);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBedrijf. Error:"+em);
         }
     }
     #endregion
@@ -172,12 +172,12 @@ public class AccountController : ControllerBase
     [HttpPut("UpdateErvaringsdeskundige")]
     public async Task<ActionResult> UpdateErvaringsdeskundige([FromBody] DTOUpdateErvaringsdeskundige dtoUpdate)
     {
-        string ErrorMessage = "";
+        string em = "";
         try
         {
             string userName;
 
-            ErrorMessage = "Fout bij User.FindFirstValue";
+            em = "Fout bij User.FindFirstValue";
             if (User.FindFirstValue(ClaimTypes.Role) == Roles.Beheerder)
             {
                 if (dtoUpdate.UserName == null)
@@ -191,7 +191,7 @@ public class AccountController : ControllerBase
                 userName = User.FindFirstValue(ClaimTypes.Name);
             }
 
-            ErrorMessage = "Fout bij await _userManager FindByNameAsync";
+            em = "Fout bij await _userManager FindByNameAsync";
             var deskundige = (Ervaringsdeskundige)await _userManager.FindByNameAsync(userName);
             if (deskundige == null)
             {
@@ -205,7 +205,7 @@ public class AccountController : ControllerBase
 
 
             // Change password
-            ErrorMessage = "Fout bij change password";
+            em = "Fout bij change password";
             if (dtoUpdate.NieuwWachtwoord != null)
             {
                 var result = await _userManager.ChangePasswordAsync(deskundige, dtoUpdate.HuidigWachtwoord, dtoUpdate.NieuwWachtwoord);
@@ -216,7 +216,7 @@ public class AccountController : ControllerBase
             }
 
             // Change username
-            ErrorMessage = "Fout bij ChangeUsername";
+            em = "Fout bij ChangeUsername";
             if (dtoUpdate.NewUserName != null)
             {
                 var userExists = await _userManager.FindByNameAsync(dtoUpdate.NewUserName);
@@ -226,15 +226,15 @@ public class AccountController : ControllerBase
                 await _userManager.UpdateNormalizedUserNameAsync(deskundige);
             }
 
-            ErrorMessage = "Fout bij _userManager UpdateAsync";
+            em = "Fout bij _userManager UpdateAsync";
             await _userManager.UpdateAsync(deskundige);
             return Ok("De gebuikers informatie is geupdate.");
         }
         catch (Exception βρεκεκεκέξ)
         {
             print(βρεκεκεκέξ);
-            print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateErvaringsDeskundige. Error:"+ErrorMessage);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateErvaringsDeskundige. Error:"+em);
         }
     }
 
@@ -243,10 +243,10 @@ public class AccountController : ControllerBase
     [HttpPut("UpdateBedrijf")]
     public async Task<ActionResult> UpdateBedrijf([FromBody] DTOUpdateBedrijf dtoUpdate)
     {
-        String ErrorMessage = "";
+        string em = "";
         try
         {
-            ErrorMessage = "Error bij het vinden van het bedrijf";
+            em = "Error bij het vinden van het bedrijf";
 
             string userName;
             if (User.FindFirstValue(ClaimTypes.Role) == Roles.Beheerder)
@@ -263,7 +263,7 @@ public class AccountController : ControllerBase
             }
 
 
-            ErrorMessage="Error bij het casten naar bedrijf";
+            em="Error bij het casten naar bedrijf";
 
             var bedrijf = (Bedrijf)await _userManager.FindByNameAsync(userName);
             if (bedrijf == null)
@@ -272,7 +272,7 @@ public class AccountController : ControllerBase
             }
 
 
-            ErrorMessage="Error bij updaten attributen van bedrijf";
+            em="Error bij updaten attributen van bedrijf";
 
             bedrijf.Kvk = dtoUpdate.Kvk ?? bedrijf.Kvk;
             bedrijf.Email = dtoUpdate.Email ?? bedrijf.Email;
@@ -282,7 +282,7 @@ public class AccountController : ControllerBase
             bedrijf.Website = dtoUpdate.Website ?? bedrijf.Website;
 
 
-            ErrorMessage="Error bij aanpassen wachtwoord";
+            em="Error bij aanpassen wachtwoord";
 
             // Change password
             if (dtoUpdate.NieuwWachtwoord != null)
@@ -292,7 +292,7 @@ public class AccountController : ControllerBase
                     return BadRequest(result.Errors);
             }
 
-            ErrorMessage="Error bij aanpassen username";
+            em="Error bij aanpassen username";
 
             // Change username
             if (dtoUpdate.NewUserName != null)
@@ -305,7 +305,7 @@ public class AccountController : ControllerBase
             }
 
 
-            ErrorMessage="Error bij updaten bedrijf";
+            em="Error bij updaten bedrijf";
 
             await _userManager.UpdateAsync(bedrijf);
             return Ok("De gebuikers informatie is geupdate.");
@@ -313,8 +313,8 @@ public class AccountController : ControllerBase
         catch (Exception κοάξ)
         {
             print(κοάξ);
-            print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBedrijf. Error:"+ErrorMessage);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBedrijf. Error:"+em);
         }
     }
 
@@ -322,23 +322,23 @@ public class AccountController : ControllerBase
     [HttpPut("UpdateBeheerder")]
     public async Task<ActionResult> UpdateBeheerder([FromBody] DTOUpdateBeheerder dtoUpdate)
     {
-        String ErrorMessage="";
+        string em="";
         try
         {
 
-            ErrorMessage="Fout bij ophalen beheerder";
+            em="Fout bij ophalen beheerder";
             string userName;
             userName = User.FindFirstValue(ClaimTypes.Name);
 
 
-            ErrorMessage="Fout bij await _userManager.FindByNameAsync";
+            em="Fout bij await _userManager.FindByNameAsync";
 
             var beheerder = (Beheerder)await _userManager.FindByNameAsync(userName);
             if (beheerder == null)
                 return BadRequest("Beheerder is niet gevonden");
 
 
-            ErrorMessage="Fout bij updaten attribuyten van beheerder";
+            em="Fout bij updaten attribuyten van beheerder";
 
             beheerder.Achternaam = dtoUpdate.Achternaam ?? beheerder.Achternaam;
             beheerder.Voornaam = dtoUpdate.Voornaam ?? beheerder.Voornaam;
@@ -347,7 +347,7 @@ public class AccountController : ControllerBase
 
            
              // Change password
-            ErrorMessage="Fout bij updaten wachtwoord";
+            em="Fout bij updaten wachtwoord";
 
             if (dtoUpdate.NieuwWachtwoord != null)
             {
@@ -358,7 +358,7 @@ public class AccountController : ControllerBase
 
 
             // Change username
-            ErrorMessage="Fout bij aanpassen username";
+            em="Fout bij aanpassen username";
             
             if (dtoUpdate.NewUserName != null)
             {
@@ -375,8 +375,8 @@ public class AccountController : ControllerBase
         catch(Exception µ)
         {
             print(µ);
-            print(ErrorMessage);
-            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBeheerder. Error:"+ErrorMessage);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBeheerder. Error:"+em);
         }
     }
 
