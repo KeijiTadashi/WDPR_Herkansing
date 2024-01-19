@@ -12,6 +12,9 @@ import Homepage from './Pages/Homepage';
 import Beheerder from './Pages/Beheerder';
 //import Ervaringdeskundige from './Pages/Ervaringdeskundige';
 import Bedrijven from './Pages/Bedrijven';
+import MijnProfiel from './Pages/MijnProfiel';
+
+
 import Ervaringdeskundige from './Pages/Ervaringdeskundige';
 import Scam from './Pages/Scam';
 import {Registreer} from "./Pages/Registreer";
@@ -53,6 +56,10 @@ const router = createBrowserRouter([
     {
         path: "/Ervaringdeskundige",
         element: <Ervaringdeskundige/>
+    },
+    {
+        path: "/MijnProfiel",
+        element: <MijnProfiel/>
     },
     {
         path: "Scam",

@@ -95,6 +95,7 @@ const Header = ({ Title }) => {
                 </div>
                 <div className={"Navigation"}>
                     <div className={"Navigation-spacer"} />
+
                     <ul aria-label="menubalk" id="menubalk">
                         <li>
                             <Link to={"/"}><button className={headerNavClassName("/")} aria-label="Home">Home</button></Link>
