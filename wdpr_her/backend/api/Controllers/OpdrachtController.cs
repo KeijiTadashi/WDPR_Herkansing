@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers;
 
-
 [ApiController]
 [Route("[controller]")]
 public class OpdrachtController : ControllerBase
@@ -17,8 +16,7 @@ public class OpdrachtController : ControllerBase
     }
 
     [HttpGet("GetVragen")]
-
-    public async Task<ActionResult<IEnumerable<DTOVragenOphalen>>> GetVragen(string id)
+    public async Task<ActionResult<IEnumerable<DTOVragenOphalen>>> GetVragen(int id)
     {
         string em = "";
         try
@@ -45,4 +43,3 @@ public class OpdrachtController : ControllerBase
         }
     }
 }
-

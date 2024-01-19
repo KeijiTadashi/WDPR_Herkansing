@@ -19,6 +19,7 @@ public class AccountController : ControllerBase
     }
 
     #region Registreer
+
     [HttpPost("RegistreerErvaringsdeskundige")]
     public async Task<ActionResult> RegistreerErvaringsdeskundige([FromBody] DTORegistreerErvaringsdeskundige dto)
     {
@@ -165,9 +166,11 @@ public class AccountController : ControllerBase
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/RegistreerBedrijf. Error:"+em);
         }
     }
+
     #endregion
 
     #region Update
+
     [Authorize(Roles = $"{Roles.Ervaringsdeskundige}, {Roles.Beheerder}")]
     [HttpPut("UpdateErvaringsdeskundige")]
     public async Task<ActionResult> UpdateErvaringsdeskundige([FromBody] DTOUpdateErvaringsdeskundige dtoUpdate)
@@ -191,7 +194,9 @@ public class AccountController : ControllerBase
                 userName = User.FindFirstValue(ClaimTypes.Name);
             }
 
+
             em = "Fout bij await _userManager FindByNameAsync";
+
             var deskundige = (Ervaringsdeskundige)await _userManager.FindByNameAsync(userName);
             if (deskundige == null)
             {
@@ -208,7 +213,8 @@ public class AccountController : ControllerBase
             em = "Fout bij change password";
             if (dtoUpdate.NieuwWachtwoord != null)
             {
-                var result = await _userManager.ChangePasswordAsync(deskundige, dtoUpdate.HuidigWachtwoord, dtoUpdate.NieuwWachtwoord);
+                var result = await _userManager.ChangePasswordAsync(deskundige, dtoUpdate.HuidigWachtwoord,
+                    dtoUpdate.NieuwWachtwoord);
                 if (!result.Succeeded)
                 {
                     return BadRequest(result.Errors);
@@ -235,6 +241,7 @@ public class AccountController : ControllerBase
             print(βρεκεκεκέξ);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateErvaringsDeskundige. Error:"+em);
+
         }
     }
 
@@ -263,8 +270,8 @@ public class AccountController : ControllerBase
             }
 
 
-            em="Error bij het casten naar bedrijf";
 
+            em="Error bij het casten naar bedrijf";
             var bedrijf = (Bedrijf)await _userManager.FindByNameAsync(userName);
             if (bedrijf == null)
             {
@@ -287,7 +294,8 @@ public class AccountController : ControllerBase
             // Change password
             if (dtoUpdate.NieuwWachtwoord != null)
             {
-                var result = await _userManager.ChangePasswordAsync(bedrijf, dtoUpdate.HuidigWachtwoord, dtoUpdate.NieuwWachtwoord);
+                var result = await _userManager.ChangePasswordAsync(bedrijf, dtoUpdate.HuidigWachtwoord,
+                    dtoUpdate.NieuwWachtwoord);
                 if (!result.Succeeded)
                     return BadRequest(result.Errors);
             }
@@ -327,6 +335,7 @@ public class AccountController : ControllerBase
         {
 
             em="Fout bij ophalen beheerder";
+
             string userName;
             userName = User.FindFirstValue(ClaimTypes.Name);
 
@@ -351,7 +360,8 @@ public class AccountController : ControllerBase
 
             if (dtoUpdate.NieuwWachtwoord != null)
             {
-                var result = await _userManager.ChangePasswordAsync(beheerder, dtoUpdate.HuidigWachtwoord, dtoUpdate.NieuwWachtwoord);
+                var result = await _userManager.ChangePasswordAsync(beheerder, dtoUpdate.HuidigWachtwoord,
+                    dtoUpdate.NieuwWachtwoord);
                 if (!result.Succeeded)
                     return BadRequest(result.Errors);
             }
@@ -379,7 +389,6 @@ public class AccountController : ControllerBase
             return StatusCode(500, "Internal server error: er gaat iets mis in AccountController/UpdateBeheerder. Error:"+em);
         }
     }
-
 
     #endregion
 

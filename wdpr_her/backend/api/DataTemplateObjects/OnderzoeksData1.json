@@ -1,0 +1,24 @@
+﻿{
+  "Sectie1": {
+    "OpenVraag1": "Waar kan ik open vragen beantwoorden?",
+    "MeerkeuzeVraag1": {
+      "Vraag": "Kies 1 of meerdere antwoorden",
+      "Optie1": "Paars",
+      "Optie2": "The rhythm of the crowd",
+      "Optie3": "Ground control to major Tom",
+      "Optie4": "And the stars look very different today"
+    }
+  },
+  "Sectie2": {
+    "Text1": "You remind me of the babe (what babe?)\nBabe with the power (what power?)\nPower of voodoo (who do?)\nYou do (do what?)\nRemind me of the babe\nI saw my baby\nCrying hard as babe could cry\nWhat could I do?\nMy baby's love had gone\nAnd left my baby blue\nNobody knew\nWhat kind of magic spell to use\n(Slime and snails) or puppy dog tails\n(Thunder or lightning) then baby said",
+    "GeslotenVraag1": {
+      "Vraag": "From what movie, staring David Bowie, are the above lyrics",
+      "Optie1": "The Spiders From Mars",
+      "Optie2": "Labyrinth",
+      "Optie3": "Tommy",
+      "Optie4": "The Pick Of Destiny",
+      "Optie5": "Who is David Bowie? And what is a movie? Is anything even real anymore?"
+    }
+  }
+}
+

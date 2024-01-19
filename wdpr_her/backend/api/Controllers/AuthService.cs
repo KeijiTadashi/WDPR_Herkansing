@@ -12,7 +12,6 @@ using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegiste
 
 namespace api.Controllers;
 
-
 public class AuthService : ControllerBase
 {
     private readonly IConfiguration _configuration;
@@ -26,7 +25,6 @@ public class AuthService : ControllerBase
         _roleManager = roleManager;
         _configuration = configuration;
     }
-
 
 
     [HttpPost("Login")]
@@ -54,6 +52,14 @@ public class AuthService : ControllerBase
 
             em = "Er gaat iets mis met het ophalen van de roles";
             var userRoles = await _userManager.GetRolesAsync(gebruiker);
+
+            var authClaims = new List<Claim>
+            {
+                new(ClaimTypes.Name, gebruiker.UserName),
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+            foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+
 
 
             em = "er gaat iets mis met het maken van een nieuw Object voor authClaims";
@@ -118,6 +124,7 @@ public class AuthService : ControllerBase
             throw new Exception("Er gaat iets mis in GenerateToken");
         }
     }
+
 
     private void print<T>(T t)
     {

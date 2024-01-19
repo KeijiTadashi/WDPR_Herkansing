@@ -39,6 +39,7 @@ public class HelperController : ControllerBase
             print(ב);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddOnderzoeksType. Error:"+em);
+
         }
     }
 
@@ -62,6 +63,7 @@ public class HelperController : ControllerBase
         {//Gimel
             print(ג);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddAandoening. Error:"+em);
+
         }
     }
 
@@ -84,6 +86,7 @@ public class HelperController : ControllerBase
             print( ד);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBenadering. Error:"+em);
+
         }
     }
 
@@ -99,13 +102,15 @@ public class HelperController : ControllerBase
             em="Er gaat wat mis met het toevoegen van een beperking";
             await _context.Beperkingen.AddAsync(new Beperking() { Naam = dto.Naam });
             await _context.SaveChangesAsync();
-            return StatusCode(201, beperking);// Created
+            return StatusCode(201, beperking); // Created
         }
         catch (Exception ה)
+
         {//Hee
             print(ה);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking. Error:"+em);
+
         }
     }
 
@@ -128,6 +133,7 @@ public class HelperController : ControllerBase
             print(ו);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddHulpmiddel. Error:"+em);
+
         }
     }
 
@@ -207,6 +213,7 @@ public class HelperController : ControllerBase
         }
         #endregion
     */
+
     #region Get Enums
 
     [HttpGet("GetOnderzoeksTypes")]
@@ -222,7 +229,7 @@ public class HelperController : ControllerBase
             print(ז);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetOnderzoeksTypes. Error:"+em);
-        }
+
     }
 
     [HttpGet("GetAandoeningen")]
@@ -238,6 +245,7 @@ public class HelperController : ControllerBase
             print(ח);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetAandoeningen. Error:"+em);
+
         }
     }
 
@@ -254,6 +262,7 @@ public class HelperController : ControllerBase
             print(ט);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetBenaderingen. Error:"+em);
+
         }
     }
 
@@ -270,6 +279,7 @@ public class HelperController : ControllerBase
             print(י);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetBeperkingen. Error:"+em);
+
         }
     }
 
@@ -286,12 +296,13 @@ public class HelperController : ControllerBase
             print(כ);
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetHulpmiddelen. Error:"+em);
+
         }
     }
 
     #endregion
-
     private void print<T>(T t){
+    //I love python
         Console.WriteLine(t);
     }
 
