@@ -13,11 +13,27 @@ export const Ervaringdeskundige = () => {
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
 
+    const onderzoeken = [
+        { id: 1, name: "Onderzoek 1", path: "/onderzoek1" },
+        { id: 2, name: "Onderzoek 2", path: "/onderzoek2" },
+        // Add more studies as needed
+    ];
+
     return (
         <>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
                 <Header/>
                 <div className={"Body"}>
+                 <div className="box">
+                        <h3>Alle onderzoeken</h3>
+                        <ul>
+                            {onderzoeken.map(onderzoek => (
+                                <li key={onderzoek.id}>
+                                    <Link to={onderzoek.path}>{onderzoek.name}</Link>
+                                </li>
+                             ))}
+                        </ul>
+                    </div>
 
                     <div className="box">
                         <h3>Algemene informatie</h3>
