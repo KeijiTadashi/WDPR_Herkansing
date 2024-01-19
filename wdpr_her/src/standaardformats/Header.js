@@ -154,7 +154,7 @@ const Header = ({ Title }) => {
                             </li> :
                             (role === "Ervaringsdeskundige") ?
                                 <li>
-                                    <Link to={"/Ervaringdeskundige"}>
+                                    <Link to={"/Ervaringsdeskundige"}>
                                         <button className={headerNavClassName("/Ervaringsdeskundige")}
                                                 aria-label="Ervaringdeskundige portaal">Ervaringdeskundige
                                         </button>
