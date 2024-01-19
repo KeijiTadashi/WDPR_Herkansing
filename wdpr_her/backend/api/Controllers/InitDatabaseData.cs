@@ -57,10 +57,12 @@ public class InitDatabaseData : ControllerBase
 
             #region Enums
 
+            em="Er gaat wat mis bij het aanmaken van een nieuw HelperController Object";
             HelperController helperController = new HelperController(_context);
 
             foreach (var v in setAandoeningen())
             {
+                em="Er gaat wat mis bij het toevoegen van aandoeningen"; 
                 await helperController.AddAandoening(v);
                 await helperController.AddBeperking(v); // Want ik (Brian) weet niet wat het verschil eigenlijk is of dat het dubbel is
             }
@@ -150,7 +152,8 @@ public class InitDatabaseData : ControllerBase
         {
             //Kanthya
             print(अ);
-            return StatusCode(500, "Internal server error: er gaat iets mis in InitDatabaseData/InitData");
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in InitDatabaseData/InitData. Error:"+em);
         }
     }
 

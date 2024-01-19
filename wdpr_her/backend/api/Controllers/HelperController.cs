@@ -285,7 +285,7 @@ public class HelperController : ControllerBase
         {//Kaf
             print(כ);
             print(em);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetHulpmiddelen");
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetHulpmiddelen. Error:"+em);
         }
     }
 
