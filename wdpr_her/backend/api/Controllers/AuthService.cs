@@ -12,7 +12,6 @@ using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegiste
 
 namespace api.Controllers;
 
-
 public class AuthService : ControllerBase
 {
     private readonly IConfiguration _configuration;
@@ -26,7 +25,6 @@ public class AuthService : ControllerBase
         _roleManager = roleManager;
         _configuration = configuration;
     }
-
 
 
     [HttpPost("Login")]
@@ -45,10 +43,10 @@ public class AuthService : ControllerBase
 
             var userRoles = await _userManager.GetRolesAsync(gebruiker);
             var authClaims = new List<Claim>
-        {
-            new(ClaimTypes.Name, gebruiker.UserName),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
+            {
+                new(ClaimTypes.Name, gebruiker.UserName),
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
             foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
 
             (string token, DateTime validTo) token = ("", DateTime.Now);
@@ -90,5 +88,4 @@ public class AuthService : ControllerBase
         );
         return (new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);
     }
-
 }

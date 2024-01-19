@@ -23,9 +23,9 @@ public class StichtingContext : IdentityDbContext<Gebruiker, IdentityRole, strin
     public DbSet<Benadering> Benaderingen { get; set; }
     public DbSet<Beperking> Beperkingen { get; set; }
     public DbSet<Hulpmiddel> Hulpmiddelen { get; set; }
-    public DbSet<Onderzoek> Onderzoeken { get; set; }
+    public DbSet<Onderzoek> Onderzoeken { get; set; } 
     public DbSet<OnderzoeksType> OnderzoeksTypes { get; set; }
     public DbSet<Verzorger> Verzorgers { get; set; }
     public DbSet<Gebruiker> Gebruikers { get; set; } = default!;
-    public DbSet<OpdrachtRespons> OpdrachtResponsEntries {get;set;}
+    public DbSet<OpdrachtRespons> OpdrachtResponsEntries { get; set; }
 }

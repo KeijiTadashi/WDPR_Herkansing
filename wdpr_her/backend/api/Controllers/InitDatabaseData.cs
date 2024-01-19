@@ -3,6 +3,7 @@ using api.Helper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SpecFlow.Internal.Json;
 
 namespace api.Controllers;
 
@@ -13,7 +14,8 @@ public class InitDatabaseData : ControllerBase
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<Gebruiker> _userManager;
 
-    public InitDatabaseData(StichtingContext context, UserManager<Gebruiker> userManager, RoleManager<IdentityRole> roleManager)
+    public InitDatabaseData(StichtingContext context, UserManager<Gebruiker> userManager,
+        RoleManager<IdentityRole> roleManager)
     {
         _context = context;
         _userManager = userManager;
@@ -26,7 +28,6 @@ public class InitDatabaseData : ControllerBase
         try
         {
             #region Roles
-
 
             if (!_roleManager.RoleExistsAsync(Roles.Beheerder).Result)
             {
@@ -57,15 +58,27 @@ public class InitDatabaseData : ControllerBase
 
             foreach (var v in setAandoeningen())
             {
+                var exists = await _context.Aandoeningen.FirstOrDefaultAsync(a => a.Naam == v.Naam);
+                if (exists != null)
+                    continue;
                 await helperController.AddAandoening(v);
-                await helperController.AddBeperking(v); // Want ik (Brian) weet niet wat het verschil eigenlijk is of dat het dubbel is
+                await helperController
+                    .AddBeperking(v); // Want ik (Brian) weet niet wat het verschil eigenlijk is of dat het dubbel is
             }
+
             foreach (var v in setBenadering())
             {
+                var exists = await _context.Benaderingen.FirstOrDefaultAsync(a => a.Soort == v.Naam);
+                if (exists != null)
+                    continue;
                 await helperController.AddBenadering(v);
             }
+
             foreach (var v in setOnderzoeksTypes())
             {
+                var exists = await _context.OnderzoeksTypes.FirstOrDefaultAsync(a => a.Type == v.Naam);
+                if (exists != null)
+                    continue;
                 await helperController.AddOnderzoeksType(v);
             }
 
@@ -74,12 +87,14 @@ public class InitDatabaseData : ControllerBase
             #endregion
 
             AccountController accountController = new AccountController(_userManager, _roleManager);
+
             #region Ervaringsdeskundigen
 
             foreach (var e in setDataErvaringsdeskundiges())
             {
                 await accountController.RegistreerErvaringsdeskundige(e);
             }
+
             #endregion
 
             #region Beheerders
@@ -87,27 +102,6 @@ public class InitDatabaseData : ControllerBase
             foreach (var b in setDataBeheerder())
             {
                 await accountController.RegistreerBeheerder(b);
-                // Console.WriteLine(
-                //     $"Start Beheerder\n{b.Voornaam}, {b.Achternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}, \n");
-                // var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
-                // if (userExists == null)
-                // {
-                //     var beheerder = new Beheerder
-                //     {
-                //         Email = b.Email,
-                //         Voornaam = b.Voornaam,
-                //         Achternaam = b.Achternaam,
-                //         UserName = b.Gebruikersnaam,
-                //         PhoneNumber = b.Telefoonnummer,
-                //         AccountType = Roles.Beheerder
-                //     };
-                //     Console.WriteLine(
-                //         $"Beheerder registreer, gewoon\n{b.Voornaam}, {b.Achternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}\n{beheerder.Voornaam},{beheerder.Achternaam}, {beheerder.UserName},{beheerder.Email},{beheerder.PhoneNumber},\n\n");
-                //
-                //     _userManager.CreateAsync(beheerder, b.Wachtwoord).Wait();
-                //     _userManager.AddToRoleAsync(beheerder, Roles.Beheerder).Wait();
-                //     Console.WriteLine("End Beheerder");
-                // }
             }
 
             #endregion
@@ -136,6 +130,20 @@ public class InitDatabaseData : ControllerBase
 
                     Console.WriteLine("End Bedrijf");
                 }
+            }
+
+            #endregion
+
+            #region Onderzoeken
+
+            OnderzoekController onderzoekController = new OnderzoekController(_context, _userManager);
+            foreach (var dto in setOnderzoeken())
+            {
+                var exists = await _context.Onderzoeken.FirstOrDefaultAsync(a => a.Titel == dto.Titel);
+                if (exists != null)
+                    continue;
+                var result = await onderzoekController.CreateOnderzoek(dto);
+                Console.WriteLine(result.ToJson());
             }
 
             #endregion
@@ -380,6 +388,46 @@ public class InitDatabaseData : ControllerBase
             new DTOHelper() { Naam = "Interview" },
             new DTOHelper() { Naam = "Op Locatie" },
             new DTOHelper() { Naam = "Engelstalig" },
+        };
+    }
+
+    // Will probably fail, because user is not set, might work if logged in and then run InitData
+    private List<DTOCreateOnderzoek> setOnderzoeken()
+    {
+        return new List<DTOCreateOnderzoek>
+        {
+            new DTOCreateOnderzoek
+            {
+                Locatie = "Moon",
+                Titel = "Fly me to the ...",
+                OnderzoeksTypes = new List<int> { 2, 3, 4 }, // (1)Enquête, (2)Interview, (3)Op Locatie, (4)Engelstalig
+                Beloning = "A stardust diamond",
+                Beschrijving = @"Look up here, I'm in Heaven
+I've got scars that can't be seen
+I've got drama, can't be stolen
+Everybody knows me now
+Look up here, man, I'm in danger
+I've got nothing left to lose
+I'm so high, it makes my brain whirl
+Dropped my cellphone down below
+Ain't that just like me?
+By the time I got to New York
+I was living like a king
+There I used up all my money
+I was looking for your ass
+This way or no way
+You know, I'll be free
+Just like that bluebird
+Now, ain't that just like me?
+Oh, I'll be free
+Just like that bluebird
+Oh, I'll be free
+Ain't that just like me?",
+                OnderzoeksData = @"{
+Sectie: {
+    Vraag:  
+}"
+            }
         };
     }
 

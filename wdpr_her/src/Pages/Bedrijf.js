@@ -11,7 +11,7 @@ export function Bedrijf() {
 
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
-    
+
     const [bedrijven, setBedrijven] = useState([])
 
     useEffect(() => {
@@ -56,9 +56,12 @@ export function Bedrijf() {
                             })}
                             </tbody>
                         </table>
-                    {/* Todo Add list of onderzoeken met buttons, eerst onderzoeken in de database, voor nu een lijst met bedrijven (eigenlijk voor Beheerder) */}
+                        {/* Todo Add list of onderzoeken met buttons, eerst onderzoeken in de database, voor nu een lijst met bedrijven (eigenlijk voor Beheerder) */}
                     </div>
-                    <Link to={"/Onderzoeken"}><button className={"Button-body"} aria-label="Knop maak nieuw onderzoek">Nieuw onderzoek</button></Link>
+                    <Link to={"/Onderzoeken"}>
+                        <button className={"Button-body"} aria-label="Knop maak nieuw onderzoek">Nieuw onderzoek
+                        </button>
+                    </Link>
 
                 </div>
             </div>

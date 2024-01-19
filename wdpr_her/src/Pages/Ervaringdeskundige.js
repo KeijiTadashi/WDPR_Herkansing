@@ -2,7 +2,7 @@ import React from "react";
 import useLocalStorage from 'use-local-storage';
 import Header from "../standaardformats/Header";
 import "../CSS/StichtingTheme.css";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import "../CSS/Ervaringdeskundige.css"
 
 
@@ -16,20 +16,20 @@ export const Ervaringdeskundige = () => {
     return (
         <>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                <Header />
+                <Header/>
                 <div className={"Body"}>
 
                     <div className="box">
                         <h3>Algemene informatie</h3>
-                        <p>Name</p> 
+                        <p>Name</p>
                         <p>Postcode</p>
                         <p>E-mail</p>
                         <p>Telefoonnummer</p>
                         <Link to={"/"}>
-                                    <button aria-label="Edit">Edit</button>
+                            <button aria-label="Edit">Edit</button>
                         </Link>
 
-                       
+
                     </div>
 
                     <div className="box">
@@ -39,13 +39,13 @@ export const Ervaringdeskundige = () => {
                         <p>Hulpmiddelen</p>
                         <p>ETC</p>
                         <Link to={"/"}>
-                                    <button aria-label="Edit">Edit</button>
+                            <button aria-label="Edit">Edit</button>
                         </Link>
 
-                        
+
                     </div>
                 </div>
-            </div >
+            </div>
         </>
     );
 };

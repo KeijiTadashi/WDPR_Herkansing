@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from '../standaardformats/Header';
 import useLocalStorage from 'use-local-storage';
 import "../Bedrijven.css"
@@ -21,7 +21,7 @@ const Bedrijven = () => {
         getBedrijven()
     }, [])
 
-   async function getBedrijven() {
+    async function getBedrijven() {
         axios.get(apiPath + "Bedrijf/GetAllBedrijven")
             .then(response => {
                 setBedrijven(JSON.parse(JSON.stringify(response.data)));
@@ -36,18 +36,18 @@ const Bedrijven = () => {
     return (
         <div>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                <Header />
+                <Header/>
                 <div className={"Body"}>
                     <p>Bedrijven ({bedrijven.length})</p>
                     {bedrijven.map((bedrijf, i) => {
-                        // .map = voor elke object returnt er een div
-                        return <div className="Bedrijfblok" key={i}>
-                            <p>Naam: {bedrijf.bedrijfsnaam}</p>
-                            <p>Kvk: {bedrijf.kvk}</p>
-                            <p>Locatie: {bedrijf.locatie}</p>
-                            <p>Website: {bedrijf.website}</p>
-                        </div>
-                    }
+                            // .map = voor elke object returnt er een div
+                            return <div className="Bedrijfblok" key={i}>
+                                <p>Naam: {bedrijf.bedrijfsnaam}</p>
+                                <p>Kvk: {bedrijf.kvk}</p>
+                                <p>Locatie: {bedrijf.locatie}</p>
+                                <p>Website: {bedrijf.website}</p>
+                            </div>
+                        }
                     )
                     }
 

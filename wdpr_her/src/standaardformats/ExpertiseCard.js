@@ -2,7 +2,7 @@ import React from "react";
 import useLocalStorage from "use-local-storage";
 import "../CSS/StichtingTheme.css";
 import "../CSS/homepage.css";
-import  PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export const ExpertiseCard = ({kop, tekst}) => {
     const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;

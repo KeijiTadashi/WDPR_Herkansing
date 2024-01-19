@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api;
 
@@ -11,9 +12,11 @@ using api;
 namespace api.Migrations
 {
     [DbContext(typeof(StichtingContext))]
-    partial class StichtingContextModelSnapshot : ModelSnapshot
+    [Migration("20240118210431_OnderzoekDrop")]
+    partial class OnderzoekDrop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,8 +220,8 @@ namespace api.Migrations
 
             modelBuilder.Entity("OnderzoekOnderzoeksType", b =>
                 {
-                    b.Property<int>("OnderzoekenId")
-                        .HasColumnType("int");
+                    b.Property<string>("OnderzoekenId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("OnderzoeksTypeId")
                         .HasColumnType("int");
@@ -377,11 +380,8 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Onderzoek", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Beloning")
                         .HasColumnType("nvarchar(max)");
@@ -409,7 +409,7 @@ namespace api.Migrations
 
                     b.HasIndex("UitvoerderId");
 
-                    b.ToTable("Onderzoeken");
+                    b.ToTable("Onderzoek");
                 });
 
             modelBuilder.Entity("api.OnderzoeksType", b =>
@@ -427,32 +427,6 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OnderzoeksTypes");
-                });
-
-            modelBuilder.Entity("api.OpdrachtRespons", b =>
-                {
-                    b.Property<int>("ResponsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResponsId"));
-
-                    b.Property<string>("GebruikerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("OnderzoekId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VraagMetAntwoordenJSON")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ResponsId");
-
-                    b.HasIndex("GebruikerId");
-
-                    b.ToTable("OpdrachtResponsEntries");
                 });
 
             modelBuilder.Entity("api.Test", b =>
@@ -708,17 +682,6 @@ namespace api.Migrations
                         .IsRequired();
 
                     b.Navigation("Uitvoerder");
-                });
-
-            modelBuilder.Entity("api.OpdrachtRespons", b =>
-                {
-                    b.HasOne("api.Gebruiker", "Gebruiker")
-                        .WithMany()
-                        .HasForeignKey("GebruikerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gebruiker");
                 });
 
             modelBuilder.Entity("api.Ervaringsdeskundige", b =>
