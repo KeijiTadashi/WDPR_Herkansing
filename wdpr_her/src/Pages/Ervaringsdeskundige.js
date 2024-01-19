@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import "../CSS/Ervaringdeskundige.css"
 
 
-export const Ervaringdeskundige = () => {
+export const Ervaringsdeskundige = () => {
 
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -50,4 +50,4 @@ export const Ervaringdeskundige = () => {
     );
 };
 
-export default Ervaringdeskundige;
+export default Ervaringsdeskundige;
