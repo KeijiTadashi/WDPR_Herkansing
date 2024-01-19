@@ -23,7 +23,7 @@ public class InitDatabaseData : ControllerBase
     [HttpPost("InitData")]
     public async Task<ActionResult> InitData()
     {
-        String em = "";
+        string em = "";
         try
         {
             #region Roles
@@ -68,10 +68,12 @@ public class InitDatabaseData : ControllerBase
             }
             foreach (var v in setBenadering())
             {
+                em="Er gaat wat mis bij het toevoegen van benaderingen";
                 await helperController.AddBenadering(v);
             }
             foreach (var v in setOnderzoeksTypes())
             {
+                em="Er gaat wat mis bij het toevoegen van onderzoekstypes";
                 await helperController.AddOnderzoeksType(v);
             }
 
@@ -79,11 +81,14 @@ public class InitDatabaseData : ControllerBase
 
             #endregion
 
-            AccountController accountController = new AccountController(_userManager, _roleManager);
-            #region Ervaringsdeskundigen
 
+            em="Er gaat wat mis met het aanmaken van een nieuw AccountController object";
+            AccountController accountController = new AccountController(_userManager, _roleManager);
+
+            #region Ervaringsdeskundigen
             foreach (var e in setDataErvaringsdeskundiges())
             {
+                em="Er gaat wat mis met het registreren van ervarignsdeskundigen";
                 await accountController.RegistreerErvaringsdeskundige(e);
             }
             #endregion
@@ -92,6 +97,7 @@ public class InitDatabaseData : ControllerBase
 
             foreach (var b in setDataBeheerder())
             {
+                em="Er gaat wat mis met het registreren van beheerders";
                 await accountController.RegistreerBeheerder(b);
                 // print(
                 //     $"Start Beheerder\n{b.Voornaam}, {b.Achternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}, \n");
@@ -115,14 +121,13 @@ public class InitDatabaseData : ControllerBase
                 //     print("End Beheerder");
                 // }
             }
-
             #endregion
 
             #region Bedrijven
-
             foreach (var b in setDataBedrijf())
             {
                 print("Start Bedrijf");
+                em="Er gaat wat mis bij het ophalen van een gebruiker";
                 var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
                 if (userExists == null)
                 {
@@ -137,6 +142,8 @@ public class InitDatabaseData : ControllerBase
                         PhoneNumber = b.Telefoonnummer,
                         AccountType = Roles.Bedrijf
                     };
+
+                    em="er gaat wat mis met het aanmaken van een bedrijf in de database";
                     _userManager.CreateAsync(bedrijf, b.Wachtwoord).Wait();
                     _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf).Wait();
 
