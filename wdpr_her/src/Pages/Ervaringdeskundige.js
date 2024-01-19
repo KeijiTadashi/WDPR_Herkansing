@@ -14,8 +14,20 @@ export const Ervaringdeskundige = () => {
     const [fontSize] = useLocalStorage('font-size', 'normal');
 
     const onderzoeken = [
-        { id: 1, name: "Onderzoek 1", path: "/onderzoek1" },
-        { id: 2, name: "Onderzoek 2", path: "/onderzoek2" },
+        { 
+            id: 1, 
+            name: "Onderzoek 1", 
+            title: "Titel van Onderzoek",
+            description: "Beschrijving van Onderzoek 1",
+            path: "/onderzoek1" 
+        },
+        { 
+            id: 2, 
+            name: "Onderzoek 2", 
+            title: "Titel van Onderzoek",
+            description: "Beschrijving van Onderzoek 2",
+            path: "/onderzoek2" 
+        },
         // Add more studies as needed
     ];
 
@@ -23,13 +35,15 @@ export const Ervaringdeskundige = () => {
         <>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
                 <Header/>
-                <div className={"Body"}>
+                
                  <div className="box">
                         <h3>Alle onderzoeken</h3>
                         <ul>
                             {onderzoeken.map(onderzoek => (
                                 <li key={onderzoek.id}>
-                                    <Link to={onderzoek.path}>{onderzoek.name}</Link>
+                                    <h4>{onderzoek.title}</h4>
+                                    <p>{onderzoek.description}</p>
+                                    <Link to={onderzoek.path}>Meer informatie</Link>
                                 </li>
                              ))}
                         </ul>
@@ -61,7 +75,7 @@ export const Ervaringdeskundige = () => {
 
                     </div>
                 </div>
-            </div>
+        
         </>
     );
 };
