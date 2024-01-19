@@ -20,17 +20,29 @@ public class OpdrachtController : ControllerBase
 
     public async Task<ActionResult<IEnumerable<DTOVragenOphalen>>> GetVragen(string id)
     {
-        var vragen = await context.Onderzoeken.Where(v => id == v.Id).Select(v => new DTOVragenOphalen()
+        string em = "";
+        try
         {
-            ID = v.Id,
-            Titel = v.Titel,
-            UitvoerderNaam = v.Uitvoerder.UserName,
-            Locatie = v.Locatie,
-            Beloning = v.Beloning,
-            Beschrijving = v.Beschrijving,
-            OnderzoeksData = v.OnderzoeksData
-        }).ToListAsync();
-        return (vragen);
+            em="Er gaat wat mis met het ophalen van de vragen";
+            var vragen = await context.Onderzoeken.Where(v => id == v.Id).Select(v => new DTOVragenOphalen()
+            {
+                ID = v.Id,
+                Titel = v.Titel,
+                UitvoerderNaam = v.Uitvoerder.UserName,
+                Locatie = v.Locatie,
+                Beloning = v.Beloning,
+                Beschrijving = v.Beschrijving,
+                OnderzoeksData = v.OnderzoeksData
+            }).ToListAsync();
+            return (vragen);
+        }
+        catch (Exception ᒥᐢᑕᓇᐢᐠ)
+        {
+            //"Badger" in Cree
+            Console.WriteLine(ᒥᐢᑕᓇᐢᐠ);
+            Console.WriteLine(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in OpdrachtController/GetVragen. Error:"+em);
+        }
     }
 }
 
