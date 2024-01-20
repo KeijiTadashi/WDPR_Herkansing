@@ -25,12 +25,14 @@ public class InitDatabaseData : ControllerBase
     [HttpPost("InitData")]
     public async Task<ActionResult> InitData()
     {
+        string em = "";
         try
         {
             #region Roles
 
             if (!_roleManager.RoleExistsAsync(Roles.Beheerder).Result)
             {
+                em="Er gaat wat mis in de check of rol Beheerder bestaat";
                 var role = new IdentityRole();
                 role.Name = Roles.Beheerder;
                 _roleManager.CreateAsync(role).Wait();
@@ -38,6 +40,7 @@ public class InitDatabaseData : ControllerBase
 
             if (!_roleManager.RoleExistsAsync(Roles.Ervaringsdeskundige).Result)
             {
+                em="er gaat wat mis in de check of de rol Ervaringsdeskundige bestaat";
                 var role = new IdentityRole();
                 role.Name = Roles.Ervaringsdeskundige;
                 _roleManager.CreateAsync(role).Wait();
@@ -45,6 +48,7 @@ public class InitDatabaseData : ControllerBase
 
             if (!_roleManager.RoleExistsAsync(Roles.Bedrijf).Result)
             {
+                em="er gaat wat mis in de check of de rol Bedrijf bestaat";
                 var role = new IdentityRole();
                 role.Name = Roles.Bedrijf;
                 _roleManager.CreateAsync(role).Wait();
@@ -54,13 +58,18 @@ public class InitDatabaseData : ControllerBase
 
             #region Enums
 
+            em="Er gaat wat mis bij het aanmaken van een nieuw HelperController Object";
             HelperController helperController = new HelperController(_context);
 
             foreach (var v in setAandoeningen())
             {
+
+                em="Er gaat wat mis bij het toevoegen van aandoeningen"; 
+
                 var exists = await _context.Aandoeningen.FirstOrDefaultAsync(a => a.Naam == v.Naam);
                 if (exists != null)
                     continue;
+
                 await helperController.AddAandoening(v);
                 await helperController
                     .AddBeperking(v); // Want ik (Brian) weet niet wat het verschil eigenlijk is of dat het dubbel is
@@ -68,17 +77,24 @@ public class InitDatabaseData : ControllerBase
 
             foreach (var v in setBenadering())
             {
+                em="Er gaat wat mis bij het toevoegen van benaderingen";
+
                 var exists = await _context.Benaderingen.FirstOrDefaultAsync(a => a.Soort == v.Naam);
                 if (exists != null)
                     continue;
+
                 await helperController.AddBenadering(v);
             }
 
             foreach (var v in setOnderzoeksTypes())
             {
+
+                em="Er gaat wat mis bij het toevoegen van onderzoekstypes";
+
                 var exists = await _context.OnderzoeksTypes.FirstOrDefaultAsync(a => a.Type == v.Naam);
                 if (exists != null)
                     continue;
+
                 await helperController.AddOnderzoeksType(v);
             }
 
@@ -86,12 +102,14 @@ public class InitDatabaseData : ControllerBase
 
             #endregion
 
+
+            em="Er gaat wat mis met het aanmaken van een nieuw AccountController object";
             AccountController accountController = new AccountController(_userManager, _roleManager);
 
             #region Ervaringsdeskundigen
-
             foreach (var e in setDataErvaringsdeskundiges())
             {
+                em="Er gaat wat mis met het registreren van ervarignsdeskundigen";
                 await accountController.RegistreerErvaringsdeskundige(e);
             }
 
@@ -101,16 +119,39 @@ public class InitDatabaseData : ControllerBase
 
             foreach (var b in setDataBeheerder())
             {
+                em="Er gaat wat mis met het registreren van beheerders";
                 await accountController.RegistreerBeheerder(b);
-            }
 
+                // print(
+                //     $"Start Beheerder\n{b.Voornaam}, {b.Achternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}, \n");
+                // var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
+                // if (userExists == null)
+                // {
+                //     var beheerder = new Beheerder
+                //     {
+                //         Email = b.Email,
+                //         Voornaam = b.Voornaam,
+                //         Achternaam = b.Achternaam,
+                //         UserName = b.Gebruikersnaam,
+                //         PhoneNumber = b.Telefoonnummer,
+                //         AccountType = Roles.Beheerder
+                //     };
+                //     print(
+                //         $"Beheerder registreer, gewoon\n{b.Voornaam}, {b.Achternaam}, {b.Gebruikersnaam}, {b.Email}, {b.Telefoonnummer}\n{beheerder.Voornaam},{beheerder.Achternaam}, {beheerder.UserName},{beheerder.Email},{beheerder.PhoneNumber},\n\n");
+                //
+                //     _userManager.CreateAsync(beheerder, b.Wachtwoord).Wait();
+                //     _userManager.AddToRoleAsync(beheerder, Roles.Beheerder).Wait();
+                //     print("End Beheerder");
+                // }
+
+            }
             #endregion
 
             #region Bedrijven
-
             foreach (var b in setDataBedrijf())
             {
-                Console.WriteLine("Start Bedrijf");
+                print("Start Bedrijf");
+                em="Er gaat wat mis bij het ophalen van een gebruiker";
                 var userExists = await _userManager.FindByNameAsync(b.Gebruikersnaam);
                 if (userExists == null)
                 {
@@ -125,10 +166,12 @@ public class InitDatabaseData : ControllerBase
                         PhoneNumber = b.Telefoonnummer,
                         AccountType = Roles.Bedrijf
                     };
+
+                    em="er gaat wat mis met het aanmaken van een bedrijf in de database";
                     _userManager.CreateAsync(bedrijf, b.Wachtwoord).Wait();
                     _userManager.AddToRoleAsync(bedrijf, Roles.Bedrijf).Wait();
 
-                    Console.WriteLine("End Bedrijf");
+                    print("End Bedrijf");
                 }
             }
 
@@ -153,8 +196,9 @@ public class InitDatabaseData : ControllerBase
         catch (Exception अ)
         {
             //Kanthya
-            Console.Write(अ);
-            return StatusCode(500, "Internal server error: er gaat iets mis in InitDatabaseData/InitData");
+            print(अ);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in InitDatabaseData/InitData. Error:"+em);
         }
     }
 
@@ -432,4 +476,8 @@ Sectie: {
     }
 
     #endregion
+
+    private void print<T>(T t){
+        Console.WriteLine(t);
+    }
 }
