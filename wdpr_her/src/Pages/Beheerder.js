@@ -4,6 +4,8 @@ import Header from "../standaardformats/Header";
 import "../CSS/StichtingTheme.css";
 import {Link} from "react-router-dom";
 import "../CSS/Beheerder.css"
+import Bedrijven from "./Bedrijven";
+import Ervaringsdeskundige from "./Ervaringsdeskundige";
 
 
 export const Beheerder = () => {
@@ -54,6 +56,8 @@ export const Beheerder = () => {
                                 <Link to={"/"}>
                                     <button aria-label="registreer">Registreer</button>
                                 </Link>
+                                <Bedrijven/>
+                                <Ervaringsdeskundige/>
                             </div>
                         </div>
                     </div>

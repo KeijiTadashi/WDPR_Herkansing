@@ -156,7 +156,7 @@ const Header = ({ Title }) => {
                                 <li>
                                     <Link to={"/Ervaringsdeskundige"}>
                                         <button className={headerNavClassName("/Ervaringsdeskundige")}
-                                                aria-label="Ervaringdeskundige portaal">Ervaringdeskundige
+                                                aria-label="Ervaringsdeskundige portaal">Ervaringsdeskundige
                                         </button>
                                     </Link>
                                 </li> :
