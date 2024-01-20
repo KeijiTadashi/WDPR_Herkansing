@@ -230,7 +230,7 @@ public class HelperController : ControllerBase
             print(em);
             return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetOnderzoeksTypes. Error:"+em);
 
-    }
+    }}
 
     [HttpGet("GetAandoeningen")]
     public async Task<ActionResult<IEnumerable<Aandoening>>> GetAandoeningen()
