@@ -7,6 +7,8 @@ import "../CSS/Ervaringsdeskundige.css"
 import { apiPath } from "../Helper/Api";
 
 
+
+
 export const Ervaringsdeskundige = () => {
 
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -86,6 +88,7 @@ export const Ervaringsdeskundige = () => {
     //         </div>
     //     </>
     // );
+
 };
 
 export default Ervaringsdeskundige;
