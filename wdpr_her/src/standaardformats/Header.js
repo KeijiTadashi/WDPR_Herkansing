@@ -73,7 +73,8 @@ const Header = ({ Title }) => {
     const Logout = () => {
         localStorage.removeItem('role');
         localStorage.removeItem('token');
-        window.location.reload();
+        if (location.pathname === "/") // only reload the window if the current page is home, otherwise it will not navigate in the rest of the code to home after logout and stay on the current page.
+            window.location.reload();
     }
 
     return (
