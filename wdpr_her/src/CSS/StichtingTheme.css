@@ -288,6 +288,9 @@ header ul li {
     padding: 1em;
     margin: 1em;
     /*width: 100%;*/
+    white-space: pre-wrap;
+    display: flex;
+    flex-direction: column;
 }
 
 .Button-Left {
