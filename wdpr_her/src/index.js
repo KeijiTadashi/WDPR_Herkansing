@@ -22,7 +22,7 @@ import {Bedrijf} from "./Pages/Bedrijf";
 
 const router = createBrowserRouter([
     {
-        path: "/ErvaringsdeskundigeOnderzoek",
+        path: "/ErvaringsdeskundigeOnderzoek/:id",
         element: <ErvaringsdeskundigeOnderzoek/>,
     },
     {

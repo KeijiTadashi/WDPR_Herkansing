@@ -5,6 +5,8 @@ import "../CSS/StichtingTheme.css";
 import axios from "axios";
 import "../CSS/Ervaringsdeskundige.css"
 import { apiPath } from "../Helper/Api";
+import {Link} from "react-router-dom";
+// import ErvaringsdeskundigeOnderzoek from "./ErvaringsdeskundigeOnderzoek";
 
 
 
@@ -38,6 +40,9 @@ export const Ervaringsdeskundige = () => {
     const [ervaring, setErvaringsdeskundige] = useState([])
     // we gebruiken useState om de lijst van de ervaringdeskundige op te slaan
 
+
+    // const nav = useNavigate();
+
     useEffect(() => {   // useEffect zorgt in dit geval voor elke refresh dat Getervaringdeskundige worden aangeroepen
         getErvaringsdeskundige()
     }, [])
@@ -66,37 +71,35 @@ export const Ervaringsdeskundige = () => {
                                 <li key={onderzoek.id}>
                                     <h4>{onderzoek.title}</h4>
                                     <p>{onderzoek.description}</p>
-                                    <Link to={onderzoek.path}>Meer informatie</Link>
+                                    <Link to={`/ErvaringsdeskundigeOnderzoek/${onderzoek.id}`}><button>Meer informatie</button></Link>
                                 </li>
                              ))}
                         </ul>
                     </div>
 
-                    <div className="box">
-                        <h3>Algemene informatie</h3>
-                        <p>Name</p>
-                        <p>Postcode</p>
-                        <p>E-mail</p>
-                        <p>Telefoonnummer</p>
-                        <Link to={"/"}>
-                            <button aria-label="Edit">Edit</button>
-                        </Link>
-
-
-                    </div>
-
-                    <div className="box">
-                        <h3>Medische informatie</h3>
-                        <h4>Deze informatie is alleen zichtbaar voor bedrijven waar je aan een onderzoek meedoet</h4>
-                        <p>Type beperking</p>
-                        <p>Hulpmiddelen</p>
-                        <p>ETC</p>
-                        <Link to={"/"}>
-                            <button aria-label="Edit">Edit</button>
-                        </Link>
-
-
-                    </div>
+                    {/*<div className="box">*/}
+                    {/*    <h3>Algemene informatie</h3>*/}
+                    {/*    <p>Name</p>*/}
+                    {/*    <p>Postcode</p>*/}
+                    {/*    <p>E-mail</p>*/}
+                    {/*    <p>Telefoonnummer</p>*/}
+                    {/*    <Link to={"/"}>*/}
+                    {/*        <button aria-label="Edit">Edit</button>*/}
+                    {/*    </Link>*/}
+                    
+                    
+                    {/*</div>*/}
+                    
+                    {/*<div className="box">*/}
+                    {/*    <h3>Medische informatie</h3>*/}
+                    {/*    <h4>Deze informatie is alleen zichtbaar voor bedrijven waar je aan een onderzoek meedoet</h4>*/}
+                    {/*    <p>Type beperking</p>*/}
+                    {/*    <p>Hulpmiddelen</p>*/}
+                    {/*    <p>ETC</p>*/}
+                    {/*    <Link to={"/"}>*/}
+                    {/*        <button aria-label="Edit">Edit</button>*/}
+                    {/*    </Link>*/}
+                    {/*</div>*/}
                 </div>
         
         </>

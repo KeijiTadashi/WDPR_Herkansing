@@ -27,29 +27,36 @@ public class ErvaringsdeskundigeController : ControllerBase
     {
         try
         {
-            int usersCount = await _userManager.Users
-            .Where(u => u.AccountType == "Ervaringsdeskundige")
-            .CountAsync();
+            string userName;
+            userName = User.FindFirstValue(ClaimTypes.Name);
+            
+            Ervaringsdeskundige ervaringsdeskundige = (Ervaringsdeskundige)await _userManager
+                .FindByNameAsync(userName);
+            
+            
+            // int usersCount = await _userManager.Users
+            // .Where(u => u.AccountType == "Ervaringsdeskundige")
+            // .CountAsync();
+            //
+            // var random = new Random();
+            // int skip = random.Next(usersCount);
 
-            var random = new Random();
-            int skip = random.Next(usersCount);
-
-            Ervaringsdeskundige deskundige = (Ervaringsdeskundige)await _userManager.Users
-                .Where(u => u.AccountType == "Ervaringsdeskundige")
-                .Skip(skip)
-                .FirstOrDefaultAsync();
+            // Ervaringsdeskundige deskundige = (Ervaringsdeskundige)await _userManager.Users
+            //     .Where(u => u.AccountType == "Ervaringsdeskundige")
+            //     .Skip(skip)
+            //     .FirstOrDefaultAsync();
 
             // var users = await _userManager.Users.ToListAsync();
 
 
             DTOGetErvaringsdeskundige dto = new DTOGetErvaringsdeskundige
             {
-                UserName = deskundige.UserName,
-                Voornaam = deskundige.Voornaam,
-                Achternaam = deskundige.Achternaam,
-                Postcode = deskundige.Postcode,
-                TelefoonNummer = deskundige.PhoneNumber,
-                Email = deskundige.Email,
+                UserName = ervaringsdeskundige.UserName,
+                Voornaam = ervaringsdeskundige.Voornaam,
+                Achternaam = ervaringsdeskundige.Achternaam,
+                Postcode = ervaringsdeskundige.Postcode,
+                TelefoonNummer = ervaringsdeskundige.PhoneNumber,
+                Email = ervaringsdeskundige.Email,
             };
             return Ok(dto);
         }
