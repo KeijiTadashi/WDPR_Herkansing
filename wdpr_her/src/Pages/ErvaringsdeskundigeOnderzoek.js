@@ -2,14 +2,20 @@ import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
 import "../CSS/Onderzoeken.css";
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 function ErvaringsdeskundigeOnderzoek() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
-
+    
+    let location = useLocation();
+    
+    let pathList = location.pathname.split('/');
+    console.log(pathList[pathList.length - 1]);
+    // const id = pathList[pathList.length - 1];
+    
     return (
         <>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
