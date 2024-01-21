@@ -59,15 +59,9 @@ public class AuthService : ControllerBase
                 new(ClaimTypes.Name, gebruiker.UserName),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
-            foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-
 
             em = "Er gaat iets mis met userRoles en authClaims toevoegen";
-            foreach (var userRole in userRoles)
-            {
-                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-            }
-
+            foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
 
             em="Er gaat iets mis bij het maken van de JWT Tokens";
             (string token, DateTime validTo) token = ("", DateTime.Now);
