@@ -53,20 +53,13 @@ public class AuthService : ControllerBase
             em = "Er gaat iets mis met het ophalen van de roles";
             var userRoles = await _userManager.GetRolesAsync(gebruiker);
 
+            em = "er gaat iets mis met het maken van een nieuw Object voor authClaims";
             var authClaims = new List<Claim>
             {
                 new(ClaimTypes.Name, gebruiker.UserName),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             foreach (var userRole in userRoles) authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-
-
-
-            em = "er gaat iets mis met het maken van een nieuw Object voor authClaims";
-            var authClaims = new List<Claim>{
-                new(ClaimTypes.Name, gebruiker.UserName),
-                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
 
 
             em = "Er gaat iets mis met userRoles en authClaims toevoegen";
