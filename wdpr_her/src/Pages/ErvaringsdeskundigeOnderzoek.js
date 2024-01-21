@@ -2,11 +2,11 @@ import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
 import "../CSS/Onderzoeken.css";
-import {Link, useNavigate, useLocation} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import {apiPath} from "../Helper/Api";
-import axios, {get} from "axios";
+import axios from "axios";
 import {useEffect, useState} from "react";
-import {map} from "react-bootstrap/ElementChildren";
+// import {map} from "react-bootstrap/ElementChildren";
 
 function ErvaringsdeskundigeOnderzoek() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -25,14 +25,14 @@ function ErvaringsdeskundigeOnderzoek() {
 
     let pathList = location.pathname.split('/');
     console.log(pathList[pathList.length - 1]);
-    // const id = pathList[pathList.length - 1];
+    const id = pathList[pathList.length - 1];
     
     // useEffect(() => {
     //     setOnderzoek()
     // }, [])
     
     useEffect(() => {
-        getVragen(onderzoekId);
+        getVragen();
     }, [])
 
     const submitOpdracht = () => {
@@ -56,55 +56,59 @@ function ErvaringsdeskundigeOnderzoek() {
         // });
     }
     
-    const getVragen = (id) => {
+    const getVragen = async () => {
         //TODO REMOVE For now testing id = 1
-        id = 1;
-        axios.get(apiPath + "Onderzoek/GetOnderzoek/"+ id).then(response => {
+        // id = 1;
+        await axios.get(apiPath + "Onderzoek/GetOnderzoek/"+ id).then(response => {
             setOnderzoek(JSON.parse(JSON.stringify(response.data)));
             // console.log("Onderzoek:");
             // console.log(response.data);
             // console.log("Data:")
             // console.log(response.data.onderzoeksData);
             
-            // console.log("Data parse:")
-            // console.log(JSON.parse(response.data.onderzoeksData));
-            // setOnderzoeksData(JSON.parse(response.data.onderzoeksData));
+            console.log("Data parse:")
+            console.log(JSON.parse(response.data.onderzoeksData));
+            setOnderzoeksData(JSON.parse(response.data.onderzoeksData));
             
             // console.log("Data stringify:")
             // console.log(JSON.stringify(response.data.onderzoeksData));
             // console.log("Data parse stringify:")
             // console.log(JSON.parse(JSON.stringify(response.data.onderzoeksData)));
-            setOnderzoeksData([
-                {
-                    type: "open",
-                    vraag: "Waar kan ik open vragen beantwoorden?"
-                }, {
-                    type: "open",
-                    vraag: "Wat is jouw favoriete smaak bowlingbal? Die van mij is paars."
-                }, {
-                    type: "meerkeuze", 
-                    vraag: "Kies 1 of meerdere antwoorden",
-                    opties: [
-                        "David Robert Jones",
-                        "The rhythm of the crowd",
-                        "Ground control to major Tom",
-                        "And the stars look very different today"
-                    ]
-                }, {
-                    type: "text",
-                    text: "You remind me of the babe (what babe?)\nBabe with the power (what power?)\nPower of voodoo (who do?)\nYou do (do what?)\nRemind me of the babe\nI saw my baby\nCrying hard as babe could cry\nWhat could I do?\nMy baby's love had gone\nAnd left my baby blue\nNobody knew\nWhat kind of magic spell to use\n(Slime and snails) or puppy dog tails\n(Thunder or lightning) then baby said"
-                }, {
-                    type: "radio",
-                    vraag: "From what movie, staring David Bowie, are the above lyrics",
-                    opties: [
-                        "The Spiders From Mars",
-                        "Labyrinth",
-                        "Tommy",
-                        "The Pick Of Destiny",
-                        "Who is David Bowie? And what is a movie? Is anything even real anymore?"
-                    ]
-                }
-            ])
+            
+            
+            // setOnderzoeksData([
+            //     {
+            //         type: "open",
+            //         vraag: "Waar kan ik open vragen beantwoorden?"
+            //     }, {
+            //         type: "open",
+            //         vraag: "Wat is jouw favoriete smaak bowlingbal? Die van mij is paars."
+            //     }, {
+            //         type: "meerkeuze", 
+            //         vraag: "Kies 1 of meerdere antwoorden",
+            //         opties: [
+            //             "David Robert Jones",
+            //             "The rhythm of the crowd",
+            //             "Ground control to major Tom",
+            //             "And the stars look very different today"
+            //         ]
+            //     }, {
+            //         type: "text",
+            //         text: "You remind me of the babe (what babe?)\nBabe with the power (what power?)\nPower of voodoo (who do?)\nYou do (do what?)\nRemind me of the babe\nI saw my baby\nCrying hard as babe could cry\nWhat could I do?\nMy baby's love had gone\nAnd left my baby blue\nNobody knew\nWhat kind of magic spell to use\n(Slime and snails) or puppy dog tails\n(Thunder or lightning) then baby said"
+            //     }, {
+            //         type: "radio",
+            //         vraag: "From what movie, staring David Bowie, are the above lyrics",
+            //         opties: [
+            //             "The Spiders From Mars",
+            //             "Labyrinth",
+            //             "Tommy",
+            //             "The Pick Of Destiny",
+            //             "Who is David Bowie? And what is a movie? Is anything even real anymore?"
+            //         ]
+            //     }
+            // ])
+            
+            
             // setTitel(onderzoek.titel);
         })
     }
@@ -145,7 +149,7 @@ function ErvaringsdeskundigeOnderzoek() {
                         <p>{onderzoek.beloning ?? "Dit onderzoek heeft geen beloning"}</p>
                         <h3>Beschrijving: </h3>
                         <p>{onderzoek.beschrijving}</p>                        
-                    {onderzoek == null ? "Waiting for data" : onderzoeksData.map((vraag, i) => { return (
+                    {onderzoeksData == null ? "Waiting for data" : onderzoeksData.map((vraag, i) => { return (
                             vraag.type === "open" ?
                                 <div key={i}>
                                     <p>{vraag.vraag}</p> 
@@ -167,6 +171,7 @@ function ErvaringsdeskundigeOnderzoek() {
                             "UNKNOWN TYPE"
                         )
                     })}
+                        <button onClick={() => console.log(JSON.stringify(onderzoeksData))}>Console Log string onderzoeksdata</button>
                     </div>
                     {/*<div className="Onderzoek">*/}
                     {/*    <h2>Doel van het onderzoek</h2>*/}
