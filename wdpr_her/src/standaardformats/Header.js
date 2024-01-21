@@ -73,6 +73,7 @@ const Header = ({ Title }) => {
     const Logout = () => {
         localStorage.removeItem('role');
         localStorage.removeItem('token');
+        window.location.reload();
     }
 
     return (
