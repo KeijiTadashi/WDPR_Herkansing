@@ -73,6 +73,7 @@ const Header = ({ Title }) => {
     const Logout = () => {
         localStorage.removeItem('role');
         localStorage.removeItem('token');
+        window.location.reload();
     }
 
     return (
@@ -156,7 +157,7 @@ const Header = ({ Title }) => {
                                 <li>
                                     <Link to={"/Ervaringsdeskundige"}>
                                         <button className={headerNavClassName("/Ervaringsdeskundige")}
-                                                aria-label="Ervaringdeskundige portaal">Ervaringdeskundige
+                                                aria-label="Ervaringsdeskundige portaal">Ervaringsdeskundige
                                         </button>
                                     </Link>
                                 </li> :

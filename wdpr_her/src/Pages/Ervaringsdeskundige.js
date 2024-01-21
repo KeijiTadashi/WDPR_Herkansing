@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
 import useLocalStorage from 'use-local-storage';
 import Header from "../standaardformats/Header";
 import "../CSS/StichtingTheme.css";
-import {Link} from "react-router-dom";
-import "../CSS/Ervaringdeskundige.css"
+import axios from "axios";
+import "../CSS/Ervaringsdeskundige.css"
+import { apiPath } from "../Helper/Api";
+
+
 
 
 export const Ervaringsdeskundige = () => {
@@ -29,12 +32,32 @@ export const Ervaringsdeskundige = () => {
             path: "/onderzoek2" 
         },
         // Add more studies as needed
+        // TODO NO GET THEM FROM THE DATABASE INSTEAD USING AXIOS
     ];
+
+    const [ervaring, setErvaringsdeskundige] = useState([])
+    // we gebruiken useState om de lijst van de ervaringdeskundige op te slaan
+
+    useEffect(() => {   // useEffect zorgt in dit geval voor elke refresh dat Getervaringdeskundige worden aangeroepen
+        getErvaringsdeskundige()
+    }, [])
+
+    async function getErvaringsdeskundige() {
+        axios.get(apiPath + "Ervaringsdeskundige/GetErvaringsdeskundige")
+            .then(response => {
+                setErvaringsdeskundige(JSON.parse(JSON.stringify(response.data)));
+                console.log("Ervaringsdeskundige:")
+                console.log(response.data)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
 
     return (
         <>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                <Header/>
+                <Header Title={ervaring.voornaam !== undefined ? ervaring.voornaam + "'s portaal" : "ervaringsdeskundige portaal"}/>
                 
                  <div className="box">
                         <h3>Alle onderzoeken</h3>
