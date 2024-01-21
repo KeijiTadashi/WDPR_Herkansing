@@ -73,6 +73,8 @@ const Header = ({ Title }) => {
     const Logout = () => {
         localStorage.removeItem('role');
         localStorage.removeItem('token');
+        if (location.pathname === "/") // only reload the window if the current page is home, otherwise it will not navigate in the rest of the code to home after logout and stay on the current page.
+            window.location.reload();
     }
 
     return (
@@ -156,7 +158,7 @@ const Header = ({ Title }) => {
                                 <li>
                                     <Link to={"/Ervaringsdeskundige"}>
                                         <button className={headerNavClassName("/Ervaringsdeskundige")}
-                                                aria-label="Ervaringdeskundige portaal">Ervaringdeskundige
+                                                aria-label="Ervaringsdeskundige portaal">Ervaringsdeskundige
                                         </button>
                                     </Link>
                                 </li> :

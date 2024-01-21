@@ -23,7 +23,7 @@ import {Succes} from "./Pages/Succes";
 
 const router = createBrowserRouter([
     {
-        path: "/ErvaringsdeskundigeOnderzoek",
+        path: "/ErvaringsdeskundigeOnderzoek/:id",
         element: <ErvaringsdeskundigeOnderzoek/>,
     },
     {

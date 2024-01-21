@@ -54,9 +54,10 @@ public class OpdrachtResponsController : ControllerBase
             // return Ok(new
             //     { message = "OpdrachtRespons created successfully :D", ResponsID = opdrachtRespons.ResponsId });
         }
-        catch
-        {
-            return StatusCode(500, "Internal server error: er gaat iets mis in CreateOpdrachtRespons");
+        catch(Exception ތާނަ){
+            print(ތާނަ);
+            return StatusCode(500, "Internal server error: er gaat iets mis met het maken van een opdrachtrespons");
+
         }
     }
 
@@ -78,10 +79,16 @@ public class OpdrachtResponsController : ControllerBase
 
             return Ok(opdrachtRespons);
         }
-        catch
+        catch(Exception ግዕዝ)
         {
-            return StatusCode(500,
-                "Internal server error: er gaat iets mis in OpdrachtResponsController/opdrachtResponsID");
+            print(ግዕዝ);
+            return StatusCode(500, "Internal server error: er gaat iets mis in OpdrachtResponsController/opdrachtResponsID");
         }
     }
+
+    private void print<T>(T t){
+        Console.WriteLine(t);
+    }
 }
+
+

@@ -2,13 +2,13 @@ import '../CSS/StichtingTheme.css';
 import useLocalStorage from 'use-local-storage';
 import Header from '../standaardformats/Header';
 import "../CSS/Onderzoeken.css";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 import {apiPath} from "../Helper/Api";
 import axios, {get} from "axios";
 import {useEffect, useState} from "react";
 import {map} from "react-bootstrap/ElementChildren";
 
-function ErvaringsdeskundigeOnderzoek(onderzoekId) {
+function ErvaringsdeskundigeOnderzoek() {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
@@ -20,6 +20,13 @@ function ErvaringsdeskundigeOnderzoek(onderzoekId) {
     const [antwoorden, setAntwoorden] = useState([]);
     const [titel, setTitel] = useState("Onderzoek");
 
+
+    let location = useLocation();
+
+    let pathList = location.pathname.split('/');
+    console.log(pathList[pathList.length - 1]);
+    // const id = pathList[pathList.length - 1];
+    
     // useEffect(() => {
     //     setOnderzoek()
     // }, [])
@@ -126,6 +133,8 @@ function ErvaringsdeskundigeOnderzoek(onderzoekId) {
         console.log(antwoorden);
     }
 
+    
+    
     return (
         <>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>

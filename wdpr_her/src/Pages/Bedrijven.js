@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../standaardformats/Header';
 import useLocalStorage from 'use-local-storage';
 import "../Bedrijven.css"
 import axios from "axios";
-import {apiPath} from "../Helper/Api";
+import { apiPath } from "../Helper/Api";
 
 const Bedrijven = () => {
     const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -36,18 +36,18 @@ const Bedrijven = () => {
     return (
         <div>
             <div className="Main" data-theme={theme} data-font-size={fontSize}>
-                <Header/>
+                <Header />
                 <div className={"Body"}>
                     <p>Bedrijven ({bedrijven.length})</p>
                     {bedrijven.map((bedrijf, i) => {
-                            // .map = voor elke object returnt er een div
-                            return <div className="Bedrijfblok" key={i}>
-                                <p>Naam: {bedrijf.bedrijfsnaam}</p>
-                                <p>Kvk: {bedrijf.kvk}</p>
-                                <p>Locatie: {bedrijf.locatie}</p>
-                                <p>Website: {bedrijf.website}</p>
-                            </div>
-                        }
+                        // .map = voor elke object returnt er een div
+                        return <div className="Bedrijfblok" key={i}>
+                            <p>Naam: {bedrijf.bedrijfsnaam}</p>
+                            <p>Kvk: {bedrijf.kvk}</p>
+                            <p>Locatie: {bedrijf.locatie}</p>
+                            <p>Website: {bedrijf.website}</p>
+                        </div>
+                    }
                     )
                     }
 

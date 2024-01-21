@@ -21,18 +21,25 @@ public class HelperController : ControllerBase
     [HttpPost("AddOnderzoeksType")]
     public async Task<ActionResult> AddOnderzoeksType([FromBody] DTOHelper dto)
     {
+        string em = "";
         try
-        {
+        {;
             var onderzoeksType = new OnderzoeksType();
+
+            
+            em="Er gaat wat mis met het toevoegen van een onderzoekstype in de database";
             await _context.OnderzoeksTypes.AddAsync(new OnderzoeksType() { Type = dto.Naam });
+
+            em="Er gaat wat mis met het opslaan van een onderzoekstype in de databasse";
             await _context.SaveChangesAsync();
             return StatusCode(201, onderzoeksType); // Created
         }
         catch (Exception ב)
-        {
-            //Bet
-            Console.Write(ב);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddOnderzoeksType");
+        {//Bet
+            print(ב);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddOnderzoeksType. Error:"+em);
+
         }
     }
 
@@ -40,18 +47,23 @@ public class HelperController : ControllerBase
     [HttpPost("AddAandoening")]
     public async Task<ActionResult> AddAandoening([FromBody] DTOHelper dto)
     {
+        string em = "";
         try
         {
             var aandoening = new Aandoening();
+
+            em="Er gaat wat mis met het toevoegen van een aandoening";
             await _context.Aandoeningen.AddAsync(new Aandoening() { Naam = dto.Naam });
+
+            em="Er gaat wat mis met het opslaan van een aandoening in de database";
             await _context.SaveChangesAsync();
             return StatusCode(201, aandoening); // Created
         }
         catch (Exception ג)
-        {
-            //Gimel
-            Console.Write(ג);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddAandoening");
+        {//Gimel
+            print(ג);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddAandoening. Error:"+em);
+
         }
     }
 
@@ -59,18 +71,22 @@ public class HelperController : ControllerBase
     [HttpPost("AddBenadering")]
     public async Task<ActionResult> AddBenadering([FromBody] DTOHelper dto)
     {
+        string em="";
         try
         {
             var benadering = new Benadering();
+
+            em="Er gaat wat mis met het toevoegen van een benadering";
             await _context.Benaderingen.AddAsync(new Benadering() { Soort = dto.Naam });
             await _context.SaveChangesAsync();
             return StatusCode(201, benadering); // Created
         }
         catch (Exception ד)
-        {
-            //Dalet
-            Console.Write(ד);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBenadering");
+        {//Dalet
+            print( ד);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBenadering. Error:"+em);
+
         }
     }
 
@@ -78,18 +94,23 @@ public class HelperController : ControllerBase
     [HttpPost("AddBeperking")]
     public async Task<ActionResult> AddBeperking([FromBody] DTOHelper dto)
     {
+        string em = "";
         try
         {
             var beperking = new Beperking();
+
+            em="Er gaat wat mis met het toevoegen van een beperking";
             await _context.Beperkingen.AddAsync(new Beperking() { Naam = dto.Naam });
             await _context.SaveChangesAsync();
             return StatusCode(201, beperking); // Created
         }
         catch (Exception ה)
-        {
-            //Hee
-            Console.Write(ה);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
+
+        {//Hee
+            print(ה);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking. Error:"+em);
+
         }
     }
 
@@ -97,18 +118,22 @@ public class HelperController : ControllerBase
     [HttpPost("AddHulpmiddel")]
     public async Task<ActionResult> AddHulpmiddel([FromBody] DTOHelper dto)
     {
+        string em = "";
         try
         {
             var hulpmiddel = new Hulpmiddel();
+
+            em="Er gaat wat mis met het toevoegen van een hulpmiddel";
             await _context.Hulpmiddelen.AddAsync(new Hulpmiddel() { Naam = dto.Naam });
             await _context.SaveChangesAsync();
             return StatusCode(201, hulpmiddel); // Created
         }
         catch (Exception ו)
-        {
-            //Waw'
-            Console.Write(ו);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
+        {//Waw'
+            print(ו);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddHulpmiddel. Error:"+em);
+
         }
     }
 
@@ -194,77 +219,91 @@ public class HelperController : ControllerBase
     [HttpGet("GetOnderzoeksTypes")]
     public async Task<ActionResult<IEnumerable<OnderzoeksType>>> GetOnderzoeksTypes()
     {
+        string em = "Er gaat wat mis in OnderzoeksTypes";
         try
         {
             return await _context.OnderzoeksTypes.ToListAsync();
         }
         catch (Exception ז)
-        {
-            //Zajien
-            Console.Write(ז);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
-        }
-    }
+        {//Zajien
+            print(ז);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetOnderzoeksTypes. Error:"+em);
+
+    }}
 
     [HttpGet("GetAandoeningen")]
     public async Task<ActionResult<IEnumerable<Aandoening>>> GetAandoeningen()
     {
+        string em="Er gaat wat mis met het ophalen van de aandoeningen";
         try
         {
             return await _context.Aandoeningen.ToListAsync();
         }
         catch (Exception ח)
-        {
-            //Chet
-            Console.Write(ח);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
+        {//Chet
+            print(ח);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetAandoeningen. Error:"+em);
+
         }
     }
 
     [HttpGet("GetBenaderingen")]
     public async Task<ActionResult<IEnumerable<Benadering>>> GetBenaderingen()
     {
+        string em = "Er gaat wat mis met het ophalen van de benaderingen";
         try
         {
             return await _context.Benaderingen.ToListAsync();
         }
         catch (Exception ט)
-        {
-            //Tet
-            Console.Write(ט);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
+        {//Tet
+            print(ט);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetBenaderingen. Error:"+em);
+
         }
     }
 
     [HttpGet("GetBeperkingen")]
     public async Task<ActionResult<IEnumerable<Beperking>>> GetBeperkingen()
     {
+        string em = "Er gaat wawt mis met het ophalen van de beperkingen";
         try
         {
             return await _context.Beperkingen.ToListAsync();
         }
         catch (Exception י)
-        {
-            //Jod
-            Console.Write(י);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
+        {//Jod
+            print(י);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetBeperkingen. Error:"+em);
+
         }
     }
 
     [HttpGet("GetHulpmiddelen")]
     public async Task<ActionResult<IEnumerable<Hulpmiddel>>> GetHulpmiddelen()
     {
+        string em = "Er gaat wat mis met het ophalen van de Hulpmiddelen";
         try
         {
             return await _context.Hulpmiddelen.ToListAsync();
         }
         catch (Exception כ)
-        {
-            //Kaf
-            Console.Write(כ);
-            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/AddBeperking");
+        {//Kaf
+            print(כ);
+            print(em);
+            return StatusCode(500, "Internal server error: er gaat iets mis in HelperController/GetHulpmiddelen. Error:"+em);
+
         }
     }
 
     #endregion
+    private void print<T>(T t){
+    //I love python
+        Console.WriteLine(t);
+    }
+
 }
