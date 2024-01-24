@@ -169,4 +169,54 @@ public class OnderzoekController : ControllerBase
         }
     }
 
+    [Authorize(Roles = $"{Roles.Bedrijf}, {Roles.Beheerder}")]
+    [HttpGet("GetOwnOnderzoeken")]
+    public async Task<ActionResult<IEnumerable<DTOGetOnderzoek>>> GetOwnOnderzoeken()
+    {
+        try
+        {
+            string userName = User.FindFirstValue(ClaimTypes.Name);
+            Gebruiker uitvoerder = await _userManager.FindByNameAsync(userName);
+            List<Onderzoek> onderzoeken = await _context.Onderzoeken.Include(o => o.Uitvoerder).Include(o => o.OnderzoeksType).Where(o => o.Uitvoerder == uitvoerder).ToListAsync();
+            List<DTOGetOnderzoek> response = new List<DTOGetOnderzoek>();
+            foreach (Onderzoek o in onderzoeken)
+            {
+                var onderzoeksTypes = new List<int>();
+                foreach (var ot in o.OnderzoeksType)
+                {
+                    onderzoeksTypes.Add(ot.Id);
+                }
+
+                string uitvoerderNaam;
+                if (o.Uitvoerder.AccountType == Roles.Bedrijf)
+                {
+                    uitvoerderNaam = ((Bedrijf)o.Uitvoerder).Naam;
+                }
+                else
+                {
+                    uitvoerderNaam = ((Persoon)o.Uitvoerder).Voornaam + ((Persoon)o.Uitvoerder).Achternaam;
+                }
+
+                response.Add(new DTOGetOnderzoek
+                {
+                    OnderzoekId = o.Id,
+                    UitvoerderId = o.Uitvoerder.Id,
+                    Titel = o.Titel,
+                    Beloning = o.Beloning,
+                    Beschrijving = o.Beschrijving,
+                    Locatie = o.Locatie,
+                    OnderzoeksType = onderzoeksTypes,
+                    OnderzoeksData = o.OnderzoeksData,
+                    UitvoerderNaam = uitvoerderNaam
+                });
+            }
+
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e);
+        }
+    }
+
 }
