@@ -33,7 +33,8 @@ function ErvaringsdeskundigeOnderzoek() {
     
     useEffect(() => {
         getVragen();
-    }, [])
+        // eslint-disable-next-line
+    }, []);
 
     const submitOpdracht = () => {
         
