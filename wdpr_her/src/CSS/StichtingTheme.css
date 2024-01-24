@@ -2,14 +2,14 @@
 and wrap so stuff automatically moves down if it gets to small */
 :root {
     /* in comments the names that are used in figma */
-    --background: #FFFFFF; /*Background*/
+    --background: #ffffff; /*Background*/
     --default: #111329; /*Default*/
-    --accent-1: #2B50EB; /*Logo blue*/
-    --accent-2: #1CA883; /*Logo green*/
-    --accent-3: #FFB800; /*Button 2*/
-    --accent-4: #21CEA1; /*Secondary*/
+    --accent-1: #2b50eb; /*Logo blue*/
+    --accent-2: #1ca883; /*Logo green*/
+    --accent-3: #ffb800; /*Button 2*/
+    --accent-4: #21cea1; /*Secondary*/
     --header-text-1: #111329;
-    --header-text-2: #FFFFFF;
+    --header-text-2: #ffffff;
     --font-size: 16px;
     --logo-size: 5vw;
     --header-column-gap: 64px;
@@ -17,28 +17,28 @@ and wrap so stuff automatically moves down if it gets to small */
 }
 
 /* Todo make dark theme (currently the same as light) */
-[data-theme='dark'] {
+[data-theme="dark"] {
     /* in comments the names that are used in figma */
     --background: #111329; /*Background*/
-    --default: #FFFFFF; /*Default*/
-    --accent-1: #2B50EB; /*Logo blue*/
-    --accent-2: #1CA883; /*Logo green*/
-    --accent-3: #FFB800; /*Button 2*/
-    --accent-4: #21CEA1; /*Secondary*/
+    --default: #ffffff; /*Default*/
+    --accent-1: #2b50eb; /*Logo blue*/
+    --accent-2: #1ca883; /*Logo green*/
+    --accent-3: #ffb800; /*Button 2*/
+    --accent-4: #21cea1; /*Secondary*/
     --header-text-1: #111329;
-    --header-text-2: #FFFFFF;
+    --header-text-2: #ffffff;
 }
 
 /*maybe add stuff like container widths, min sizes padding etc. as well*/
-[data-font-size='big'] {
+[data-font-size="big"] {
     --font-size: 20px;
 }
 
-[data-font-size='bigger'] {
+[data-font-size="bigger"] {
     --font-size: 24px;
 }
 
-[data-font-size='biggest'] {
+[data-font-size="biggest"] {
     --font-size: 28px;
 }
 
@@ -50,7 +50,6 @@ and wrap so stuff automatically moves down if it gets to small */
     display: flex;
     flex-direction: column;
     width: 100%;
-
 }
 
 p {
@@ -111,7 +110,6 @@ header {
     width: 100%;
     padding-top: 16px;
     z-index: 200;
-
 }
 
 .header-text {
@@ -268,19 +266,20 @@ header ul li {
 }
 
 .inputFontSize {
-    font-size: var(--font-size); /*Voornamelijk voor de login-velden in Login.js*/
+    font-size: var(
+        --font-size
+    ); /*Voornamelijk voor de login-velden in Login.js*/
 }
 
-  /* ... (existing styles remain unchanged) */
+/* ... (existing styles remain unchanged) */
 
-[data-theme='dark'] .header h3 {
+[data-theme="dark"] .header h3 {
     color: #ffffff; /* Set the color for the dark theme */
 }
-  
-[data-theme='light'] .header h3 {
-  color: #111329; /* Set the color for the light theme */
-}
 
+[data-theme="light"] .header h3 {
+    color: #111329; /* Set the color for the light theme */
+}
 
 .Section-border {
     border: 2px solid var(--accent-1);
@@ -306,13 +305,16 @@ header ul li {
 }
 
 .Section-list-item {
-
     display: flex;
     flex-direction: row;
 }
 
 .Section-list-column-names {
-
     display: flex;
     flex-direction: row;
+}
+
+.Ervaringsdeskundige-Antwoorden {
+    /* list-style-type: none; */
+    list-style-type: none;
 }

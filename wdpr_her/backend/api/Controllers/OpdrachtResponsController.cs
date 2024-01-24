@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using api.DataTemplate;
 using Microsoft.AspNetCore.Identity;
+using api.Helper;
 
 namespace api.Controllers;
 
@@ -22,7 +23,7 @@ public class OpdrachtResponsController : ControllerBase
         _userManager = userManager;
     }
 
-    [Authorize]
+    [Authorize(Roles = Roles.Ervaringsdeskundige)]
     [HttpPost("CreateOpdrachtRespons")]
     public async Task<IActionResult> CreateOpdrachtRespons([FromBody] DTOCreateOpdrachtRespons dto)
     {
@@ -32,7 +33,7 @@ public class OpdrachtResponsController : ControllerBase
             {
                 return BadRequest("Geen OpdrachtRespons data");
             }
-            
+
             string userName;
             userName = User.FindFirstValue(ClaimTypes.Name);
 
@@ -46,7 +47,7 @@ public class OpdrachtResponsController : ControllerBase
                 Gebruiker = gebruiker,
                 VraagMetAntwoordenJSON = dto.VraagMetAntwoordenJSON
             };
-            
+
             await _context.OpdrachtResponsEntries.AddAsync(opdrachtRespons);
             await _context.SaveChangesAsync();
 
@@ -54,7 +55,8 @@ public class OpdrachtResponsController : ControllerBase
             // return Ok(new
             //     { message = "OpdrachtRespons created successfully :D", ResponsID = opdrachtRespons.ResponsId });
         }
-        catch(Exception ތާނަ){
+        catch (Exception ތާނަ)
+        {
             print(ތާނަ);
             return StatusCode(500, "Internal server error: er gaat iets mis met het maken van een opdrachtrespons");
 
@@ -79,14 +81,15 @@ public class OpdrachtResponsController : ControllerBase
 
             return Ok(opdrachtRespons);
         }
-        catch(Exception ግዕዝ)
+        catch (Exception ግዕዝ)
         {
             print(ግዕዝ);
             return StatusCode(500, "Internal server error: er gaat iets mis in OpdrachtResponsController/opdrachtResponsID");
         }
     }
 
-    private void print<T>(T t){
+    private void print<T>(T t)
+    {
         Console.WriteLine(t);
     }
 }

@@ -36,24 +36,15 @@ function ErvaringsdeskundigeOnderzoek() {
     }, [])
 
     const submitOpdracht = () => {
-        // const info = {
-        //         Gebruikersnaam: usernameRef.current.value,
-        //         Wachtwoord: passwordRef.current.value,
-        //         Email: emailRef.current.value,
-        //         Voornaam: voornaamRef.current.value,
-        //         Achternaam: achternaamRef.current.value,
-        //         Telefoonnummer: telefoonnummerRef.current.value,
-        //         Postcode: postcodeRef.current.value
-        //     };
-        //
-        //
-        // axios
-        //     .post(apiPath, info)
-        //     .then(() => {
-        //         nav("/Succes");
-        //     }).catch((err) => {
-        //     console.log(err.toJSON());
-        // });
+        
+        const info = {
+            OnderzoekId: onderzoek.UitvoorderId,
+            VraagMetAntwoordenJSON: JSON.stringify(antwoorden)
+        };
+        axios
+            .post(apiPath + "OpdrachtRespons/CreateOpdrachtRespons", info)
+            .then(() => nav("/Succes"))
+            .catch((err) => console.log(err.toJSON()));
     }
     
     const getVragen = async () => {
@@ -61,21 +52,13 @@ function ErvaringsdeskundigeOnderzoek() {
         // id = 1;
         await axios.get(apiPath + "Onderzoek/GetOnderzoek/"+ id).then(response => {
             setOnderzoek(JSON.parse(JSON.stringify(response.data)));
-            // console.log("Onderzoek:");
-            // console.log(response.data);
-            // console.log("Data:")
-            // console.log(response.data.onderzoeksData);
             
             console.log("Data parse:")
             console.log(JSON.parse(response.data.onderzoeksData));
             setOnderzoeksData(JSON.parse(response.data.onderzoeksData));
             
-            // console.log("Data stringify:")
-            // console.log(JSON.stringify(response.data.onderzoeksData));
-            // console.log("Data parse stringify:")
-            // console.log(JSON.parse(JSON.stringify(response.data.onderzoeksData)));
             
-            
+            //#region Test onderzoeksdata
             // setOnderzoeksData([
             //     {
             //         type: "open",
@@ -107,7 +90,7 @@ function ErvaringsdeskundigeOnderzoek() {
             //         ]
             //     }
             // ])
-            
+            //#endregion
             
             // setTitel(onderzoek.titel);
         })
@@ -119,15 +102,19 @@ function ErvaringsdeskundigeOnderzoek() {
         console.log(e);
         console.log(indexVraag)
         let localAntwoorden = [antwoorden];
+        let localOpties;
         switch (type) {
             case "open" : antwoorden[indexVraag] = e; break;
             case "meerkeuze" :
-                let localOpties = antwoorden[indexVraag] ?? [];
+                localOpties = antwoorden[indexVraag] ?? [];
                 if (e === false)
                     localOpties = localOpties.filter(optie => optie !== indexOptie);
                 else
                     localOpties = [...localOpties, indexOptie];
                 antwoorden[indexVraag] = localOpties;
+                break;
+            case "radio":
+                antwoorden[indexVraag] = indexOptie;
                 break;
             default : console.log("This question type is unknown... nothing will happen with this change.")
         }
@@ -135,6 +122,7 @@ function ErvaringsdeskundigeOnderzoek() {
         setAntwoorden(...localAntwoorden)
         console.log("End handle:");
         console.log(antwoorden);
+        console.log(antwoorden.toString())
     }
 
     
@@ -148,8 +136,10 @@ function ErvaringsdeskundigeOnderzoek() {
                         <h3>Beloning: </h3>
                         <p>{onderzoek.beloning ?? "Dit onderzoek heeft geen beloning"}</p>
                         <h3>Beschrijving: </h3>
-                        <p>{onderzoek.beschrijving}</p>                        
-                    {onderzoeksData == null ? "Waiting for data" : onderzoeksData.map((vraag, i) => { return (
+                        <p>{onderzoek.beschrijving}</p>
+                        <div className={"Ervaringsdeskundige-Vragen"}>                        
+                        {onderzoeksData == null ? "Waiting for data" : onderzoeksData.map((vraag, i) => {
+                            return (
                             vraag.type === "open" ?
                                 <div key={i}>
                                     <p>{vraag.vraag}</p> 
@@ -160,19 +150,29 @@ function ErvaringsdeskundigeOnderzoek() {
                                     <p>{vraag.vraag}</p>
                                     <ul>
                                     {vraag.opties.map((optie, j) => {
-                                        return <li key={i + "," + j}><label><input type={"checkbox"} defaultChecked={false} onChange={(e) => {handle(e.target.checked, vraag.type, i, j)}}/>{optie}</label></li>
+                                        return <li key={i + "," + j} className={"Ervaringsdeskundige-Antwoorden"}><label><input type={"checkbox"} defaultChecked={false} onChange={(e) => {handle(e.target.checked, vraag.type, i, j)}}/>{optie}</label></li>
                                     })}
                                     </ul>
                                 </div> :
                             vraag.type === "radio" ?
-                                <p>{vraag.vraag}</p> :
+                                <div key={i}>
+                                        <p>{vraag.vraag}</p>
+                                        <ul>
+                                            {vraag.opties.map((optie, j) => {
+                                                return <li key={i + "," + j} className={"Ervaringsdeskundige-Antwoorden"}><label><input type={"radio"} defaultChecked={false} name={"opties" + i} onChange={(e) => { handle(e.target.checked, vraag.type, i, j) }} />{optie}</label></li>
+                                            })}
+                                        </ul>
+                                </div> :
                             vraag.type === "text" ?
                                 <p>{vraag.text}</p> :
                             "UNKNOWN TYPE"
                         )
                     })}
-                        <button onClick={() => console.log(JSON.stringify(onderzoeksData))}>Console Log string onderzoeksdata</button>
                     </div>
+                        <button onClick={submitOpdracht}>Submit</button>
+                        {/* <button onClick={() => console.log(JSON.stringify(onderzoeksData))}>Console Log string onderzoeksdata</button> */}
+                    </div>
+                    
                     {/*<div className="Onderzoek">*/}
                     {/*    <h2>Doel van het onderzoek</h2>*/}
                     {/*    <p>Het doel van dit onderzoek is om te kijken wat jouw gebruikers ervaring is bij het gebruik*/}
