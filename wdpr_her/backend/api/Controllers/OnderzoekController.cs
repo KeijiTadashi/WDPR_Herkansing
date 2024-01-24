@@ -76,7 +76,7 @@ public class OnderzoekController : ControllerBase
             var onderzoek = await _context.Onderzoeken.Include(o => o.Uitvoerder).Include(o => o.OnderzoeksType).FirstOrDefaultAsync(o => o.Id == id);
             if (onderzoek == null)
                 return BadRequest($"Onderzoek met id: {id} bestaat niet.");
-            
+
             // _context.OnderzoeksTypes.Where(ot => )_context.Onderzoeken.
 
             var onderzoeksTypes = new List<int>();
@@ -113,7 +113,7 @@ public class OnderzoekController : ControllerBase
                 OnderzoeksData = onderzoek.OnderzoeksData,
                 UitvoerderNaam = uitvoerderNaam
             };
-            
+
             return Ok(response);
         }
         catch (Exception e)
@@ -121,4 +121,52 @@ public class OnderzoekController : ControllerBase
             return StatusCode(500, $"Internal server error: er gaat iets mis in OnderzoekController/GetOnderzoek\n{e}");
         }
     }
+
+    [HttpGet("GetAllOnderzoeken")]
+    public async Task<ActionResult<IEnumerable<DTOGetOnderzoek>>> GetAllOnderzoeken()
+    {
+        try
+        {
+            List<Onderzoek> onderzoeken = await _context.Onderzoeken.Include(o => o.Uitvoerder).Include(o => o.OnderzoeksType).ToListAsync();
+            List<DTOGetOnderzoek> response = new List<DTOGetOnderzoek>();
+            foreach (Onderzoek o in onderzoeken)
+            {
+                var onderzoeksTypes = new List<int>();
+                foreach (var ot in o.OnderzoeksType)
+                {
+                    onderzoeksTypes.Add(ot.Id);
+                }
+
+                string uitvoerderNaam;
+                if (o.Uitvoerder.AccountType == Roles.Bedrijf)
+                {
+                    uitvoerderNaam = ((Bedrijf)o.Uitvoerder).Naam;
+                }
+                else
+                {
+                    uitvoerderNaam = ((Persoon)o.Uitvoerder).Voornaam + ((Persoon)o.Uitvoerder).Achternaam;
+                }
+
+                response.Add(new DTOGetOnderzoek
+                {
+                    OnderzoekId = o.Id,
+                    UitvoerderId = o.Uitvoerder.Id,
+                    Titel = o.Titel,
+                    Beloning = o.Beloning,
+                    Beschrijving = o.Beschrijving,
+                    Locatie = o.Locatie,
+                    OnderzoeksType = onderzoeksTypes,
+                    OnderzoeksData = o.OnderzoeksData,
+                    UitvoerderNaam = uitvoerderNaam
+                });
+            }
+
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e);
+        }
+    }
+
 }

@@ -318,3 +318,28 @@ header ul li {
     /* list-style-type: none; */
     list-style-type: none;
 }
+
+.Small-remove-button {
+    /* margin: 1em; */
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 1em;
+    margin-right: 1em;
+    padding-top: 0;
+    padding-left: 0.5em;
+    padding-bottom: 0;
+    padding-right: 0.5em;
+    height: fit-content;
+    width: fit-content;
+}
+
+.Question {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+}
+
+.Question-info {
+    display: flex;
+    flex-direction: column;
+}

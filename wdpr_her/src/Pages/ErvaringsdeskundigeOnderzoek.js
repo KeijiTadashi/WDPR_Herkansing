@@ -18,7 +18,7 @@ function ErvaringsdeskundigeOnderzoek() {
     const [onderzoek, setOnderzoek] = useState([]);
     const [onderzoeksData, setOnderzoeksData] = useState([]);
     const [antwoorden, setAntwoorden] = useState([]);
-    const [titel, setTitel] = useState("Onderzoek");
+    // const [titel, setTitel] = useState("Onderzoek");
 
 
     let location = useLocation();
@@ -47,10 +47,10 @@ function ErvaringsdeskundigeOnderzoek() {
             .catch((err) => console.log(err.toJSON()));
     }
     
-    const getVragen = async () => {
+    const getVragen = () => {
         //TODO REMOVE For now testing id = 1
         // id = 1;
-        await axios.get(apiPath + "Onderzoek/GetOnderzoek/"+ id).then(response => {
+        axios.get(apiPath + "Onderzoek/GetOnderzoek/"+ id).then(response => {
             setOnderzoek(JSON.parse(JSON.stringify(response.data)));
             
             console.log("Data parse:")
