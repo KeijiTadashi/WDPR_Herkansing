@@ -21,6 +21,7 @@ import {Registreer} from "./Pages/Registreer";
 import {Bedrijf} from "./Pages/Bedrijf";
 import { Succes } from "./Pages/Succes";
 import CreateOnderzoek from "./Pages/CreateOnderzoekBrian";
+import Feedback from './Pages/Feedback';
 
 const router = createBrowserRouter([
     {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
     {
         path: "/CreateOnderzoek",
         element: <CreateOnderzoek/>
+    },
+    {
+        path: "/Feedback",
+        element: <Feedback/>
     }
 ]);
 

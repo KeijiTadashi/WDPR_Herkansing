@@ -44,7 +44,7 @@ function ErvaringsdeskundigeOnderzoek() {
         };
         axios
             .post(apiPath + "OpdrachtRespons/CreateOpdrachtRespons", info)
-            .then(() => nav("/Succes"))
+            .then(() => nav("/Feedback"))
             .catch((err) => console.log(err.toJSON()));
     }
     

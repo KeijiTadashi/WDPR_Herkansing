@@ -1,22 +1,27 @@
 import React, {useState} from 'react';
 import '../CSS/EnqueteFeedback.css';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 const SurveyFeedbackForm = ({onFeedback, onSubmit}) => {
     const [satisfaction, setSatisfaction] = useState('');
     const [easeOfUnderstanding, setEaseOfUnderstanding] = useState('');
     const [suggestions, setSuggestions] = useState('');
 
+    const nav = useNavigate();
+    
+
     const handleSubmit = () => {
-        const feedbackData = [
-            {naam: '1: tevredenheid', value: satisfaction},
-            {naam: '2: gebruikersgemak', value: easeOfUnderstanding},
-            {naam: '3: tips en tops', value: suggestions}
-        ];
-        onFeedback(feedbackData);
-        if (onSubmit) {
-            onSubmit(); // Invoke the onSubmit prop if provided
-        }
+        // const feedbackData = [
+        //     {naam: '1: tevredenheid', value: satisfaction},
+        //     {naam: '2: gebruikersgemak', value: easeOfUnderstanding},
+        //     {naam: '3: tips en tops', value: suggestions}
+        // ];
+        // onFeedback(feedbackData);
+        // if (onSubmit) {
+        //     onSubmit(); // Invoke the onSubmit prop if provided
+        // }
+        nav("/Succes");
     };
 
     return (
