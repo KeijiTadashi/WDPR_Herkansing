@@ -147,13 +147,20 @@ const Header = ({ Title }) => {
                             </>
                         }
                         {(role === "Beheerder") ?
-                            <li>
-                                <Link to={"/Beheerder"}>
-                                    <button className={headerNavClassName("/Beheerder")}
-                                            aria-label="Beheerder portaal">beheerder
-                                    </button>
-                                </Link>
-                            </li> :
+                            <>
+                                <li>
+                                    <Link to={"/Beheerder"}>
+                                        <button className={headerNavClassName("/Beheerder")}
+                                                aria-label="Beheerder portaal">beheerder
+                                        </button>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to={"/CreateOnderzoek"}>
+                                        <button className={headerNavClassName("/CreateOnderzoek")} aria-label={"Maak nieuw onderzoek"}>Maak onderzoek</button>
+                                    </Link>
+                                </li>
+                            </> :
                             (role === "Ervaringsdeskundige") ?
                                 <li>
                                     <Link to={"/Ervaringsdeskundige"}>
@@ -163,13 +170,20 @@ const Header = ({ Title }) => {
                                     </Link>
                                 </li> :
                                 (role === "Bedrijf") ?
-                                    <li>
-                                        <Link to={"/Bedrijf"}>
-                                            <button className={headerNavClassName("/Bedrijf")}
-                                                    aria-label="Bedrijfsportaal">Bedrijf
-                                            </button>
-                                        </Link>
-                                    </li> : ""
+                                    <>
+                                        <li>
+                                            <Link to={"/Bedrijf"}>
+                                                <button className={headerNavClassName("/Bedrijf")}
+                                                        aria-label="Bedrijfsportaal">Bedrijf
+                                                </button>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={"/CreateOnderzoek"}>
+                                                <button className={headerNavClassName("/CreateOnderzoek")} aria-label={"Maak nieuw onderzoek"}>Maak onderzoek</button>
+                                            </Link>
+                                        </li>
+                                    </> : ""
                         }
 
 

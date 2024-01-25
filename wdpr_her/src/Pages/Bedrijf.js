@@ -12,21 +12,30 @@ export function Bedrijf() {
     const [theme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
     const [fontSize] = useLocalStorage('font-size', 'normal');
 
-    const [bedrijven, setBedrijven] = useState([])
+    // const [bedrijven, setBedrijven] = useState([]);
+    const [onderzoeken, setOnderzoeken] = useState([]);
 
     useEffect(() => {
-        getBedrijven()
+        // getBedrijven()
+        getOnderzoeken();
     }, [])
 
-    async function getBedrijven() {
-        axios.get(apiPath + "Bedrijf/GetAllBedrijven")
+    // async function getBedrijven() {
+    //     axios.get(apiPath + "Bedrijf/GetAllBedrijven")
+    //         .then(response => {
+    //             setBedrijven(JSON.parse(JSON.stringify(response.data)));
+    //             console.log("Bedrijven:")
+    //             console.log(response.data)
+    //         })
+    //         .catch(e => {
+    //             console.log(e)
+    //         })
+    // }
+
+    const getOnderzoeken = () => {
+        axios.get(apiPath + "Onderzoek/GetOwnOnderzoeken")
             .then(response => {
-                setBedrijven(JSON.parse(JSON.stringify(response.data)));
-                console.log("Bedrijven:")
-                console.log(response.data)
-            })
-            .catch(e => {
-                console.log(e)
+                setOnderzoeken(response.data);
             })
     }
 
@@ -36,7 +45,26 @@ export function Bedrijf() {
                 <Header Title={"Bedrijfsportaal"}/>
                 <div className={"Body"}>
                     <div className={"Section-border"}>
-                        <table>
+                    <table>
+                            <thead>
+                            <tr>
+                                <th>Titel</th>
+                                <th>Beschrijving</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {onderzoeken.map((onderzoek) => {
+                                return (
+                                    <tr key={onderzoek.id}>
+                                        <td>{onderzoek.titel}</td>
+                                        <td>{onderzoek.beschrijving}</td>
+                                    </tr>
+                                );
+                            })}
+                            </tbody>
+                        </table>
+
+                        {/* <table>
                             <thead>
                             <tr>
                                 <th>Bedrijf</th>
@@ -55,10 +83,10 @@ export function Bedrijf() {
                                 );
                             })}
                             </tbody>
-                        </table>
+                        </table> */}
                         {/* Todo Add list of onderzoeken met buttons, eerst onderzoeken in de database, voor nu een lijst met bedrijven (eigenlijk voor Beheerder) */}
                     </div>
-                    <Link to={"/Onderzoeken"}>
+                    <Link to={"/CreateOnderzoek"}>
                         <button className={"Button-body"} aria-label="Knop maak nieuw onderzoek">Nieuw onderzoek
                         </button>
                     </Link>

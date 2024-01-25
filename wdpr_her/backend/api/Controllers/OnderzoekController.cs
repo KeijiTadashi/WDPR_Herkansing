@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using SpecFlow.Internal.Json;
 
 namespace api.Controllers;
 
@@ -62,4 +64,159 @@ public class OnderzoekController : ControllerBase
             return StatusCode(500, $"Internal server error: er gaat iets mis in OnderzoekController/CreateOnderzoek\n{e}");
         }
     }
+
+    // [Authorize(Roles = $"{Roles.Bedrijf}, {Roles.Beheerder}, {Roles.Ervaringsdeskundige}")]
+    [HttpGet("GetOnderzoek/{id}")]
+    public async Task<ActionResult<DTOGetOnderzoek>> GetOnderzoek(int id)
+    {
+        try
+        {
+            DTOGetOnderzoek response;
+            string uitvoerderNaam = "";
+            var onderzoek = await _context.Onderzoeken.Include(o => o.Uitvoerder).Include(o => o.OnderzoeksType).FirstOrDefaultAsync(o => o.Id == id);
+            if (onderzoek == null)
+                return BadRequest($"Onderzoek met id: {id} bestaat niet.");
+
+            // _context.OnderzoeksTypes.Where(ot => )_context.Onderzoeken.
+
+            var onderzoeksTypes = new List<int>();
+            foreach (var ot in onderzoek.OnderzoeksType)
+            {
+                onderzoeksTypes.Add(ot.Id);
+                // onderzoeksType.Add(await _context.OnderzoeksTypes.FirstOrDefaultAsync(o => o.Id == ot.Id));
+            }
+
+            // Console.WriteLine(onderzoek.ToJson());
+            Console.WriteLine("Uitvoerder: " + onderzoek.Uitvoerder);
+            Console.WriteLine("Id: " + onderzoek.Uitvoerder.Id);
+
+            // var uitvoerder = await _userManager.FindByIdAsync(onderzoek.Uitvoerder.Id);
+            if (onderzoek.Uitvoerder.AccountType == Roles.Bedrijf)
+            {
+                uitvoerderNaam = ((Bedrijf)onderzoek.Uitvoerder).Naam;
+            }
+            else
+            {
+                uitvoerderNaam = ((Persoon)onderzoek.Uitvoerder).Voornaam + ((Persoon)onderzoek.Uitvoerder).Achternaam;
+            }
+
+            Console.WriteLine("Naam: " + uitvoerderNaam);
+            response = new DTOGetOnderzoek
+            {
+                OnderzoekId = onderzoek.Id,
+                UitvoerderId = onderzoek.Uitvoerder.Id,
+                Titel = onderzoek.Titel,
+                Beloning = onderzoek.Beloning,
+                Beschrijving = onderzoek.Beschrijving,
+                Locatie = onderzoek.Locatie,
+                OnderzoeksType = onderzoeksTypes,
+                OnderzoeksData = onderzoek.OnderzoeksData,
+                UitvoerderNaam = uitvoerderNaam
+            };
+
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, $"Internal server error: er gaat iets mis in OnderzoekController/GetOnderzoek\n{e}");
+        }
+    }
+
+    [HttpGet("GetAllOnderzoeken")]
+    public async Task<ActionResult<IEnumerable<DTOGetOnderzoek>>> GetAllOnderzoeken()
+    {
+        try
+        {
+            List<Onderzoek> onderzoeken = await _context.Onderzoeken.Include(o => o.Uitvoerder).Include(o => o.OnderzoeksType).ToListAsync();
+            List<DTOGetOnderzoek> response = new List<DTOGetOnderzoek>();
+            foreach (Onderzoek o in onderzoeken)
+            {
+                var onderzoeksTypes = new List<int>();
+                foreach (var ot in o.OnderzoeksType)
+                {
+                    onderzoeksTypes.Add(ot.Id);
+                }
+
+                string uitvoerderNaam;
+                if (o.Uitvoerder.AccountType == Roles.Bedrijf)
+                {
+                    uitvoerderNaam = ((Bedrijf)o.Uitvoerder).Naam;
+                }
+                else
+                {
+                    uitvoerderNaam = ((Persoon)o.Uitvoerder).Voornaam + ((Persoon)o.Uitvoerder).Achternaam;
+                }
+
+                response.Add(new DTOGetOnderzoek
+                {
+                    OnderzoekId = o.Id,
+                    UitvoerderId = o.Uitvoerder.Id,
+                    Titel = o.Titel,
+                    Beloning = o.Beloning,
+                    Beschrijving = o.Beschrijving,
+                    Locatie = o.Locatie,
+                    OnderzoeksType = onderzoeksTypes,
+                    OnderzoeksData = o.OnderzoeksData,
+                    UitvoerderNaam = uitvoerderNaam
+                });
+            }
+
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e);
+        }
+    }
+
+    [Authorize(Roles = $"{Roles.Bedrijf}, {Roles.Beheerder}")]
+    [HttpGet("GetOwnOnderzoeken")]
+    public async Task<ActionResult<IEnumerable<DTOGetOnderzoek>>> GetOwnOnderzoeken()
+    {
+        try
+        {
+            string userName = User.FindFirstValue(ClaimTypes.Name);
+            Gebruiker uitvoerder = await _userManager.FindByNameAsync(userName);
+            List<Onderzoek> onderzoeken = await _context.Onderzoeken.Include(o => o.Uitvoerder).Include(o => o.OnderzoeksType).Where(o => o.Uitvoerder == uitvoerder).ToListAsync();
+            List<DTOGetOnderzoek> response = new List<DTOGetOnderzoek>();
+            foreach (Onderzoek o in onderzoeken)
+            {
+                var onderzoeksTypes = new List<int>();
+                foreach (var ot in o.OnderzoeksType)
+                {
+                    onderzoeksTypes.Add(ot.Id);
+                }
+
+                string uitvoerderNaam;
+                if (o.Uitvoerder.AccountType == Roles.Bedrijf)
+                {
+                    uitvoerderNaam = ((Bedrijf)o.Uitvoerder).Naam;
+                }
+                else
+                {
+                    uitvoerderNaam = ((Persoon)o.Uitvoerder).Voornaam + ((Persoon)o.Uitvoerder).Achternaam;
+                }
+
+                response.Add(new DTOGetOnderzoek
+                {
+                    OnderzoekId = o.Id,
+                    UitvoerderId = o.Uitvoerder.Id,
+                    Titel = o.Titel,
+                    Beloning = o.Beloning,
+                    Beschrijving = o.Beschrijving,
+                    Locatie = o.Locatie,
+                    OnderzoeksType = onderzoeksTypes,
+                    OnderzoeksData = o.OnderzoeksData,
+                    UitvoerderNaam = uitvoerderNaam
+                });
+            }
+
+            return Ok(response);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e);
+        }
+    }
+
 }
